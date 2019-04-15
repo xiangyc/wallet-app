@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>优惠券</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+
+    <ul class="coupon-tab coupon-tab-50">
+        <li id="couponLi1" class="current" tapmode onclick="queryList(1);">可用优惠券</li>
+        <li id="couponLi0" tapmode onclick="queryList(0);">不可用优惠券</li>
+    </ul>
+
+    <div class="coupon-box">
+      <script id="coupon-template1" type="text/x-dot-template">
+          {{ for(var i=0; i< it.length; i++) { }}
+              <div class="coupon-list coupon-bgc_{{=it[i].categoryId}}" onclick="confimCoupon({{=it[i].id}})">
+                    <div class="select_cutover hide" id="{{=it[i].id}}"></div>
+                    <div id="name{{=it[i].id}}" class="hide">{{=it[i].categoryName}}{{=it[i].couponValue}}{{=it[i].unitName}}</div>
+                    <div class="coupon-name">{{=it[i].categoryName}}</div>
+                    <div class="coupon-c">
+                        <div class="coupon-c-top">
+                            <div class="coupon_cdigit mui-clearfix">
+                                <p class="coupon_num"><span>{{=it[i].couponValue}}</span>{{=it[i].unitName}}</p>
+                                <p class="text-right">有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</p>
+                            </div>
+
+                            <div class="coupon_cdigit mui-clearfix">
+                                <p class="coupon_title">{{=it[i].instanceName}}</p>
+                                {{ if(originalPrice === 0){ }}
+                                <div class="triangle-facing-top" onclick="showDetail({{=it[i].id}})">详情<i></i></div>
+                                {{ } }}
+                            </div>
+
+                        </div>
+                        <div id="detail{{=it[i].id}}" class="coupon-c-desc">{{=it[i].instanceDetail}}</div>
+                    </div>
+              </div>
+          {{ } }}
+      </script>
+      <div id="coupon-content1"></div>
+
+     <script id="coupon-template0" type="text/x-dot-template">
+          {{ for(var i=0; i< it.length; i++) { }}
+              <div class="coupon-list coupon-bgc_gray">
+                    <div class="select_cutover hide" id="{{=it[i].id}}"></div>
+                    <div id="name{{=it[i].id}}" class="hide">{{=it[i].categoryName}}{{=it[i].couponValue}}{{=it[i].unitName}}</div>
+                    <div class="coupon-name">{{=it[i].categoryName}}</div>
+                    <div class="coupon-c">
+                        <div class="coupon-c-top">
+                            <div class="coupon_cdigit mui-clearfix">
+                                <p class="coupon_num"><span>{{=it[i].couponValue}}</span>{{=it[i].unitName}}</p>
+                                <p class="text-right">有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</p>
+                            </div>
+
+                            <div class="coupon_cdigit mui-clearfix">
+                                <p class="coupon_title">{{=it[i].instanceName}}</p>
+                            </div>
+
+                        </div>
+                        <div id="detail{{=it[i].id}}" class="coupon-c-desc">{{=it[i].instanceDetail}}</div>
+                    </div>
+              </div>
+          {{ } }}
+      </script>
+      <div id="coupon-content0" class="hide"></div>
+
+	</div>
+
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+
+	<button id="confirmBtn" class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb hide" onclick="submit()">选择</button>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/selectCoupon.js"></script>
+</html>

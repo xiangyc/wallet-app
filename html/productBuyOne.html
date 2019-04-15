@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+	<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+	<title>订单</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+</head>
+<body>
+<div class="mui-content">
+		<div class="real-price prA-t-new">
+			<span class="real-price-b">实时金价(元/克)</span>
+			<span class="real-price-t"><em id="lastPrice">0.00</em></span>
+		</div>
+
+		<div class="prA-list-recharge">可用余额：<span><em id="useBalance">0.00</em>元</span>
+			<div tapmode onclick="recharge();" class="recharge-button">充值</div>
+			<div tapmode onclick="allBuyGold()" class="recharge-button">全部买入</div>
+		</div>
+
+		<div class="mui-input-group mui-input-tb prAbuy-list-li thirdlogin">
+			<div class="mui-input-row binding-prompt hide" id="descId"></div>
+
+			<div class="mui-input-row input-row-f input-row-switch">
+				
+				<input id="amount" placeholder="请输入购买克重" type="number" oninput="if(value.length>8)value=value.slice(0,8);" maxlength="8" onkeyup="computeBalance();" />
+
+				<input id="money" type="number" class="hide" oninput="if(value.length>10)value=value.slice(0,10);" maxlength="10" placeholder="请输入购买金额" onkeyup="computeMoney();" />
+
+				<div id="switchToBuyWayStrId" onclick="switchToBuyWay();" class="switch-btn">按金额买</div>
+			</div>
+
+			<div class="mui-table-view-cell hide" id="moneyDiv"><em >预计金额</em>：<span id="balance1">0.00</span><em >元</em></div>
+			<div class="mui-table-view-cell hide" id="amountDiv"><em >购买克重</em>：<span id="balance2">0.00</span><em >克</em></div>
+
+			<input id="formatBalance" type="text" value="" class="hide" />
+
+		</div>
+
+		<div class="mui-input-group mui-input-tb prAbuy-list-li mui-mt10">
+			<div class="mui-input-row input-row-f">
+				<label>年化赠金</label>
+				<span id="profitRate"></span>
+			</div>
+			<div class="mui-input-row input-row-f">
+				<label>到期日期</label>
+				<span id="startTime"></span>
+			</div>
+			<div id="comeItemDiv" class="mui-table-view-cell list-menu" tapmode onclick="cancelDrop()">
+				<a class="mui-navigate-right color6">
+					<span id="comeSpan" class="list-right">到期回款</span>
+					到期后
+				</a>
+			</div>
+		</div>
+
+	<!-- 半年产品还款计划开始 -->
+	<div class="fm-agreement">
+		<p class="common_protocol">
+			<span id="argeeId" class="icon_protocol current" onclick="agreement()"></span>阅读并同意 <span class="protocol_text"><a target="_blank" onclick="openAgreement();">《购买黄金租赁服务协议》</a></span>
+		</p>
+	</div>
+	<div tapmode onclick="showMessage();" class="main-bomb-prompt">
+		买金提示
+	</div>
+	<button id="submitBtn" disabled tapmode onclick="submitOrder();" class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb">
+		确认购买
+	</button>
+</div>
+<!--买金提示-->
+<div id="messageDiv" class="bomb-box hide">
+	<h4>买金提示<i tapmode onclick="showMessage();"><img src="../image/icon-close.png"></i></h4>
+	<div id="periodDiv" class="bomb-c hide">
+		<p>
+			1.不支持提前赎回、安心金产品到期后资金自动结算到您的账户余额；
+		</p>
+		<p>
+			2.保值稳健型，无金价波动风险；
+		</p>
+		<p>
+			3.按金额购买，购买的黄金克重精确小数点后3位数，小数点后4位起全部省略不计。
+		</p>
+
+	</div>
+
+</div>
+<div id="messageDropDiv" tapmode onclick="showMessage();" class="mui-backdrop hide"></div>
+
+<!--到期后选择-->
+<div id="comeDiv" class="bomb-box bomb-choice-box hide">
+	<div class="bomb-c">
+		<div class="bomb-c-title">到期后</div>
+		<ul class="mui-table-view mui-table-view-radio">
+			<li id="come1Li" tapmode onclick="selectComeType(0, '到期回款');" class="mui-table-view-cell mui-selected">
+				<a class="mui-navigate-right">到期回款</a>
+			</li>
+			<li id="come2Li" tapmode onclick="selectComeType(1, '提取金条');" class="mui-table-view-cell">
+				<a class="mui-navigate-right">提取金条</a>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<div id="comeDropDiv" tapmode onclick="cancelDrop();" class="mui-backdrop hide"></div>
+
+<!--合伙人激活-->
+<div id="buyGoldActivationDiv" class="bomb-box bomb-box-s hide">
+        <div class="mui-popup-inner">
+            <div class="mui-popup-title color6" id="activationDesc"></div>
+        </div>
+        <div class="mui-popup-buttons">
+            <span tapmode onclick="closeActivation();" class="mui-popup-button yellow">知道了</span>
+        </div>
+    </div>
+<div id="buyGoldActivationDropDiv" class="mui-backdrop hide" tapmode onclick="closeActivation();"></div>
+
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common/validate.js"></script>
+<script type="text/javascript" src="../script/common/countdown.js"></script>
+<script type="text/javascript" src="../script/common/calculate.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript" src="../script/library/base64.js"></script>
+<script type="text/javascript" src="../script/portal/productBuyOne.js"></script>
+</html>

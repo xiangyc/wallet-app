@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html class="mui-bg-white">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>购买成功</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+</head>
+<body>
+
+<div class="mui-content mui-bg-white">
+      <div class="mui-content-box">
+
+       <div class="register-success">
+            <h1><img src="../image/icon-success.png"></h1>
+            <h6>订单提交成功</h6>
+        </div>
+
+	        <div class="coupon-package hide" id="drawChanceDiv">
+	            <img src="../image/member/register-package02.png">
+	            <div class="coupon-package-p">
+	                <h4 id="couponCashbag"> 恭喜您，获得<em id="chanceId"></em>次抽奖机会！</h4>
+	                <p>立即去抽奖→</p>
+	            </div>
+	        </div>
+
+	       <div class="noviceCoupon-box mui-mt10 hide" id="couponDetailDiv">
+	            <img src="../image/member/register-bg01.png">
+	            <div class="noviceCoupon-box-c">
+	                <div class="noviceCoupon-l" id="nCLnum">
+	                    <span>￥<em id="couponValue"></em></span>
+	                    <p>满<em id="minPurchaseWeight"></em>克可用</p>
+	                </div>
+	                <div class="noviceCoupon-r" id="nCRnum">
+	                    <h4 id="couponName"></h4>
+	                    <h6>有效期至:<span id="couponExpiredTime"></span></h6>
+	                    <p id="couponDesc"></p>
+	                </div>
+	            </div>
+	 		</div>
+
+		 	<div class="coupon-package hide" id="descDiv">
+                <h3>恭喜您，获得<em id="descId"></em></h3>
+            </div>
+
+		  <div class="coupon-package hide" id="couponPackageDiv">
+			  <img src="../image/member/register-package.png">
+			  <div class="coupon-package-p">
+				  <h4 class="red">恭喜您，获得<em id="couponId"></em>张优惠券大礼包</h4>
+				  <span class="color9">您可以从“我的->优惠券”查看详情。</span>
+			  </div>
+		  </div>
+
+		  <div class="coupon-package smashing-eggs hide" id="eggsPackageDiv">
+			  <img src="../image/member/smashing-eggs.png">
+			  <div class="coupon-package-p">
+				  <h4 class="red">恭喜您,获得<em id="smashingeggsId"></em>次砸蛋机会</h4>
+				  <p>点击领取大奖</p>
+			  </div>
+		  </div>
+
+	 	<div class="coupon-package hide" id="cashBackDiv">
+                <h3>恭喜您，获得<em id="cashBackId"></em></h3>
+        </div>
+	
+        <div class="register-btn mui-mt10">
+            <ul class="">
+                <li class="mui-mt10"><button type="button" class="mui-btn mui-btn-outlined mui-btn-width100" onclick="closeBuy()">关闭</button></li>
+                <li class="mui-mt10"><button type="button" class="mui-btn mui-btn-primary mui-btn-width100" onclick="openOrderList()">查看订单</button></li>
+            </ul>
+        </div>
+
+      </div>
+</div>
+</body>
+
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/portal/productBuySuccess.js"></script>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>塞黄金进红包</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/swipe4.css" />
+    <!-- Demo styles -->
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color:#000;
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide span{ }
+        .swiper-slide{ background-color: transparent; }
+        .swiper-slide input{ margin-bottom: 0; border: none; background-color: transparent; padding: 10px 0; text-align: center; font-size:16px;  }
+        .swiper-slide em{  font-size:12px; color: #333; padding: 0; width: 24px; display: none;  }
+        .swiper-slide.swiper-slide-active em{  display: inline-table;  }
+        .swiper-slide.swiper-slide-active input{ color: #e83421;
+            font-size: 30px;
+            height: 38px;
+            line-height: 38px;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            border-bottom: 1px solid #ccb856;
+            border-radius: 0;
+            text-align: center; }
+
+        .swiper-container{ width: 86%; margin: 0 7%; position: absolute; height: 60px;  }
+
+        .red-wishes .placeholder-input{ font-size: 24px;color: #ffc41d; width: 100%; margin: 0 auto; padding: 0; border:0; border-radius: 0; background-color: transparent; text-align: center; height: 28px; line-height: 28px;  }
+
+
+        .placeholder-input::-webkit-input-placeholder { color:#ccc; }
+        .placeholder-input:-moz-placeholder { color:#ccc; }
+        .placeholder-input::-moz-placeholder {color:#ccc; }
+        .placeholder-input:-ms-input-placeholder { color:#ccc; }
+
+    </style>
+</head>
+<body class="background-f8">
+<div class="red-box red-wedding">
+    <div class="red-html red-sent">
+        <div class="red-bg">
+        </div>
+        <div class="red-wedding-con">
+            <div class="red-img">
+                <img src="../../../image/redpacket/them_wedding/send-top.jpg" />
+            </div>
+            <div class="red-amout">
+
+                <div class="swiper-container">
+                    <div id="swiperDiv" class="swiper-wrapper">
+                    </div>
+                </div>
+
+                <img src="../../../image/redpacket/them_wedding/send-amout.jpg" />
+            </div>
+
+            <div class="red-price">价值约：<span id="totalMoney"></span>元</div>
+            <div class="red-wishes"><input id="remark" onfocus="showSend(0);" onblur="showSend(1);" maxlength="16" type="text" class="placeholder-input"> </div>
+        </div>
+        <div id="sendDiv" class="red-body-bg">
+            <div class="red-btn">
+                <div tapmode onclick="next();" class="red-btn-next"></div>
+                <img class="red-wedding-btnImg" src="../../../image/redpacket/them_wedding/send-btn.png" />
+            </div>
+            <div class="red-href"><a tapmode onclick="redRule();">红包规则</a></div>
+            <img src="../../../image/redpacket/them_wedding/send-bg.png" />
+        </div>
+        <div class="bomb-box hide" id="messageDiv">
+            <h4>请输入交易密码</h4>
+            <div class="bomb-c">
+                <form class="mui-input-group red-form-box">
+                    <div class="number-text">黄金红包：<span id="showAmount">毫克</span></div>
+                    <div class="mui-input-row">
+                        <label class="label-icon jypw-icon"><i></i></label>
+                        <input maxlength="20" type="password" class="mui-input-clear mui-input" id="payPwd" placeholder="请输入交易密码">
+                    </div>
+                    <div class="link-forget">
+                        <a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+                    </div>
+                </form>
+                <button class="mui-btn mui-btn-block mui-btn-warning" id="submitBtn" onclick="confirm()">确定</button>
+            </div>
+        </div>
+        <div class="mui-backdrop hide" tapmode id="messageDropDiv" onclick="showMessage();"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/core/global.js"></script>
+<script type="text/javascript" src="../../../script/library/swipe4.js"></script>
+<script type="text/javascript" src="../../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../../script/redpacket/wedding/sendRed.js"></script>
+</html>

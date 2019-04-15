@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>绑定新手机号</title>
+	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body class="backgwhite">
+<div class="header">
+	<a class="back-icon" tapmode onclick="closePhoneWin();"></a>
+	<h1>绑定新手机号</h1>
+</div>
+<div class="mui-content pwfind mui-mt20">
+
+	<div class="logInput">
+		<div>
+			<input type="number" id="mobile" oninput="if(value.length>11)value=value.slice(0,11);" maxlength="11" placeholder="输入新的手机号码" />
+			<i class="mui-icon mui-icon-closeempty hide"
+             id='cleanInputId' tapmode onclick="cleanInput();" ></i>
+		</div>
+		<div class="getCodeBox">
+			<input id="code" maxlength="6" type="number" oninput="if(value.length>6)value=value.slice(0,6);" onkeyup="validateCode();"  placeholder="请输入验证码" />
+			<input type="button" id="sendButton" tapmode onclick="sendSmsCode();" class="getCode" value="获取验证码" disabled/>
+		</div>
+		<div class="logBtn pwfindBtn">
+			<button id="registSpan" tapmode onclick="commit();" type="button" class="mui-bt mui-btn-default mui-add-radius" disabled>确定</button>
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/sms.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		sms.setBtFlag(0);
+		  
+		$api.html($api.byId('phoneId'), global.getUserMobile());
+		
+		$("#mobile").bind("input propertychange",function(){
+	        validateMobile();
+	    });
+	    
+	    initEvent();
+	}
+	
+	function initEvent(){
+		api.addEventListener({
+		    name:'viewappear'
+	    },function(ret,err){
+	    	api.closeWin({
+				name: 'changePhoneTwoWin'
+		    });
+	    });
+	
+	}
+
+	function closePhoneWin(){
+
+		 api.closeWin();
+	}
+	
+	function validateCode(){
+		var value = $api.val($api.byId('code'));
+		value=value.replace(/\D/g,'');
+	
+		$api.val($api.byId('code'),value);
+		
+		if(!validate.isEmpty(value) && value.length <=6 && value.length >=4){
+			var mobile = $api.val($api.byId('mobile'));
+			if (!validate.isEmpty(mobile) && mobile.length==11) {
+				if(validate.mobile(mobile)){
+					$api.removeAttr($api.byId('registSpan'), 'disabled');
+				}
+			}		
+		}else{
+			$api.attr($api.byId('registSpan'), 'disabled', 'disabled');
+		}
+	}
+
+function validateMobile(){
+	if(sms.getBtFlag() ===1){
+		return ;
+	}
+	var mobile = $api.val($api.byId('mobile'));
+
+	if (!validate.isEmpty(mobile) ) {	
+		$api.removeCls($api.byId('cleanInputId'), 'hide'); 
+	}
+
+	if (validate.isEmpty(mobile) || mobile.length<11 ) {	 
+		$api.attr($api.byId('sendButton'), 'disabled', 'disabled');
+		$api.attr($api.byId('registSpan'), 'disabled', 'disabled');
+		
+	 	return;
+	}
+
+	if (!validate.isEmpty(mobile) && mobile.length==11) {
+		if(validate.mobile(mobile)){
+			$api.removeAttr($api.byId('sendButton'), 'disabled');
+		
+			var value = $api.val($api.byId('code'));
+			if(!validate.isEmpty(value) && value.length <=6 && value.length >=4){					
+ 				
+ 				$api.removeAttr($api.byId('registSpan'), 'disabled');
+			}		
+		}else{
+			$api.attr($api.byId('sendButton'), 'disabled', 'disabled');
+			$api.attr($api.byId('registSpan'), 'disabled', 'disabled');
+			global.setToast('请输入正确的手机号码');
+		}		
+	}
+
+}
+
+function sendSmsCode() {
+	var mobile = $api.val($api.byId('mobile'));
+
+	if (validate.isEmpty(mobile)) {
+		global.setToast('手机号不能为空');
+		return;
+	}
+
+	if (!validate.mobile(mobile)) {
+		global.setToast('请输入正确的手机号码');
+		return;
+	}
+
+	api.ajax({
+		method : 'get',
+		cache : false,
+		dataType : 'json',
+		returnAll : false,
+		url : global.getRequestUri() + '/members/validate/mobile?mobile=' + mobile
+	}, function(ret, err) {
+		if (ret) {
+			if (!ret.value) {
+				global.setToast('该手机号已经存在，请换一个手机号绑定');
+			} else {
+				//发送注册短信验证码			
+				sms.sendSms(mobile,'','changeMobileSendMsg','6','sendButton');	
+			}
+		} else {
+			global.setErrorToast();
+		}
+	});
+}
+
+function commit(){
+	var mobile = $api.val($api.byId('mobile'));	
+	var code = $api.val($api.byId('code'));
+		
+	if (validate.isEmpty(mobile)) {
+		global.setToast('手机号不能为空');
+		return;
+	}
+
+	if (!validate.mobile(mobile)) {
+		global.setToast('请输入正确的手机号码');
+		return;
+	}
+
+	if (validate.isEmpty(code)) {
+		global.setToast('手机验证码不能为空');
+		return;
+	}
+
+	$api.attr($api.byId('registSpan'), 'disabled', 'disabled');
+	
+	api.ajax({
+		method : 'post',
+		cache : false,
+		dataType : 'json',
+		returnAll : false,
+		url : global.getRequestUri() + '/members/changeMobile',
+		data : {
+			values : {
+				'mobile' : mobile,
+				'code' : code
+			}
+		}
+	}, function(ret, err) {
+		if (ret) {
+			if (ret.success) {				
+				
+     		    var firstChar =mobile.substring(0,3);
+      		    var endChar =mobile.substring(mobile.length-4,mobile.length); 
+       
+				global.setLoginMobile(mobile);
+				
+				global.setUserMobile(firstChar+'****'+endChar);
+				
+				global.setToast('手机号更换成功');
+								
+				setTimeout(function(){
+					ok();
+                }, 2000);           
+				
+			} else {
+				$api.removeAttr($api.byId('registSpan'), 'disabled');
+				global.setToast(ret.message);
+			}
+		} else {
+			$api.removeAttr($api.byId('registSpan'), 'disabled');
+			global.setErrorToast();
+		}
+	});
+}
+
+function ok(){
+	api.sendEvent({
+	    name:'changeMobileSuccessEvent'
+	});	  
+	  
+	api.closeWin({
+		name: 'setSubWin'
+	});
+	api.closeWin({
+		name: 'changePhoneWin'
+	});
+	api.closeWin({
+		name: 'changePhoneThirdWin'
+	});
+	
+	api.closeWin();
+   
+}
+
+function cleanInput(){
+	$api.addCls($api.byId('cleanInputId'), 'hide');
+	$api.val($api.byId('mobile'),'');
+	
+	$api.attr($api.byId('sendButton'), 'disabled', 'disabled');
+	$api.attr($api.byId('registSpan'), 'disabled', 'disabled');
+
+}
+</script>
+</html>

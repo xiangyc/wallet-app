@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+	</head>
+	<body>
+		<div id="wrap" class="hide">
+			<div id="header">
+				<a class="back-icon" tapmode onclick="api.closeWin();"></a>
+				<h1><span id="title">金算子</span></h1>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript">
+		var url;
+		apiready = function(){
+		 
+			var top = 0;
+			if(api.pageParam.showHeader === 0){
+				top = 0;
+			}else{
+				$api.removeCls($api.byId('wrap'), 'hide');
+
+			    var header = $api.byId('header');
+			    if(header){
+			        $api.fixIos7Bar(header);
+			    }
+			    var pos = $api.offset(header);
+			    top = pos.h;
+				if(api.pageParam.title){
+					$api.html($api.byId('title'), api.pageParam.title);
+				}
+			}
+
+			url = api.pageParam.url;
+
+		    api.openFrame({
+		        name: 'advIndex4Frame',
+		        url: url,
+		        rect:{
+		            x: 0,
+		            y: top,
+		            w: 'auto',
+		            h: 'auto'
+		        },
+		        pageParam: api.pageParam,
+		        bounces: false,
+		        vScrollBarEnabled: false
+		    });
+		    
+		    api.addEventListener({
+	            name:'webLoginEvent'
+            },function(ret,err){
+            	var params = {  "title" : "登录" };
+				global.openWinName("loginWin", '../member/login', params);
+            });
+            
+            
+            api.addEventListener({
+		        name: 'thirdShareEvent'
+		    }, function(ret, err) {
+		        if (ret && ret.value) {
+					doThirdShare(ret.value.title, ret.value.subTitle, ret.value.linkSrc);
+		        }
+		
+		    });
+		    
+		      api.addEventListener({
+		        name: 'loginRefresh'
+		    }, function(ret, err) {
+		    	//console.log('loginrefresh');
+		    	
+		        api.openFrame({
+			        name: 'advIndex4Frame',
+			        url: url,
+			        rect:{
+			            x: 0,
+			            y: top,
+			            w: 'auto',
+			            h: 'auto'
+			        },
+			        pageParam: api.pageParam,
+			        bounces: false,
+			        vScrollBarEnabled: false,
+			        reload:true
+			    });
+		
+		    });
+		    
+		     api.addEventListener({
+		        name: 'logOutSuccess'
+		    }, function(ret, err) {
+		    	console.log('logOutSuccess');
+		    	
+		        api.openFrame({
+			        name: 'advIndex4Frame',
+			        url: url,
+			        rect:{
+			            x: 0,
+			            y: top,
+			            w: 'auto',
+			            h: 'auto'
+			        },
+			        pageParam: api.pageParam,
+			        bounces: false,
+			        vScrollBarEnabled: false,
+			        reload:true
+			    });
+		
+		    });
+		    
+		    api.addEventListener({
+		        name: 'openOrderEvent'
+		    }, function(ret, err) {
+		        var params = { "page" : "../member/orderList", "title" : "订单记录", "closeToWin" : 1 ,optSrc:ret.value.optSrc};
+				global.openWinName('orderListHeader', '../member/orderListHeader', params);
+		
+		    });
+		    		    
+		    api.addEventListener({
+		        name: 'openActivityInstanceEvent'
+		    }, function(ret, err) {
+		        if (ret && ret.value) {										
+					var linkSrc = ret.value.linkSrc + 'activityInstanceId=' + ret.value.activityInstanceId;
+				    var params = { "page" : "../member/activityInstance", "activityInstanceId" : ret.value.activityInstanceId, "title" : ret.value.activityName, "url" : linkSrc, "closeToWin" : 1 };
+				    global.openWinName('activityInstanceHeader', '../common/h5_header', params);
+		        }
+		
+		    });		    
+		    
+		}
+			
+	function doThirdShare(title, subTitle, linkSrc){
+
+		var params = { "title" : title, "subTitle" : subTitle, "linkSrc" : linkSrc};
+		
+		api.openFrame({
+	        name: 'doThirdShareFrame',
+	        url: '../activity/share.html',
+	        rect:{
+	            x: 0,
+	           // y: api.winHeight - 160,
+	            y:0,
+	            w: 'auto',
+	            h: api.winHeight
+	        },
+	        pageParam : params,
+	        bounces: false,
+	        vScrollBarEnabled: false,
+	        reload: true
+	    });
+	    		
+	}
+	</script>
+</html>

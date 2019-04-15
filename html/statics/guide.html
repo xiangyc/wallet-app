@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>引导页</title>
+		<style>
+			* {
+				border: 0px;
+				margin: 0px;
+				padding: 0px;
+			}
+			html, body {
+				border: 0px;
+				margin: 0px;
+				padding: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			#wrapper > * > * {
+				background: #f9b017;
+				float: left;
+				background-size: 100%;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			#wrapper > * > *:nth-child(1) {
+				background-image: url(../../image/statics/guide1.png);
+			}
+			#wrapper > * > *:nth-child(2) {
+				background-image: url(../../image/statics/guide2.png);
+			}
+			#wrapper > * > *:nth-child(3) {
+				background-image: url(../../image/statics/guide3.png);
+			}
+			li {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<ul>
+				<li></li>
+				<li></li>
+				<li onclick="api.closeWin();"></li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../../script/api.js"></script>
+		<script type="text/javascript" src="../../script/library/jquery.js"></script>
+		<script type="text/javascript" src="../../script/library/iscroll.js"></script>
+		<script type="text/javascript">
+			function onewh(id, callback) {
+				function xy() {
+					var w, h, scrollload;
+					w = $(window).width();
+					h = $(window).height();
+					$("#" + id).css({
+						width : w + "px",
+						height : h + "px"
+					})
+					$("#" + id + ">*>*").css({
+						width : w + "px",
+						height : h + "px"
+					})
+					$("#" + id + ">*").css({
+						width : w * $("#" + id + ">*>*").length + "px",
+						height : h + "px"
+					})
+				}
+
+
+				$(window).resize(function() {
+					xy();
+					myiscroll._resize();
+				})
+				xy()
+				var myiscroll = new iScroll(id, {
+					scrollX : false,
+					scrollY : true,
+					fixedScrollbar : true,
+					hScrollbar : false,
+					vScrollbar : false,
+					bounce : false,
+					momentum : false,
+					snap : "li",
+					onScrollMove : function() {
+						if ( scrollload = this.x == this.pagesX[this.pagesX.length - 1])
+							;
+					},
+					onScrollEnd : function() {
+						if (scrollload)
+							callback();
+					}
+				});
+			}
+
+
+			$().ready(function(e) {
+				onewh("wrapper", function() {
+					api.closeWin();
+				});
+			});
+		</script>
+	</body>
+</html>7

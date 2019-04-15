@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+	<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+	<title>产品列表</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+</head>
+<body>
+<div class="mui-content mui-mb70 backdrop-f8f8f8">
+	<!--安心金-->
+	<div class="home-pro-box pro-list-box mui-mt10">
+		<div class="pro-list-main">
+			<script id="period-template" type="text/x-dot-template">
+				{{ for(var i=0; i< it.length; i++) { }}
+					<div tapmode onclick="openProductSubWin(2, {{=it[i].id }}, '{{=it[i].name }}');" class="pro-list">
+						<div class="pro-year-bonus">
+							<span><i>{{=it[i].profitRate}}</i>%
+							{{if(it[i].rushPurchase && it[i].startActivity){}}
+								<em><i>+</i><span>{{=it[i].productStrategys[0].profitRate }}</span>%</em>
+							{{ } }}
+							</span>
+							<em>年化赠金</em>
+						</div>
+						<div class="pro-year-other">
+							<div class="pro-name">
+							<span>
+								{{if(it[i].type === 2){ }}
+									新手金
+								{{ }else{ }}
+									{{=it[i].category.name }}
+								{{ } }}
+								{{=it[i].period }}
+								{{if(it[i].periodUnit === 3){}}
+									小时
+								{{ }else{ }}
+									天
+								{{ } }}
+							</span>
+							
+							{{if(it[i].rushPurchase){ }}
+							<i class="pro-act-icon">
+								{{=it[i].productStrategys[0].name }}
+							</i>
+							{{ } }}
+							{{if(it[i].type === 2){ }}
+								<i class="pro-act-icon">新手专享</i>
+							{{ } }}
+							</div>
+							
+							<div class="pro-trait">
+							<span>
+							{{if(it[i].category.id === 2){ }}
+
+								{{if(it[i].purchaseAmount === 0){ }}
+									{{=it[i].minPurchaseMoney }}元起购
+								{{ } else { }}
+									{{=it[i].purchaseAmount/1000 }}克起购
+								{{ } }}
+
+							{{ } else { }}
+								{{=it[i].purchaseAmount }}毫克起购
+							{{ } }}
+							</span>
+							<span>
+							{{if(it[i].category.id === 2){ }}
+								{{if(it[i].profitType === 4 || it[i].profitType === 3){ }}
+									按月发赠金
+								{{ } else if(it[i].type === 2){ }}
+									限购一次
+								{{ } else { }}
+									稳定生金
+								{{ } }}	
+							{{ } else { }}
+								随买随卖
+							{{ } }}	
+							</span>
+<!--							<span>
+							{{if(it[i].category.id === 2){ }}
+								赠金高
+							{{ } else { }}
+								按日发赠金
+							{{ } }}
+							</span>-->
+							</div>
+							
+							<div class="pro-coupon hide">共6张优惠券可用</div>
+						</div>
+						
+						{{if(it[i].rushPurchase && it[i].startActivity){ }}
+							<div class="pro-act-time"><em>活动结束:{{=global.formatDate(it[i].productStrategys[0].endTime, 'yyyy-MM-dd hh:mm') }}</em></div>
+						{{ }else if(it[i].rushPurchase){ }}
+							<div class="pro-act-time"><em>活动开始{{=global.formatDate(it[i].productStrategys[0].startTime, 'yyyy-MM-dd hh:mm') }}</em></div>
+						{{ } }}
+					</div>
+				{{ } }}	
+			</script>
+
+			<div id="period-content"></div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/library/doT.js"></script>
+<script type="text/javascript" src="../script/common/page.js"></script>
+<script type="text/javascript" src="../script/common/cache.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript" src="../script/portal/productActivityList.js"></script>
+</html>

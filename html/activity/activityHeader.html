@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a class="back-icon" tapmode onclick="api.closeWin();"></a>
+				<h1><span id="title"></span></h1>
+					<a onclick="share()" class="right">分享</a>
+			</div>
+			<div id="body">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function(){
+			$api.html($api.byId('title'), api.pageParam.title);
+
+		    var header = $api.byId('header');
+		    if(header){
+		        $api.fixIos7Bar(header);
+		    }
+		    var pos = $api.offset(header);
+		    var $body = $api.dom('body');
+		    var body_h = $api.offset($body).h;
+		    var rect_h = body_h - pos.h;
+			    
+		    api.openFrame({
+		        name: api.pageParam.page,
+		        url: api.pageParam.page + '.html',
+		        rect:{
+		            x: 0,
+		            y: pos.h,
+		            w: 'auto',
+		            h: 'auto',
+		            marginLeft: 0,
+		    		marginTop: 0,
+		   			marginBottom: 0,
+		    		marginRight: 0
+		        },
+		        pageParam : api.pageParam,
+		        bounces: false,
+		        vScrollBarEnabled: false
+		    });
+		}
+		    
+		function share(){
+			api.execScript({
+				frameName: api.pageParam.page,
+				script: 'share();'
+			});
+		}
+	</script>
+</html>

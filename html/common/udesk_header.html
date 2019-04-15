@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a class="back-icon" tapmode onclick="closeWin();"></a>
+				<h1><span id="title"></span></h1>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/kfSHA1.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	
+	<script type="text/javascript" >
+	
+	apiready = function(){
+	    var header = $api.byId('header');
+	    if(header){
+	        $api.fixIos7Bar(header);
+	    }
+	    var pos = $api.offset(header);
+	    var $body = $api.dom('body');
+	    //var body_h = api.winHeight;
+	    var body_h = $api.offset($body).h;
+	    var rect_h = body_h - pos.h;
+		
+		$api.html($api.byId('title'), api.pageParam.title);
+	
+		var timestamp = new Date().getTime();
+	    var webToken = global.getSecurityMobile();
+		var title = global.getHelpTitle();
+	    var imUserKey = "aad48d544fea0b99e301d2fda3eb021c";
+
+	    var sign_str = "nonce=" + timestamp+ "&timestamp=" +timestamp+ "&web_token=" + webToken + "&" + imUserKey;
+	    sign_str = hex_sha1(sign_str);
+	    sign_str = sign_str.toUpperCase();
+
+		var url = 'http://jsz.udesk.cn/im_client/?web_plugin_id=42732&c_phone='+webToken+
+		'&nonce='+timestamp+'&signature='+sign_str+'&timestamp='+timestamp+'&web_token='+webToken+
+		'&c_cn_title='+title+'&c_name='+global.getUserName();
+	
+	    api.openFrame({
+	        name: 'udeskHead',
+	        url: url,
+	        rect:{
+	            x: 0,
+	            y: pos.h,
+	            w: 'auto',
+	            h: 'auto',
+	            marginLeft: 0,
+	    		marginTop: 0,
+	   			marginBottom: 0,
+	    		marginRight: 0
+	        },
+	        pageParam : api.pageParam,
+	        bounces: false,
+	        vScrollBarEnabled: false
+	    });
+	}
+
+	function closeWin(){
+	
+		api.closeWin();		
+	}
+
+	
+	</script>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html id="htmlDiv" class="">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>您访问的页面不存在</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+	    <style type="text/css">
+	    	/*无网络*/
+			.no-network {  text-align: center;  font-size: 16px;  color: #888;  padding-top: 30%;  }
+			.no-network img {  margin: 0 auto;  display: block; width: 100%;  }
+			.no-network.pt0{padding-top: 0; overflow: hidden; height: 100%; background-color: #ccc; }
+	    </style>
+
+	</head>
+	<body>
+		<div class="mui-content hide" id="mainDiv">
+			<div class="page-notin">
+				<i><img src="../image/page-notin.png"></i>
+				<p>
+					您访问的<em>页面不存在</em>
+				</p>
+				<button tapmode onclick="api.closeWin();" class="mui-btn-block mui-btn-warning btn-notin-return">
+					返回
+				</button>
+			</div>
+			<div tapmode onclick="call('4006832999');" class="service-phone">
+				<div class="service-phone-l">
+					<i><img src="../image/contact-logo.jpg"></i>
+					<div class="service-phone-l">
+						<span>客服热线(周一至周日 9:00-19:00)</span>
+						<em>4006-832-999</em>
+					</div>
+				</div>
+				<div class="service-phone-r">
+					<button class="mui-btn mui-btn-warning">
+						拨打电话
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="noneNetworkDiv" class="mui-content hide">
+			<div class="no-network pt0">
+				<img src="../image/no-network.png">
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript">
+	apiready = function(){
+		api.addEventListener({
+	        name:'keyback'
+        },function(ret,err){
+        	api.closeWin();
+        });
+
+		api.addEventListener({
+		    name:'networkConnection'
+	    },function(ret,err){
+			isNetworkConnection();
+	    });
+
+        isNetworkConnection();
+	}
+	
+	function call(number){
+		api.call({
+		    type: 'tel_prompt',
+		    number: number
+			}); 
+		}
+
+	function isNetworkConnection() {
+	// 无网络
+		if(global.networkConnection()){
+			$api.addCls($api.byId('noneNetworkDiv'), 'hide');
+			$api.removeCls($api.byId('mainDiv'), 'hide');
+			$api.removeCls($api.byId('htmlDiv'), 'mui-bg-white');
+		} else {
+			$api.removeCls($api.byId('noneNetworkDiv'), 'hide');
+			$api.addCls($api.byId('mainDiv'), 'hide');
+			$api.addCls($api.byId('htmlDiv'), 'mui-bg-white');
+		}
+	}
+
+	</script>
+</html>

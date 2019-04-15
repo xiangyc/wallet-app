@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>天天金</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+	   <div class="mui-content backdrop-f8f8f8 mui-mb70">
+
+			<div class="pro-detail-top">
+				<div class="pro-detail-yearbonus">
+				     <span><em id="profitRate"></em>%</span>
+					<em>年化赠金</em>
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9 pro-top-list">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon">产品期限</span>
+						<div class="mui-media-body" id="period"></div>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon">起购克重</span>
+						<div id="purchaseSpan" class="mui-media-body"><em id="purchaseAmount"></em>克</div>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon">风险等级</span>
+						<div class="mui-media-body">稳健型<i class="icon-sigh-white" tapmode onclick="showTips();"></i></div>
+					</li>
+				</ul>
+			</div>
+
+			<div id="dayGoldAmountDiv" class="pro-detail-hold mui-clearfix mui-mt10 hide">
+				<div class="pro-hold-active">
+					<span id="perdiemAmount"></span>
+					<em>当前持有天天金(克)</em>
+				</div>
+				<div class="pro-hold-button">
+					<button type="button" class="mui-btn mui-btn-outlined mui-btn-width92 mui-add-radius" tapmode onclick="sale();">卖金</button>
+				</div>
+			</div>
+
+			 <div id="activityDiv" class="pr-activity-details hide">
+		            <div class="pr-activity-title"><i id="nameI"></i>
+						<div id="timeEm" class="ac-count-time">距离结束<span><i id="dayI"></i>天<span><span><i id="hourI"></i>时<span><span><i id="minuteI"></i>分<span><span><i id="secondI"></i>秒<span></div>
+					</div>
+		            <p id="noteP"></p>
+		    </div>
+
+			<div class="pro-detail-intro mui-mt10">
+				<div class="pro-title border-b">产品介绍</div>
+				<ul  id="descriptionApp">
+			
+				</ul>
+			</div>
+
+			<div class="pro-detail-problem mui-mt10">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li id ="questionLi" class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right">
+							<i></i>常见问题
+						</a>
+					</li>
+				</ul>
+
+			   <ul class="mui-table-view help-list-box mui-m0">
+	
+					<script id="helpCategory-template" type="text/x-dot-template">
+						{{ for(var i=0; i< it.length; i++) { }}
+						
+							<li class="mui-table-view-cell mui-collapse " id="li{{=it[i].id}}" onclick="showContent({{=it[i].id}})">
+								<a class="mui-navigate-right">{{=it[i].title}}</a>
+								<div class="mui-collapse-content help-list-c" >
+							      {{=it[i].appContent}}
+								</div>
+							</li>
+
+							{{ } }}
+					</script> 
+
+					<div id="helpCategory-content"></div>
+                </ul>
+
+			</div>
+
+		   <button type="button" id="submitBtn" tapmode disabled class="mui-btn mui-btn-fb-buy mui-btn-block ">立即购买</button>
+
+	   </div>
+
+	</body>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/library/doT.js"></script>
+	<script type="text/javascript" src="../script/portal/productDayDetail.js"></script>
+</html>

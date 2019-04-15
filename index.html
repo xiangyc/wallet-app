@@ -1,0 +1,35 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/frame.css"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<div id="asset" class="topbar">
+					<h1>
+						<div class="search-input">
+							<i></i>
+							<input type="text" onclick="search()" />
+						</div>
+					</h1>
+					<a class="kf-right" tapmode onclick="doCustom('分类');"></a>
+				</div>
+				<div id="activity" class="topbar">
+					发现
+					<a id="notice3" tapmode class="kf-icon" onclick="doCustom('发现列表');"><i></i></a>
+				</div>
+			</div>
+			<div id="main"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="./script/api.js"></script>
+	<script type="text/javascript" src="./script/core/global.js"></script>
+	<script type="text/javascript" src="./script/index.js"></script>
+
+</html>

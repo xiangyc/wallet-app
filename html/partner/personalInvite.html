@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>邀请加入金算子</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+   <style>
+     html,body { background-color:transparent !important; overflow: hidden;  }
+    .mui-backdrop{ background-color:rgba(0,0,0,.2) !important; }
+    .share-box-ul.two li{ width: 50%; }
+    </style>
+</head>
+<body>
+  <div class="invite-box hide" id="codeDiv">
+
+      <div class="invite-top">
+          <img src="" class="avatar-img" onerror="this.src='../../image/partner/default-avatar-icon.jpg'" />
+          <p id="mobile"></p>
+      </div>
+
+      <div class="invite-code">
+          <h4>识别图中二维码，邀请您加入金算子</h4>
+          <div class="invite-code-img" id="qrcodeDiv"></div>
+      </div>
+
+      <div class="close-page" onclick="api.closeFrame();"> <img src="../../image/partner/close-icon.png"/> </div>
+      <!-- <div class="down-page"> <img src="../../image/partner/down-icon.png"/> </div> -->
+      <div class="partake-page" onclick="codeshare();"> <img src="../../image/partner/partake-icon.png"/> </div>
+
+  </div>
+
+
+  <div class="invite-box invite-box-jg hide" id="orgCodeDiv">
+
+      <div class="invite-top">
+          <img src="" class="avatar-img" onerror="this.src='../../image/partner/default-avatar-icon.jpg'" />
+          <p id="orgMobile"></p>
+      </div>
+
+      <div class="invite-code">
+          <h4>识别图中二维码，邀请您加入机构成为合伙人</h4>
+          <div class="invite-code-img" id="qrOrgCodeDiv"></div>
+      </div>
+
+      <div class="close-page" onclick="api.closeFrame();"> <img src="../../image/partner/close-icon.png"/> </div>
+      <div class="partake-page" onclick="codeshare();"> <img src="../../image/partner/partake-icon.png"/> </div>
+  </div>
+
+
+  <div id="shareDiv" class="share-box hide">
+      <ul class="share-box-ul mui-clearfix" id="shareUl">
+        <li onclick="shareWx('session');" class="wechat-icon">
+                    <i></i>微信好友
+                </li>
+                <li id="qfriendLi" onclick="shareQzone('qfriend');"  class="qq-icon">
+                    <i></i>QQ好友
+                </li>
+                <li onclick="shareWx('timeline');"  class="friend-icon">
+                    <i></i>朋友圈
+                </li>
+                 <li id="qzoneLi" onclick="shareQzone('qzone');"  class="qzone-icon">
+          <i></i>QQ空间
+        </li>
+      </ul>
+      <div class="mui-popup-buttons">
+        <span onclick="api.closeFrame();" class="mui-popup-button">取消</span>
+      </div>
+    </div>
+  <div id="buybackdrop" class="mui-backdrop hide"></div> 
+
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/core/global.js"></script>
+  <script type="text/javascript" src="../../script/common/shareImage.js"></script>
+  <script type="text/javascript" src="../../script/library/jquery.js"></script>
+  <script type="text/javascript" src="../../script/library/jqueryQrcode.js"></script>
+  <script type="text/javascript" src="../../script/library/qrcode.js"></script>
+  <script type="text/javascript" src="../../script/library/base64.js"></script>
+  <script type="text/javascript" src="../../script/partner/personalInvite.js"></script>
+</body>
+</html>

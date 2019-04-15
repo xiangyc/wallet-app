@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>联系我们</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view address-list-box mui-mt10 contact-b">
+				<li tapmode onclick="openFeedback();" class="mui-table-view-cell list-menu">
+					<a id="versionName" class="mui-navigate-right"> <span class="list-right"></span> <i class="list-feedback" ></i>用户反馈 </a>
+				</li>
+				<li class="mui-table-view-cell list-menu list-menu-p" onclick="call('4006-832-999');">
+					<a class="mui-navigate-right"> <span class="list-right line-height14">4006-832-999 <em>09:00-19:00</em> </span>
+					<div class="list-contact-left">
+						<i class="list-contact-phone"></i>客服电话
+					</div> </a>
+				</li>
+				<li class="mui-table-view-cell list-menu" tapmode onclick="clipBoard('cs@jsz.top');">
+					<a class="mui-navigate-right"><span class="list-right">cs@jsz.top</span>
+					<i class="list-contact-mailbox"></i>客服邮箱</a>
+				</li>
+				<li class="mui-table-view-cell list-menu" tapmode onclick="clipBoard('www.jsz.top');">
+					<a class="mui-navigate-right"><span class="list-right">www.jsz.top</span>
+					<i class="list-contact-website"></i>官方网站</a>
+				</li>
+				<li class="mui-table-view-cell list-menu" tapmode onclick="clipBoard('jinsuanzi88');">
+					<a class="mui-navigate-right"><span class="list-right">jinsuanzi88</span>
+					<i class="list-contact-wx"></i>官方微信</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view address-list-box mui-mt10 list-menu">
+				<li tapmode onclick="aboutUs();" class="mui-table-view-cell list-menu">
+					<a id="versionName" class="mui-navigate-right"> <span class="list-right"></span> <i class="list-setup-aboutus" ></i>关于金算子 </a>
+				</li>
+				<li id="versionLi" class="mui-table-view-cell list-menu">
+					<a id="versionName" class="mui-navigate-right"> <span class="list-right" id="version"></span> <i class="list-contact-version" ></i>当前版本 </a>
+				</li>
+<!-- 				<li class="mui-table-view-cell list-menu" onclick="openAgreement();">
+					<a class="mui-navigate-right"> <span class="list-right"></span> <i class="list-contact-protocol"></i>用户协议 </a>
+				</li> -->
+			</ul>
+
+		<div id="versionUpdate" class="bomb-box hide">
+	    	<div class="main">
+		        <h4 class="title">更新内容</h4>
+		        <div class="bomb-c mui-popup-inner"><p id="versionDescription"></p></div>
+	        </div>
+	        <div class="mui-popup-buttons"><span class="mui-popup-button" onclick="versionCancel()">取消</span><button id="submitBtn" class="mui-popup-button yellow" onclick="download();">更新</button></div>
+	    </div>
+
+ 		<div id="versionUpdateDropDiv" class="mui-backdrop hide"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/library/mui.js"></script>
+	<script type="text/javascript" src="../../script/portal/contactUs.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+
+</html>

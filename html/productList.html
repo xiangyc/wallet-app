@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>黄金产品</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<div id="noneNetworkDiv" class="mui-content hide">
+			<div class="no-network pt0">
+				<img src="../image/no-network.png">
+			</div>
+		</div>
+        <div id="mainDiv" class="mui-content mui-mb70 backdrop-f8f8f8">
+			<div id="bannerDiv" class="pro-mall-add hide" tapmode onclick="doActivity();">
+				<img id="imgId">
+			</div>
+			
+			<!--安心金-->
+			<div class="home-pro-box pro-list-box mui-mt10">
+				<div class="pro-title border-b"><h3><span>安心金</span><span>稳健型</span><i class="icon-sigh" tapmode onclick="showDetail(1);"></i></h3></div>
+				<div class="pro-list-main">
+
+					<script id="period-template" type="text/x-dot-template">
+						{{ for(var i=0; i< it.length; i++) { }}
+						 {{if(!it[i].type || it[i].type === 1){ }}
+							<div class="pro-list" tapmode onclick="openSubWin(2, {{=it[i].id }}, '{{=it[i].name }}');">
+								<div class="pro-year-bonus">
+									<span><i>{{=it[i].profitRate}}</i>%									
+										{{if(it[i].rushPurchase && it[i].startActivity){}}
+											<em><i>+</i><span>{{=it[i].productStrategys[0].profitRate }}</span>%</em>
+										{{ } }}
+									</span>
+									<em>年化赠金</em>
+								</div>
+								<div class="pro-year-other">
+									<div class="pro-name">
+										<span>
+											{{=it[i].period}}
+												{{if(it[i].periodUnit === 3){}}
+													小时
+												{{ }else{ }}
+													天
+											{{ } }}
+										</span>
+											{{if(it[i].rushPurchase && it[i].startActivity){ }}
+													<i class="pro-act-icon">{{=it[i].productStrategys[0].name }}</i>
+											{{ } }}										
+									</div>
+		 							{{if(it[i].memberCouponsCount){ }}
+										<div class="pro-coupon">{{=it[i].memberCouponsCount }}张优惠券可用</div>
+									{{ }else{ }}
+										<div class="pro-trait ">
+											<span>
+											{{if(it[i].category.id === 2){ }}
+												{{if(it[i].purchaseAmount === 0){ }}													
+													{{=it[i].minPurchaseMoney }}元起购
+												{{ } else { }}	
+													{{=it[i].purchaseAmount/1000 }}克起购
+												{{ } }}	
+											{{ } else { }}
+												{{=it[i].purchaseAmount }}毫克起购
+											{{ } }}
+											</span>
+											<span>
+											{{if(it[i].category.id === 2){ }}
+												{{if(it[i].profitType === 4 || it[i].profitType === 3){ }}
+													按月发赠金
+												{{ } else { }}
+													稳定生金 
+												{{ } }}	
+											{{ } else { }}
+												随买随卖
+											{{ } }}	
+											</span>
+<!--											<span>
+											{{if(it[i].category.id === 2){ }}
+												赠金高
+											{{ } else { }}
+												按日发赠金
+											{{ } }}
+											</span>-->
+										</div>
+									{{ } }} 
+
+								</div>
+								
+									{{if(it[i].rushPurchase && it[i].startActivity){ }}
+										<div class="pro-act-time">活动结束:{{=global.formatDate(it[i].productStrategys[0].endTime, 'yyyy-MM-dd hh:mm') }}</div>
+									{{ }else if(it[i].rushPurchase){ }}
+										<div class="pro-act-time">预计开始:{{=global.formatDate(it[i].productStrategys[0].startTime, 'yyyy-MM-dd hh:mm') }}</div>
+									{{ } }}
+
+							</div>
+						 {{ } }}	
+						{{ } }}	
+					</script>
+
+						<div id="period-content"></div>
+				</div>
+
+			
+			</div>
+			
+		
+
+			<!--商城按钮-->
+			<div class="pro-list-mall-btn mui-mt10 mui-clearfix" tapmode onclick="openShop();">
+				<img src="../image/icon-mall.png">
+				<div>
+					<h3>黄金商城</h3>
+					<span>开启实物黄金新零售</span>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/library/doT.js"></script>
+	<script type="text/javascript" src="../script/common/page.js"></script>
+	<script type="text/javascript" src="../script/common/cache.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/portal/productList.js"></script>
+</html>

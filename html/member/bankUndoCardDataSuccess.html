@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>解绑银行卡</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	</head>
+	<body>
+		<div class="bind-bcard-success">
+			<h1><img src="../../image/icon-success.png" /></h1>
+			<h6>资料提交成功</h6>
+			<p>您的解绑申请客服已经在处理中，预计1个工作日处理完成。处理结果会通过短信通知您，请耐心等待。</p>
+		</div>
+		<div class="rechange-btn">
+			<button type="button" class="mui-btn mui-btn-block mui-btn-primary" tapmode onclick="complete();">完成</button>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" >
+		
+		function complete(){
+			api.closeWin({
+	        		name : 'bankUndoCardDataWin'
+			});	  
+
+			api.closeWin();
+		}
+	</script>
+</html>

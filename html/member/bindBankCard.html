@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>绑定银行卡</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+
+			<div class="realname-step hide">
+				<ul>
+					<li class="current" id="bindCardId"><em>1</em>实名绑卡</li>
+					<li id="setPayPwdId"><em>2</em>设置交易密码</li>
+				</ul>
+			</div>
+		
+			<div id='bankCardForm' class="mui-input-group">
+				<div class="mui-input-row">
+					<label class="label-icon realname-icon01"><i></i></label>
+					<input id='userName' type="text" maxlength="20" class="mui-input-clear mui-input" placeholder="请输入姓名">
+				</div>
+				<div class="mui-input-row">
+					<label class="label-icon realname-icon02"><i></i></label>
+					<input id='idCardNo' type="text" maxlength="20" class="mui-input-clear mui-input" placeholder="请输入身份证号码">
+				</div>
+
+				<div class="mui-input-row">
+					<label class="label-icon realname-icon04"><i></i></label>
+					<input id='cardNo' type="tel" maxlength="20" class="mui-input-clear mui-input" placeholder="请输入银行卡号">
+				</div>
+				<div class="mui-input-row">
+					<label class="label-icon realname-icon05"><i></i></label>
+					<input id='mobile' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入银行预留手机号">
+				</div>
+				<div class="mui-input-row">
+					<label class="label-icon realname-icon06"><i></i></label>
+					<div class="mui-input-r">
+						<input id="smsCode" type="tel" class="mui-input-clear mui-input" placeholder="请输入验证码">
+						<input id="sendSms" tapmode onclick="gainCode();" class="fm-item-btn" value="获取验证码" type="button">
+					</div>
+				</div>
+	<!-- 			<div class="main-bomb-prompt">
+					<i></i>解绑银行卡需联系客服上传手持身份证和银行卡照片，请谨慎操作
+				</div> -->
+			</div>
+
+
+			<div id='bankCardBt' class="mui-content-padded">
+				<button id="confirmBtn" tapmode onclick="bindSubmit();" class="mui-btn mui-btn-block mui-btn-warning">
+					确定
+				</button>
+			</div>
+
+			<div id='payPwdForm' class="mui-input-group mui-mt10 hide">						
+				<div class="mui-input-row">
+					<label class="label-icon pw-icon"><i></i></label>
+					<input id='password' type="password" maxlength="6" class="mui-input-clear mui-input" placeholder="请输入6位数字的交易密码">
+				</div>
+
+				<div class="mui-input-row">
+					<label class="label-icon pw-icon"><i></i></label>
+					<input id='confirmPassword' type="password" maxlength="6" class="mui-input-clear mui-input" placeholder="请输入确认密码">
+					<a id="eye" tapmode onclick="showPassword();" class="password-btn passwordOn"></a>
+				</div>
+
+			</div>
+
+
+			<div id='payPwdBt' class="mui-content-padded hide">
+				<button tapmode id="payPwdSpan" onclick="setPayPassword();" class="mui-btn mui-btn-block mui-btn-warning" >确定</button>
+			</div>
+
+			<div tapmode onclick="openBankList();" class="main-bomb-prompt"><i></i>银行限额表</div>
+
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/member/bindBankCard.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+</html>

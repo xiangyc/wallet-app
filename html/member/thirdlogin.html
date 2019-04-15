@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>绑定金算子账号</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content thirdlogin">
+			<ul class="thirdlogin-choice">
+				<li id="clickAccount1" class="current" tapmode onclick="clickAccount(1);">已有账号</li>
+				<li id="clickAccount2" tapmode onclick="clickAccount(2);">无账号</li>
+			</ul>
+			<!--已有账号-->
+			<div class="" id="logDivId">
+				<form id='login-form' class="mui-input-group mui-mt10">
+					<div class="mui-input-row">
+						<label class="label-icon userred-gray-icon"><i></i></label>
+						<input id='userName' type="number" oninput="if(value.length>11)value=value.slice(0,11);" maxlength="11" class="mui-input-clear mui-input" placeholder="输入已注册手机号">
+					</div>
+					<div class="mui-input-row">
+						<label class="label-icon pw-gray-icon"><i></i></label>
+						<input id='loginPassword' type="password" maxlength="20" class="mui-input-clear mui-input" placeholder="输入登录密码">
+						<a id='loginEye' tapmode onclick="showPassword('loginPassword','loginEye');" class="password-btn passwordOn"></a>
+					</div>
+				</form>
+				<div class="binding-prompt">绑定金算账号后，可以直接通过第三方登录。</div>
+				<div class="mui-content-padded">
+					<button tapmode onclick="login();" class="mui-btn mui-btn-block mui-btn-warning">
+						绑定
+					</button>
+				</div>
+			</div>
+			<!--无账号-->
+			<div class="mui-content mui-hidden" id="regDivId">
+				<form id='login-form' class="mui-input-group mui-mt10">
+					<div class="mui-input-row binding-prompt">绑定金算账号后，可以直接通过第三方登录。</div>
+					<div class="mui-input-row">
+						<label class="label-icon userred-gray-icon"><i></i></label>
+						<input id="mobile" maxlength="11" type="tel" value='' onkeyup="validateMobile();"  class="mui-input-clear mui-input" placeholder="请输入注册手机号">
+					</div>
+
+					<div class="mui-input-row">
+						<label class="label-icon code-icon-gray"><i></i></label>
+						<div class="mui-input-r">
+							<input id="code" maxlength="6" type="tel" class="mui-input-clear mui-input" placeholder="请输入验证码">
+							<input id="sendButton" tapmode onclick="sendSmsCode();" class="fm-item-btn" value="获取验证码" type="button" disabled="disabled">
+						</div>
+					</div>
+
+					<div class="mui-input-row">
+						<label class="label-icon pw-gray-icon"><i></i></label>
+
+						<input id="password" maxlength="20" type="password" class="mui-input-clear mui-input" placeholder="请输入6-20位字母+数字的密码">
+						<a id="eye" tapmode onclick="showPassword('password','eye');" class="password-btn passwordOn"></a>
+					</div>
+
+					<div class="mui-input-row">
+						<label class="label-icon invitation-icon-gray"><i></i></label>
+						<input id="recommendMobile"  maxlength="11" type="text" value='' class="mui-input-clear mui-input" placeholder="输入推荐人手机或邀请码(非必填)">
+					</div>
+				</form>
+
+				<div class="fm-agreement">
+					<p class="common_protocol">
+						<span id="argeeId" class="icon_protocol current" onclick="agreement()"></span>阅读并同意
+						<span class="protocol_text"><a tapmode onclick="openAgreement();">《财易通智金用户服务协议》</a></span>
+					</p>
+				</div>
+
+				<div class="mui-content-padded">
+					<button class="mui-btn mui-btn-block mui-btn-warning" id="registSpan" onclick="register();">注册</button>
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/common/sms.js"></script>
+	<script type="text/javascript" src="../../script/member/thirdLogin.js"></script>
+	<script type="text/javascript" src="../../script/member/loginDataWrapper.js"></script>
+</html>

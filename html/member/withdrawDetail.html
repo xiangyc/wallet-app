@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提现详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+<div class="with-detail mui-mt10">
+    <h6><span id="realMoney">0.00</span>元</h6>
+    <p id="currentStatus"></p>
+</div>
+<div class="with-detail-con mui-mt10">
+    <ul>
+        <li>
+            <span>提现金额</span>
+            <i><em id="withdrawAmount">0.00</em>元</i>
+        </li>
+        <li>
+            <span>提现手续费</span>
+            <i><em id="fee">0.00</em>元</i>
+        </li>
+        <li>
+            <span>当前状态</span>
+            <i id="statusValue"></i>
+        </li>
+        <li>
+            <span>提现银行</span>
+            <i id="bankName"></i>
+        </li>
+        <li>
+            <span>申请时间</span>
+            <i id="applyTime"></i>
+        </li>
+        <li>
+            <span>到账时间</span>
+            <i id="loanTime">--</i>
+        </li>
+        <li>
+            <span>提现单号</span>
+            <i id="applyNo"></i>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/withdrawDetail.js"></script>
+</html>

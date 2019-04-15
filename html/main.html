@@ -1,0 +1,158 @@
+﻿﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/swipe4.css" />
+ 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<style type="text/css">
+            .swiper-container2 {
+		      width: 100%;
+		      height: 190px;
+		      overflow: hidden;
+		      padding-left: 15px;
+		    }
+    	</style>
+	</head>
+	<script type="text/javascript" src="../script/library/jquery.js"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $.fn.extend({
+                Scroll: function (opt, callback) {
+                    //参数初始化
+                    if (!opt) var opt = {};
+                    var _this = this.eq(0).find("ul:first");
+                    var lineH = _this.find("li:first").height();//获取行高                    
+                        line = opt.line ? parseInt(opt.line, 10) : parseInt(this.height() / lineH, 10), //每次滚动的行数，默认为一屏，即父容器高度
+                        speed = opt.speed ? parseInt(opt.speed, 10) : 1000, //卷动速度，数值越大，速度越慢（毫秒）
+                        timer = opt.timer ? parseInt(opt.timer, 10) : 5000; //滚动的时间间隔（毫秒）
+            
+                    if (line == 0) line = 1;
+                    var upHeight = 0 - line * lineH;
+                    var downHeight=line * lineH - 0;
+                    //滚动函数
+                    scrollUp = function () {
+                        _this.animate(
+                            { marginTop: upHeight },
+                            speed,
+                            function () {
+                                for (i = 1; i <= line; i++) {
+                                    _this.find("li:first").appendTo(_this);
+                                }
+                                _this.css({ marginTop: 0 });
+                            }
+                        );
+                    },
+                        //向下滚动函数
+                        scrollDown = function () {
+                            _this.animate(
+                                { marginTop: downHeight },//动画展示css样式
+                                speed,
+                                function () {
+                                    _this.find("li:last").prependTo(_this);
+                                    _this.css({ marginTop: 0 });
+                                }
+                            )
+                        }
+                    var timerID
+                    //鼠标事件绑定
+                    _this.hover(function () {
+                        //clearInterval(timerID);
+                    }, function () {
+                        timerID = setInterval("scrollUp()", timer);//这里调用向下或者向上滚动函数
+                    }).mouseout();
+                }
+            })
+        })(jQuery);
+    </script>
+	<body>
+	    <!--无网络-->
+		<div id="noneNetworkDiv" class="mui-content hide">
+			<div class="no-network pt0">
+				<img src="../image/no-network.png">
+			</div>
+		</div>
+		
+	   <!--新页面开始-->
+		<div id="mainDiv" class="mui-content backdrop-f8f8f8" style="margin-top: 168px;">
+
+			<!--公告-->
+			<div class="home-notice-box" id="scrollDiv">
+				<img src="../image/home/home-icon-notice.png" class="home-icon-notice"/>
+				<ul id="noticeUL">
+				</ul>
+				<span tapmode onclick="closeNotice();" class="mui-icon mui-icon-closeempty"></span>
+			</div>
+
+
+			<!--精品推荐-->
+			<div class="home-pro-box mui-mt10 ">
+				<div class="pro-title"><h3>精品推荐</h3></div>
+				<div class="pro-boutique-main">
+
+					<script id="shop-template" type="text/x-dot-template">
+						{{ for(var i=0; i< it.length; i++) { }}
+				        	<div tapmode onclick="openShopDetail({{=it[i].id }}, '{{=it[i].name }}');" class="pro-wrap">
+								<div class="pro-img"><img onerror="src='../image/error-icon-nopic.png'" src="{{=global.getImgUri() + it[i].imgurl}}"></div>
+								<div class="pro-info">
+								    <h3>
+								    	{{ if(it[i].name.length > 18){ }}
+												{{=it[i].name.substring(0,18) + '…' }}
+											{{ }else{ }}
+												{{=it[i].name }}
+										{{ } }}
+								    </h3>
+									<p>
+										{{ if(it[i].summary.length > 34){ }}
+												{{=it[i].summary.substring(0,34) + '…' }}
+											{{ }else{ }}
+												{{=it[i].summary }}
+										{{ } }}
+									</p>
+									<div class="pro-price">
+										￥<em>{{=global.formatCurrency(it[i].salePrice) }}</em>
+									</div>
+								</div>
+							</div>
+						{{ } }}
+					</script>
+
+					  <div id="shop-content" > </div>
+				</div>
+			</div>
+
+		</div>
+	   <!--新页面结束-->
+
+	</body>
+
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/library/swipe4.js"></script>
+	<script type="text/javascript" src="../script/library/doT.js"></script>
+	<script type="text/javascript" src="../script/common/cache.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/core/eventCenter.js"></script>
+	<script type="text/javascript" src="../script/portal/main.js"></script>
+	<script type="text/javascript" src="../script/library/aui-scroll.js" ></script>
+	<script type="text/javascript">
+	    var scroll = new auiScroll({
+	        listen:true,
+	        distance:200 //判断到达底部的距离，isToBottom为true
+	    },function(ret){
+	    	//ret.isToBottom
+            if(ret.scrollTop > 44){
+            	api.sendEvent({
+	                name:'scrollTopEvent'
+                });
+            }else{
+            	api.sendEvent({
+	                name:'scrollBottomEvent'
+                });
+            }
+	    });
+	</script>
+</html>

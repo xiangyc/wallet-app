@@ -1,0 +1,40 @@
+ <!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>买金合同详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+
+    <div id="contract" class="bomb-box-contract hide">
+
+       <div style="font-size: 13px;margin-top: 3px;">
+        <button id="prev" onclick="goPrevious()">上一页</button>
+        <button id="next" onclick="goNext()">下一页</button>
+        &nbsp; &nbsp;
+        <span style="margin-top: 7px;">页码: <span id="page_num"></span> / <span id="page_count"></span></span>
+        <button onclick="showOrderDetail()" style="margin-left: 20%;">关闭</button>
+       </div>
+       <div>
+          <canvas id="the-canvas" style="border:1px solid black; max-width: 100%;"></canvas>
+       </div>
+    </div>
+
+    <div id="contractDiv" tapmode onclick="showOrderDetail();" class="mui-backdrop hide"></div>
+
+
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/pdf.js"></script>
+<script type="text/javascript" src="../../script/member/goldContractDetail.js"></script>
+</html>

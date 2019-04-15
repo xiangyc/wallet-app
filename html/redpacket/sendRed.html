@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>塞黄金到红包</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body>
+
+<div class="red-box">
+    <div class="red-html red-sent">
+        <div class="red-body-bg">
+            <div class="red-btn">
+                <div class="red-btn-next" onclick="next();"></div>
+                <img class="red-btnImg" src="../../image/redpacket/send-btn.png" />
+            </div>
+            <div class="red-href"><a tapmode onclick="redRule();">红包规则</a></div>
+            <img src="../../image/redpacket/them_wedding/send-bg.png" />
+        </div>
+        <div class="red-bg"></div>
+        <div class="red-con">
+            <div class="prepare-con">
+                <div class="prepare-text">
+                    <a tapmode onclick="buyGold();">立刻购买 ></a>
+                    <span>可用红包金：<i id="envelopeAmount">0</i>毫克</span>
+                </div>
+                <div class="adv-prepare-input">
+                    <span>毫克</span>
+                    <label id="show1">总克重</label>
+                    <label id="show1" class="hide">单个总克重</label>
+                    <input placeholder="请填写克重" onkeyup="calAmount()" type="number" oninput="if(value.length>6)value=value.slice(0,6);" maxlength="6" id="amount"/>
+                </div>
+                <div class="adv-prepare-text">
+                    <span class="" id="show2">抽到的黄金克重随机<i onclick="changeType(1)">改成普通红包</i></span> <span class="hide" id="show3">抽到的黄金克重固定<i onclick="changeType(2)">改成拼手气红包</i></span>
+                </div>
+                <div class="adv-prepare-input">
+                    <span>个</span>
+                    <label>红包个数</label>
+                    <input placeholder="请填写个数" onkeyup="calAmount()" type="number" oninput="if(value.length>3)value=value.slice(0,3);" maxlength="3" id="quantity"/>
+                </div>
+
+                <div class="adv-prepare-value">
+                    <span><i id="totalaAmount">0</i>毫克</span><span id="totalMoney">价值约：<em>0.00</em>元</span>
+                </div>
+
+                <div class="adv-prepare-input adv-prepare-input2">
+                    <label>留言</label>
+                    <input placeholder="财源滚滚， 日进斗金" id="remark" maxlength="16" type="text" />
+                </div>
+
+                <div class="prepare-text">
+                    <p>单日最多发<i id="maxDaysAmount">0.000</i>克，今日剩余可发<i id="availableSendAmount">0.00</i>克</p>
+                </div>
+            </div>
+        </div>
+        <!--发红包弹框-->
+        <div class="bomb-box hide" id="messageDiv">
+            <h4>请输入交易密码</h4>
+            <div class="bomb-c">
+                <form class="mui-input-group red-form-box">
+                    <div class="number-text">黄金红包：<span id="showAmount">0.000毫克</span></div>
+                    <div class="mui-input-row">
+                        <label class="label-icon jypw-icon"><i></i></label>
+                        <input maxlength="20" type="password" class="mui-input-clear mui-input" id="payPwd" placeholder="请输入交易密码">
+                    </div>
+                    <div class="link-forget">
+                        <a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+                    </div>
+                </form>
+                <button class="mui-btn mui-btn-block mui-btn-warning" id="submitBtn" onclick="confirm()">确定</button>
+            </div>
+        </div>
+        <div class="mui-backdrop hide" tapmode id="messageDropDiv" onclick="showMessage();"></div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/redpacket/prepare.js"></script>
+</html>

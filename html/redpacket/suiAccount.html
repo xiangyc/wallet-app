@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>随心金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+</head>
+<body>
+
+<div class="mui-content">
+    <div class="real-price pr-d-t">
+        <div class="pr-rate">
+            <span class="real-price-t"><em id="activeBalance">0.000</em></span>
+            <span class="real-price-b">随心金(克)</span>
+        </div>
+
+        <div class="pr-c-points mui-mt10 mui-clearfix">
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="profitMoney">0.00</span>
+                <span class="title-b">浮动盈亏(元)</span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="totalActiveIncome">0.00</span>
+                <span tapmode onclick="showMessage('totalActiveIncomeDiv');" class="title-b">历史盈亏(元)<i></i></span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="buyAvgPrice">0.00</span>
+                <span class="title-b">买入均价(元/克)</span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="activeIncome">0.00</span>
+                <span class="title-b">累计赠金(元)</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="account-bt bt-btn-fixed">
+    <div tapmode onclick="openSubWin(1);" class="btn3 btn-sell"><i class="sell-icon"></i>卖金</div>
+    <div tapmode onclick="openSubWin(2);" class="btn3 btn-buy"><i class="buy-icon"></i>买金</div>
+    <div tapmode onclick="carryGold();" class="btn3 btn-sell"><i class="goldrecord-icon"></i>提金</div>
+</div>
+
+    <div id="messageDropDiv" tapmode onclick="showMessage('');" class="mui-backdrop hide"></div>
+    
+    <div id="totalActiveIncomeDiv" class="bomb-box hide">
+        <h4>历史盈亏</h4>
+        <div class="bomb-c">
+            <p>
+                历史盈亏=随心金每日赠金累计+随心金卖出的盈亏累计。
+            </p>
+            <p>
+                某次卖出随心金的盈亏=（卖出金价-买入均价）x卖金克重-卖金手续费。
+            </p>
+        </div>
+    </div>
+    <!--不可提金提示 -->
+    <div id="carryDiv" class="bomb-box hide">
+        <h4>提示</h4>
+        <div class="bomb-c">
+            <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+        </div>
+    </div>
+
+    <div id="carryDropDiv" tapmode onclick="showCarry();" class="mui-backdrop hide"></div>
+
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/suiAccount.js"></script>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>安心金</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<div class="mui-content backdrop-f8f8f8 mui-mb70">
+
+			<div class="pro-detail-top">
+				<div class="pro-detail-yearbonus">
+					<span><i id="profitRate"></i>%<i id="rewardRate"></i></span>
+					<em>年化赠金</em>
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9 pro-top-list">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon">产品期限(天)</span>
+						<div class="mui-media-body" id="period"></div>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon" id="buyName">起购</span>
+						<div class="mui-media-body" id="minPurchaseMoney"></div>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+						<span class="mui-icon" id="periodTypeName"></span>
+						<div class="mui-media-body hide" id="periodTypeDiv1">稳健型<i class="icon-sigh-white" tapmode onclick="showTips();"></i></div>
+						<div class="mui-media-body hide" id="periodTypeDiv2"><em id="maxPurchaseAmount"></em>克</div>
+					</li>
+				</ul>
+			</div>
+
+			<ul id="periodGoldLi" class="mui-table-view mui-table-view-chevron member-asset-list pro-coupon-ul mui-mt10 hide">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" tapmode onclick="selectCoupon()">
+						<span id="vaildCouponCount" class="font-red"></span>优惠券
+					</a>
+				</li>
+			</ul>
+
+			<div id="activityDiv" class="pro-detail-activity hide">
+				<div class="pro-activity-c">
+					<div id="nameI" class="activity-title">火力全开</div>
+					<div id="timeEm" class="activity-time">
+						距结束
+						<span><em><i id="dayI"></i></em>天</span>
+						<span><em><i id="hourI"></i></em>时</span>
+						<span><em><i id="minuteI"></i></em>分</span>
+						<span><em><i id="secondI"></i></em>秒</span>
+					</div>
+					<p id="noteP"></p>
+				</div>
+			</div>
+
+			<div class="pro-detail-intro mui-mt10">
+				<div class="pro-title border-b">产品介绍</div>
+				<ul id="descriptionApp">
+			<!-- 		<li><span>买卖手续费</span><p>买入无手续费,卖出按0.7元/克收取</p></li>
+					<li><span>购买限制</span><p>每人每日可累计买入1000克，累计卖出共500克</p></li>
+					<li><span>赠金计算</span><p>T日购买，T+1日开始计算赠金，即成功买入的次日开始计算赠金。每日赠金=买金克重×买金次日凌晨金价×年化赠金÷365</p></li>
+					<li><span>购买限制</span><p>按日以现金形式发放，当日赠金次日发放</p></li>
+					<li><span>赠金计算</span><p>T日购买，T+1日开始计算赠金，即成功买入的次日开始计算赠金。每日赠金=买金克重×买金次日凌晨金价×年化赠金÷365</p></li> -->
+				</ul>
+			</div>
+
+			<div class="pro-income-contrast mui-mt10">
+				<div class="pro-title">年化收益对比</div>
+				<div class="income-contrast"><img id="imgId"> </div>
+
+			</div>
+
+			<div class="pro-detail-problem mui-mt10">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li id ="questionLi" class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right">
+							<i></i>常见问题
+						</a>
+					</li>
+				</ul>
+
+			   <ul class="mui-table-view help-list-box mui-m0">
+	
+					<script id="helpCategory-template" type="text/x-dot-template">
+						{{ for(var i=0; i< it.length; i++) { }}
+						
+							<li class="mui-table-view-cell mui-collapse " id="li{{=it[i].id}}" onclick="showContent({{=it[i].id}})">
+								<a class="mui-navigate-right">{{=it[i].title}}</a>
+								<div class="mui-collapse-content help-list-c" >
+							      {{=it[i].appContent}}
+								</div>
+							</li>
+
+							{{ } }}
+					</script> 
+
+					<div id="helpCategory-content"></div>
+                </ul>
+
+			</div>
+
+		   <button type="button" id="submitBtn" class="mui-btn mui-btn-fb-buy mui-btn-block" tapmode onclick="buy();">立即购买</button>
+
+		</div>
+
+
+       <!--查看优惠券-->
+		<div id="couponsDiv" class="select-coupons-barrage hide">
+
+			<div class="select-coupons-list">
+		       <h3>优惠券</h3> <i class="close-icon" tapmode onclick="closeCoupon();"></i>
+		       <div class="coupons-list-ul scrollbar-line">
+		 			  <script id="coupon-template" type="text/x-dot-template">
+		 			    {{ for(var i=0; i< it.length; i++) { }}
+							<div class="coupons-list mui-checkbox">
+
+                               <div class="coupon-name">{{=it[i].categoryName}}</div>
+
+							   <div class="coupons-list-l">
+								   <span>{{=it[i].couponValue}}<i>{{=it[i].unitName}}</i></span>
+								   <em>{{=it[i].categoryName}}</em>
+							   </div>
+
+							   <div class="coupons-list-r">
+								   <em>{{=it[i].instanceDetail}}</em>
+								   <span>有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</span>
+							   </div>
+
+							</div>
+						  {{ } }}
+				      </script>
+					<div id="coupon-content"></div>
+			  </div>
+			</div>
+            <button id="confirmCouponBtn" tapmode onclick="closeCoupon();" class="mui-btn mui-btn-fb-buy mui-btn-block">关闭</button>
+		</div>
+	    <div id="couponsDropDiv" class="mui-backdrop hide" tapmode onclick="closeCoupon();"></div>
+	</body>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/library/doT.js"></script>
+	<script type="text/javascript" src="../script/portal/productDetail.js"></script>
+</html>

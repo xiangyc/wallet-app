@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>红包规则</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body>
+<div class="red-box red-padding-box">
+
+    <ul class="red-tab">
+        <li tapmode onclick="switchDiv(1);" id="receiveRuleLi" class="active">发红包</li>
+        <li tapmode onclick="switchDiv(2);" id="sendRuleLi">领红包</li>
+    </ul>
+
+    <div class="rule-con">
+        <div id="receiveRuleDiv" class="rule-text">
+
+            <p>1、单个黄金红包的份数不超过100份，克重在0.001克至5克之间，每日发放的黄金红包累计克重不超过20克；</p>
+
+            <p>2、发放黄金红包将扣减用户账户内的红包金克重，红包金克重不足时需要购买红包金；</p>
+
+            <p>3、黄金红包有效期24小时，24小时后无人领取的黄金红包将退回至用户的红包金账户；</p>
+
+            <p>4、黄金红包支持微信好友、朋友圈等渠道分享，并且支持转发；</p>
+
+            <p>5、通过领取黄金红包的形式，新注册的用户将跟黄金红包的发送者建立邀请关系，成为红包发送者的被邀请好友。</p>
+
+        </div>
+        <div id="sendRuleDiv" class="rule-text hide">
+
+            <p>1、新老用户均可通过输入手机号、验证码后，领取获得的黄金红包；</p>
+
+            <p>2、用户领取的黄金红包克重将直接存到用户红包金账户，可直接卖金或者提金；</p>
+
+            <p>3、用户通过输入手机号、验证码的形式领取黄金红包后，其过往拆开未领取的黄金红包将自动关联到该手机号，并且系统将默认该手机号为后续领取黄金红包的账户；</p>
+            
+            <p>4、红包金不计算赠金收益。</p>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/rule.js"></script>
+</html>

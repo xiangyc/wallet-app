@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+			<div style="position: relative">
+				<a class="back-icon" tapmode onclick="closeWin();"></a>
+				<h1>订单记录</h1>
+				<!--<a class="option-icon" tapmode onclick="showCondition();"></a>-->
+			</div>
+			<ul class="order-tab" id="ordertabTypeUl">
+				<li tapmode onclick="selectOrderType(1, this);" id="buyLi" class="active" >买金</li>
+				<li tapmode onclick="selectOrderType(2, this);" id="sellLi">卖金</li>
+				<li tapmode onclick="selectOrderType(3, this);" id="extractLi">提金</li>
+			</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/member/orderListHeader.js"></script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>产品列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/product.css" />
+    <style>
+        .mui-content{background:#f8f8f8;}
+    </style>
+</head>
+<body>
+<div class="mui-content">
+    <ul class="pro-sort" id="sortLi">
+        <li onclick="sortList(0,this)" class="active">默认排序</li>
+        <li onclick="sortList(1,this)"><i></i>价格</li>
+        <li onclick="sortList(3,this)">销量</li>
+    </ul>
+    <ul class="home-pro" id="goods-content">
+    </ul>
+
+    <script id="goods-template" type="text/x-dot-template">
+    {{ for(var i=0; i< it.length; i++) { }}
+    <li class="mui-col-xs-6" onclick="openShopDetail({{=it[i].id}},'{{=it[i].name}}')">
+        <p><img onerror="src='../../image/icon.png'" src="{{=global.getImgUri()+it[i].imgurl}}"/></p>
+        <div class="home-pro-text">
+            <span>{{=it[i].name}}</span>
+            <i>￥<em>{{=it[i].salePrice}}</em></i>
+        </div>
+    </li>
+    {{ } }}
+    </script>
+
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/product/proList.js"></script>
+
+</html>

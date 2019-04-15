@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>更改邀请人</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body>
+<div class="change-inviter">
+    <p>原邀请人：<span id="mobile"></span></p>
+    <div class="mui-input-row input-row-f">
+        <label>邀请人</label><input id="code" placeholder="请输入邀请码" type="text" maxlength="10">
+    </div>
+    <div class="mui-content-padded">
+        <button tapmode onclick="bindSubmit();" id="confirmBtn" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">保存</button>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/changeInviter.js"></script>
+</html>

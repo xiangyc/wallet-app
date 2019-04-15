@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>一分钟了解金算子</title>
+        <style>
+            * {
+                border: 0px;
+                margin: 0px;
+                padding: 0px;
+            }
+            html, body {
+                border: 0px;
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+                height: 100%;
+            }
+            #wrapper > * > * {
+                background: #f4f7fa;
+                float: left;
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: top center;
+            }
+            #wrapper > * > *:nth-child(1) {
+                background-image: url(../../image/statics/oneminute1.png);
+            }
+            #wrapper > * > *:nth-child(2) {
+                background-image: url(../../image/statics/oneminute2.png);
+            }
+            #wrapper > * > *:nth-child(3) {
+                background-image: url(../../image/statics/oneminute3.png);
+            }
+            #wrapper > * > *:nth-child(4) {
+                background-image: url(../../image/statics/oneminute4.png);
+            }
+            #wrapper > * > *:nth-child(5) {
+                background-image: url(../../image/statics/oneminute5.png);
+            }
+            li {
+                display: block;
+            }
+
+            .current-number{
+            position: absolute; bottom: 30px;
+            left: 50%;
+            text-align: center;
+            transform: translateX(-50%);
+            -ms-transform: translateX(-50%);        /* IE 9 */
+            -webkit-transform: translateX(-50%);    /* Safari and Chrome */
+            -o-transform: translateX(-50%);     /* Opera */
+            -moz-transform: translateX(-50%);       /* Firefox */
+            height: 30px;
+            color: #666;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+          <!--  <div class="current-number"><em id="sortId">1</em>/5</div> -->
+
+        <script type="text/javascript" src="../../script/api.js"></script>
+        <script type="text/javascript" src="../../script/library/jquery.js"></script>
+        <script type="text/javascript" src="../../script/library/iscroll.js"></script>
+        <script type="text/javascript">
+            function onewh(id, callback) {
+                function xy() {
+                    var w, h, scrollload;
+                    w = $(window).width();
+                    h = $(window).height();
+                    $("#" + id).css({
+                        width : w + "px",
+                        height : h + "px"
+                    })
+                    $("#" + id + ">*>*").css({
+                        width : w + "px",
+                        height : h + "px"
+                    })
+                    $("#" + id + ">*").css({
+                        width : w * $("#" + id + ">*>*").length + "px",
+                        height : h + "px"
+                    })
+                }
+
+
+                $(window).resize(function() {
+                    xy();
+                    myiscroll._resize();
+                })
+                xy()
+                var flag = 1;
+                var myiscroll = new iScroll(id, {
+                    scrollX : false,
+                    scrollY : true,
+                    fixedScrollbar : true,
+                    hScrollbar : false,
+                    vScrollbar : false,
+                    bounce : false,
+                    momentum : false,
+                    snap : "li",
+                    onScrollMove : function() {
+                       
+                        if ( scrollload = this.x == this.pagesX[this.pagesX.length - 1]){
+                            // $api.html($api.byId('sortId'),flag++);
+                        }
+                    },
+                    onScrollEnd : function() {
+                        if (scrollload){
+                            callback();
+                        }
+                    }
+                });
+            }
+
+
+            $().ready(function(e) {
+                onewh("wrapper", function() {
+                   // api.closeWin();
+                });
+            });
+        </script>
+    </body>
+</html>

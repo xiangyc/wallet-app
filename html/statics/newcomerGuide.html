@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>新手指引</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/swipe.css" />
+		<style>
+			html, body {
+				background: url(../../image/help/guidance-bg.jpg) 0 0 no-repeat;
+				background-color: #060301;
+				background-size: 100%;
+				padding-top: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content" style=" overflow-y: hidden; overflow-x: hidden;">
+			<div class="guidance-top">
+				<ul id="typeUl">
+					<li id="regLi" class="current" >
+						<em>1</em>注册
+					</li>
+					<li id="reNameLi" >
+						<em>2</em>实名绑卡
+					</li>
+					<li id="rechargeLi" >
+						<em>3</em>充值认购
+					</li>
+					<li id="withDrawLi" >
+						<em>4</em>提金/提现
+					</li>
+				</ul>
+			</div>
+	
+			<div id='slide1' class='swipe2'>
+				<div class='swipe-wrap2'>
+					<div>
+						<img src="../../image/help/guidance-11.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-12.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-13.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-14.jpg">
+					</div>
+
+					<div>
+						<img src="../../image/help/guidance-21.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-22.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-23.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-24.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-25.jpg">
+					</div>
+
+					<div>
+						<img src="../../image/help/guidance-31.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-32.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-33.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-34.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-35.jpg">
+					</div>
+
+
+					<div>
+						<img src="../../image/help/guidance-41.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-42.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-43.jpg">
+					</div>
+					<div>
+						<img src="../../image/help/guidance-44.jpg">
+					</div>
+
+				</div>
+				<div id="pointer1" class="pointer2">
+					<div class="li">
+						<a class='active'></a>
+					</div>
+					<div class="li">
+						<a></a>
+					</div>
+					<div class="li">
+						<a></a>
+					</div>
+					<div class="li">
+						<a></a>
+					</div>
+
+					<div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+
+					<div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+
+
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+				    <div class="li">
+						<a></a>
+					</div>
+						
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/swipe.js"></script>
+	<script type="text/javascript">
+		var selectIndex = 1;
+		
+		apiready = function() {
+			createSwipe(1);
+		}
+		
+		function selectType(index, el) {
+			var lis = $api.domAll($api.byId('typeUl'), 'li');
+			for (var i = 0; i < lis.length; i++) {
+				$api.removeCls(lis[i], 'current');
+			}
+			for (var i = 1; i <= 4; i++) {
+				$api.addCls($api.byId('slide' + i), 'hide');
+			}
+			$api.addCls(el, 'current');
+			$api.removeCls($api.byId('slide' + index), 'hide');
+			createSwipe(index);
+		}
+
+		function showType(index) {
+			var lis = $api.domAll($api.byId('typeUl'), 'li');
+			for (var i = 0; i < lis.length; i++) {
+				$api.removeCls(lis[i], 'current');
+			}
+
+			if(index<=3){
+				$api.addCls($api.byId('regLi'), 'current');
+			}else if(index>3 && index < 9){
+				$api.addCls($api.byId('reNameLi'), 'current');
+			}else if(index>=9 && index < 14){
+				$api.addCls($api.byId('rechargeLi'), 'current');
+			}else if(index>=14 && index < 18){
+				$api.addCls($api.byId('withDrawLi'), 'current');
+			}
+					
+		}
+		
+		function createSwipe(number){
+				selectIndex = number;
+				var slide = $api.byId('slide' + selectIndex);
+				var pointer = $api.domAll('#pointer' + selectIndex + ' a');
+				window.mySlide = Swipe(slide, {
+					autoplay : false,
+					continuous : false,
+					disableScroll : true,
+					stopPropagation : true,
+					mode: 'vertical',
+					callback : function(index, element) {
+						showType(index);
+						var actPoint = $api.dom('#pointer' + selectIndex + ' a.active');
+						$api.removeCls(actPoint, 'active');
+						$api.addCls(pointer[index], 'active');
+					}
+				});
+		}
+	</script>
+</html>

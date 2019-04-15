@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<style>
+			.mui-navigate-right:after, .mui-push-right:after{content:none;}
+			.record-list-top .mui-navigate-right span{padding-right:0;}
+			.extraction-state-img{left:60%;top:17px;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content" style="padding-top: 10px; ">
+			<script id="order-template" type="text/x-dot-template">
+				{{ for(var i=0; i< it.length; i++) { }}
+				<div class="mui-table-view address-list-box mui-mb10" onclick="showOrderDetail({{=it[i].orderType}}, {{=it[i].id}}, {{=it[i].statusValue}}, {{=it[i].productCategory }}, {{=it[i].isWithdraw }}, {{=it[i].money }});">
+					<div class="mui-table-view-cell record-list-top">
+						<a class="mui-navigate-right">
+							<label>
+								{{ switch(it[i].orderType) {
+								case 1: }}
+								买金
+								{{if(it[i].strategyName) {}}
+								<i class="pr-ac-label">{{=it[i].strategyName }}</i>
+								{{ } }}
+								{{if(it[i].productType === 2){ }}
+								<i class="pr-ac-label">新手金</i>
+								{{ } }}
+								{{ break;
+								case 2: }}
+								卖金
+								{{ break;
+								case 3: }}
+								{{=it[i].withdrawGoldTypeName}}
+								{{ break;
+								default: }}
+								其它
+								{{ break; } }}
+							</label>
+							{{ if(it[i].statusValue === 0 || it[i].statusValue === 5){ }}
+								<span class="yellow">{{=it[i].status}}</span>
+							{{ } else { }}
+								<span>{{=it[i].status}}</span>
+							{{ } }}
+						</a>
+					</div>
+
+					<div class="record-list-b mui-clearfix">
+
+						<div class="record-list-lc">
+							{{ if(it[i].orderType === 1){ }}
+		                 	<span>{{=it[i].productName }}
+							{{ if(it[i].couponCategorys){}}
+							 	{{for(var j=0; j< it[i].couponCategorys.length; j++) {}}
+		                 		<i class="coupon-flag{{=it[i].couponCategorys[j].id}}">
+									{{=it[i].couponValue}}{{=it[i].couponUnitName}}{{=it[i].couponCategorys[j].name}}
+								</i>
+		                 		{{ } }}
+							{{ } }}
+		                 	</span>
+
+							{{ } else { }}
+							<span>{{=it[i].productName }}</span>
+							{{ } }}
+							<em>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm:ss') }}</em>
+						</div>
+
+						<div class="record-list-rc">
+							<span>{{=global.formatNumber(it[i].amount/1000,3) }}克</span>
+							{{ if(it[i].orderType === 1){ }}
+								<em>支付金额：{{=global.formatNumber(it[i].money,2) }}元</em>
+							{{ } else if (it[i].orderType === 2) { }}
+								<em>卖金收入：{{=global.formatNumber(it[i].money,2) }}元</em>
+							{{ } else { }}
+								<em>费用总计：{{=global.formatNumber(it[i].money,2) }}元</em>
+							{{ } }}
+						</div>
+
+					</div>
+
+					{{ if(it[i].isWithdraw  === 1 && it[i].productCategory === 2){ }}
+					<div class="extraction-state-img"></div>
+					{{ } }}
+				</div>
+				{{ } }}
+			</script>
+
+
+			<div id="order-content">
+
+			</div>
+			<div id="no-records" class="no-address hide">
+				<i></i>
+				暂无记录
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/doT.js"></script>
+	<script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/member/orderList.js"></script>
+</html>

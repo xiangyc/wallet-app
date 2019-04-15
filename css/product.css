@@ -1,0 +1,53 @@
+.grey{color:#666!important;}
+/*分类*/
+.classifyBox{border-top:1px solid #f6f6f6;}
+.classifyBox.mui-row.mui-fullscreen>[class*="mui-col-"] {height: 100%;}
+.classifyBox .mui-col-xs-3, .classifyBox .mui-control-content {overflow-y: auto;height: 100%;}
+.classifyBox .mui-segmented-control .mui-control-item {line-height: 50px;width: 100%;}
+.classifyBox .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {background-color: #fff;}
+.classifyBox .classifyNav{background:#f2f2f2;height:100%;display:block;}
+.classifyBox .classifyNav a{border:0!important;height:54px;line-height:54px;color:#2d2d2d;font-weight:normal;font-size:14px;}
+.classifyBox .classifyNav a.mui-active{color:#ffad16!important;position:relative;font-weight:bold;font-size:15px;}
+.classifyBox .classifyNav a.mui-active:before{content:'';width:4px;height:16px;position:absolute;left:0;top:50%;margin-top:-8px;background:#ffad16;}
+.classifyBox .classifyCon{background:#fff;height:100%;display:block;padding-bottom:80px;}
+.classifyBox .classifyCon .mui-table-view{overflow:hidden;padding:0 10px;position:relative;}
+.classifyBox .classifyCon .mui-table-view:after{background-color:#fff;height:1px;bottom:0;z-index:999;-webkit-transform: scaleY(1);transform:scaleY(1);}
+.classifyBox .classifyCon .mui-table-view:before{content:none;}
+.classifyBox .classifyCon .mui-table-view-cell{width:50%;float:left;padding:15px;border-right:1px solid #f6f6f6;border-bottom:1px solid #f6f6f6;}
+.classifyBox .classifyCon .mui-table-view-cell:nth-child(2n){border-right:1px solid #fff;}
+.classifyBox .classifyCon .mui-table-view-cell:after{content:none;}
+.classifyBox .classifyCon .mui-table-view-cell:before{content:none;}
+.classifyBox .classifyCon .mui-table-view-cell img{width:100%;display:block;}
+.classifyBox .classifyCon .mui-table-view-cell span,.classifyBox .classifyCon .mui-table-view-cell i{display:block;text-align:center;line-height:1;font-size:12px;color:#666666;}
+.classifyBox .classifyCon .mui-table-view-cell span{margin-bottom:12px;}
+
+/* 产品列表 */
+.pro-sort{overflow:hidden;padding:0 10px;height:45px;line-height:45px;background:#fff;}
+.pro-sort li{float:left;width:12%;text-align:center;font-size:14px;font-weight:bold;color:#2d2d2d;position:relative;}
+.pro-sort li:before{position:absolute;right:0;top:50%;content:'';width:0;height:0;border-width:0 3px 3px;border-style:solid;border-color:transparent transparent #2d2d2d;margin:-5px auto 0;}
+.pro-sort li:after{position:absolute;right:0;top:50%;content:'';width:0;height:0;border-width:3px 3px 0;border-style:solid;border-color:#2d2d2d transparent transparent;margin:1px auto 0;}
+.pro-sort li:first-child{text-align:left;width:44%;}
+.pro-sort li:last-child{text-align:right;width:44%;}
+.pro-sort li:first-child:before,.pro-sort li:first-child:after,.pro-sort li:last-child:before,.pro-sort li:last-child:after{content:none;}
+.pro-sort li.active{color:#ffad16;}
+.pro-sort li.ascending:before{border-color:transparent transparent #ffad16;}
+.pro-sort li.descending:after{border-color:#ffad16 transparent transparent;}
+
+.home-pro{overflow:hidden;padding:0 0 15px 0;}
+.home-pro li{float:left;padding:10px 5px 10px 10px;color:#2d2d2d;}
+.home-pro li:nth-child(2n){float:left;padding:10px 10px 10px 5px;color:#2d2d2d;}
+.home-pro li p{overflow:hidden;background:#f4f4f4;border-radius: 12px 12px 0 0 ;}
+.home-pro-text{background:#fff;border-radius: 0 0 12px 12px;padding:0 10px 10px;}
+.home-pro-text span{font-size:14px;color:#2d2d2d;display:block;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;line-height:1;padding-top:12px;}
+.home-pro-text i{font-size:12px;color:#ff3b30;font-weight:normal;display:block;line-height:1;padding-top:12px;}
+.home-pro-text em{font-size:16px;font-weight:bold;}
+
+/*搜索页面*/
+
+.search{padding:10px 15px;}
+.search h1{font-size:14px;font-weight:bold;line-height:3;overflow:hidden;}
+.search h1 i{float:right;width:25px;padding:14px 5px 13px;}
+.search ul{display:block;}
+.search ul:after{content:'';display:block;clear:both;}
+.search ul li{float:left;background:#f5f5f5;border-radius:30px;margin:0 10px 10px 0;}
+.search ul li a{display:block;padding:0 12px;height:30px;line-height:30px;color:#2d2d2d;font-size:12px;}

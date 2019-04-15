@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>红包金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+</head>
+<body>
+<div class="mui-content">
+    <div class="real-price red-account-hold">
+        <div class="pr-rate">
+            <span class="red-account-title">持有红包金(克)</span>
+            <span class="real-price-t"><em id="envelopeAmount">0.000</em></span>
+            <span class="real-price-b">黄金现值 <em id="envelopeMoney">0.00</em>元</span>
+        </div>
+    </div>
+    <div class="real-price red-account-launch" tapmode onclick="openSubWin(1);">
+        <div class="red-launch-bt">
+            <span>发黄金红包</span>
+            <p>给亲朋好友发红包</p>
+        </div>
+    </div>
+    <ul class="mui-table-view mui-mt10">
+        <!-- <li tapmode onclick="openSubWin(6);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right">
+                我的营销红包
+            </a>
+        </li> -->
+        <li tapmode onclick="openSubWin(2);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right">
+                一分钟了解红包金
+            </a>
+        </li>
+<!--         <li tapmode onclick="openSubWin(3);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right">
+                黄金红包帮助
+            </a>
+        </li> -->
+    </ul>
+
+     <div class="account-bt bt-btn-fixed">
+        <div tapmode onclick="openSubWin(4);" class="btn3 btn-sell"><i class="sell-icon"></i>卖金</div>
+        <div tapmode onclick="openSubWin(5);" class="btn3 btn-sell"><i class="buy-icon"></i>买金</div>
+        <div tapmode onclick="carryGold();" class="btn3 btn-sell"><i class="goldrecord-icon"></i>提金</div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/redAccount.js"></script>
+</html>

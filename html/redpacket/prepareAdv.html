@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>营销红包</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body>
+<div class="red-box">
+    <div class="red-prepare red-prepare-adv">
+        <div class="prepare-gold-ingot prepare-gold-adv">
+            <i class="prepare-gold-ingot-left animated rotateInDownLeft"><img src="../../image/redpacket/gold-ingot-left.png" /></i>
+            <i class="prepare-gold-ingot-mid slideInDown animated"><img src="../../image/redpacket/gold-ingot-mid.png" /></i>
+            <i class="prepare-gold-ingot-right animated rotateInDownRight"><img src="../../image/redpacket/gold-ingot-right.png" /></i>
+        </div>
+        <div class="red-packet-top">
+
+            <div class="prepare-con">
+                <div class="prepare-text">
+                    <a tapmode onclick="buyGold();">立刻购买 ></a>
+                    <span>可用红包金：<i id="envelopeAmount">0.000</i>毫克</span>
+                </div>
+                <div class="adv-prepare-input">
+                    <span>毫克</span>
+                    <label id="show1">总克重</label>
+                    <label id="show1" class="hide">单个总克重</label>
+                    <input placeholder="请填写克重" onkeyup="calAmount()" type="number" oninput="if(value.length>6)value=value.slice(0,6);" maxlength="6" id="amount"/>
+                </div>
+                <div class="adv-prepare-text">
+                    <span class="" id="show2">抽到的黄金克重随机<i onclick="changeType(1)">改成普通红包</i></span> <span class="hide" id="show3">抽到的黄金克重固定<i onclick="changeType(2)">改成拼手气红包</i></span>
+                </div>
+                <div class="adv-prepare-input">
+                    <span>个</span>
+                    <label>红包个数</label>
+                    <input placeholder="请填写个数" onkeyup="calAmount()" type="number" oninput="if(value.length>3)value=value.slice(0,3);" maxlength="3" id="quantity"/>
+                </div>
+
+                <div class="adv-prepare-per">人均红包金额：<em id="perMoney">0.00</em>元<span>新增注册平台补贴：<em id="perBt">0</em>元/人</span> </div>
+
+
+                <div class="adv-prepare-value">
+                    <span><i id="totalaAmount">0</i>毫克</span><span id="totalMoney">价值约：<em>0.00</em>元</span>
+                </div>
+
+                <div class="adv-prepare-input adv-prepare-input2">
+                    <label>留言</label>
+                    <input placeholder="财源滚滚， 日进斗金" id="remark" maxlength="16" type="text" />
+                </div>
+
+                <div class="adv-prepare-per2">营销红包有效期30天，30天后无人领取将返还</div>
+            </div>
+
+        </div>
+        <div onclick="next();" class="adv-prepare-btn">
+        </div>
+<!--        <div class="advprepare-bottom-text">
+            <a tapmode="" onclick="advredRule();">红包规则</a>
+        </div>-->
+
+		<!--发红包弹框-->
+		<div class="bomb-box hide" id="messageDiv">
+			<h4>请输入交易密码</h4>
+		    <div class="bomb-c">
+		        <form class="mui-input-group red-form-box">
+		          <div class="number-text">营销红包：<span id="showAmount">0.000克</span></div>
+		          <div class="mui-input-row">
+		             <label class="label-icon jypw-icon"><i></i></label>
+		             <input maxlength="20" type="password" class="mui-input-clear mui-input" id="payPwd" placeholder="请输入交易密码">
+		          </div>
+		          <div class="link-forget">
+				  	<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+				  </div>
+		        </form>
+		        <button class="mui-btn mui-btn-block mui-btn-warning" id="submitBtn" onclick="confirm()">确定</button>
+		    </div>
+		</div>
+		<div class="mui-backdrop hide" tapmode id="messageDropDiv" onclick="showMessage();"></div>		
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/redpacket/prepareAdv.js"></script>
+</html>

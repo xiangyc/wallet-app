@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提现</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+<div class="with">
+    <div class="with-bank">
+        <div class="mui-content">
+            <div class="with-card">
+                <div class="with-card-img">
+                    <img src="../../image/member/bank-icon/bank-icon-zs.png" onerror="this.src='../../image/member/bank-icon/bank-icon-default.png'" />
+                </div>
+                <div class="with-card-info">
+                    <ul>
+                        <li>招商银行</li>
+                        <li>
+                            <i>孟*固</i>
+                            <span>尾号<em>8941</em></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="with-text">
+                <a>点击查看</a>
+                <span>当前有<i>3</i>笔提现正在处理中</span>
+            </div>
+        </div>
+    </div>
+    <div class="with-money">
+        <div class="mui-content">
+            <h1><span>可提现金额(元)：<i>5336.85</i></span>提现金额</h1>
+            <div class="with-money-con">
+                <input type="text" placeholder="10元起提" />
+                <a>全部提现</a>
+            </div>
+            <div class="with-money-text">
+                <p>实际到账</p>
+                <span>
+                    <i>487.547</i>元
+                </span>
+                <em>(扣除手续费<i>5.00</i>元)</em>
+            </div>
+        </div>
+    </div>
+    <div class="rechange-btn">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" onclick="confirm()">提交</button>
+    </div>
+    <div class="rechange-more">
+        <a>提现规则</a>
+    </div>
+
+    <div class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div class="mui-popup-title"></div>
+            <div class="mui-popup-text">当日充值金额不能当天提现</div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelShow();" >知道了</span></div>
+    </div>
+    <div class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelShow();" ></div>
+
+    <div class="mui-popup mui-popup-in mui-haveTitle hide" id="passwordDiv">
+        <div class="mui-popup-inner">
+            <div class="mui-popup-title"><i><img src="../../image/icon-close.png"/></i>输入验证码</div>
+            <div class="mui-popup-con">
+                <div class="mui-popup-text">验证码已发送至手机号<span>139***6225</span> <i>(<em>59S</em>)</i></div>
+                <div class="mui-popup-math">￥<i>10000.00</i></div>
+                <div class="mui-popup-code shuru">
+                    <div id="payPassword_container" class="alieditContainer clearfix" data-busy="0">
+                        <div data-error="i_error">
+                            <div class="six-password">
+                                <input class="i-text sixDigitPassword" id="payPassword_rsainput" type="text" autocomplete="off" required="required" value="" name="payPassword_rsainput" data-role="sixDigitPassword" tabindex="" maxlength="6" minlength="6" aria-required="true">
+                                <div tabindex="0" class="sixDigitPassword-box">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <span style="left: 0; visibility: hidden;" id="cardwrap" data-role="cardwrap"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mui-popup-button-box closeWrap"><button class="mui-btn mui-btn-primary mui-btn-block">知道了</button></div>
+    </div>
+    <div class="mui-popup-backdrop mui-active closeWrap hide" id="showDiv"></div>
+
+    <div class="toast-box">银行卡余额不不足</div>
+
+
+    <div class="layer-content hide" id="numKey">
+        <div class="form_edit clearfix">
+            <div class="form_edit_left">
+                <div class="num">1</div>
+                <div class="num">2</div>
+                <div class="num">3</div>
+                <div class="num">4</div>
+                <div class="num">5</div>
+                <div class="num">6</div>
+                <div class="num">7</div>
+                <div class="num">8</div>
+                <div class="num">9</div>
+                <div class="num">X</div>
+                <div class="num">.</div>
+                <div class="num">0</div>
+            </div>
+            <div class="form_edit_right">
+                <div id="remove">
+                    <i>
+                        <img src='../../image/icon-delete.png' />
+                    </i>
+                </div>
+                <div class="closeWrap" id="beSure">确定</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/common/numEric.js"></script>
+<script type="text/javascript" >
+    function confirm(){
+        $('#passwordDiv').removeClass('hide');
+        $('#passwordDiv').attr('style','top:32%');
+        $('#showDiv').removeClass('hide');
+        $('#numKey').removeClass('hide');
+        // setNumEricId('#payPassword_container i');
+        $('#numKey').attr('style', 'bottom:0');
+    }
+    function callbackAddNumEric(str,id){
+        var oDiv = $(id);
+        var j = oDiv.length;
+        var l = 0;
+
+        if(j==0){
+            $('#cardwrap').css('left','0');
+            return;
+        }
+        oDiv[6-j].innerHTML = str;
+        validateStr += str;
+        j--;
+        if(j==0){
+            $('#cardwrap').css('left','0px');
+            $('#cardwrap').css('visibility','hidden');
+            $("#payPassword_container").attr('data-busy','1');
+        }else{
+            l = 6-j;
+            $('#cardwrap').css('left',l*44.6+'px');
+        }
+    }
+    function callbackRemoveNumEric(id){
+        var oDiv = $(id);
+        var j = oDiv.length;
+        var l = 0;
+        if(j==6) return;
+        j = j + 1;
+        if(j==0){
+            $('#cardwrap').css('left','-50px');
+            return;
+        }else{
+            if(l<=0){
+                $('#cardwrap').css('visibility','hidden');
+                return;
+            }else{
+                l = 6-j;
+                oDiv.eq(l).css('active');
+                $('#cardwrap').css('visibility','visible');
+                $('#cardwrap').css('left',l*44.6+'px');
+                oDiv[6-j].innerHTML = "";
+                validateStr = validateStr.substring(0,l);
+            }
+        }
+    }
+    function callbackBeSure(){
+
+    }
+</script>
+</body>
+</html>

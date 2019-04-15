@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>首页弹框广告</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+ 		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+ 		<style type="text/css">
+ 			html,body{ background:transparent !important;  }
+ 		</style>
+	</head>
+	<body>
+		<div id="bombDiv" class="index-add-box">
+			<div class="index-add-img" onclick="detail()"><img id="advIndexImgId"></div>
+			<div class="index-add-c">
+				<P id="advIndexTextId"></P>
+				<div class="index-add-btn" onclick="detail();">了解详情</div>
+			</div>
+			<div onclick="closeAdv();" class="close-icon"><i></i></div>
+		</div>
+		<div id="bombDropDiv" class="mui-backdrop"></div>
+	</body>
+
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript">
+		var type;
+		var relativeId;
+		var url;
+
+		apiready = function(){
+			type = api.pageParam.type;
+			relativeId = api.pageParam.relativeId;
+			url = api.pageParam.url;
+
+			$api.attr($api.byId('advIndexImgId'), 'src', global.getImgUri()+'/' + api.pageParam.imgurl)
+			//$api.attr($api.byId('advIndexImgId'), 'src', 'https://www.jsz.top/images/maskd_wechat.jpg')
+			
+			var text = api.pageParam.text;
+			if(text){
+				$api.html($api.byId('advIndexTextId'), text);
+			}else{
+				$api.addCls($api.byId('advIndexTextId'), 'hide');
+			}
+
+		}
+
+		function detail(){
+			$api.setStorage("clickAdvIndexTime",new Date().getTime());
+			
+			api.sendEvent({
+	        	name: 'advIndexEvent',
+	        	extra: {
+	        		type : type,
+	        		relativeId : relativeId,
+	        		url :url
+	        	}
+	    	});
+		}
+
+		function closeAdv(){
+			api.closeFrame();
+		}
+
+	</script>
+</html>

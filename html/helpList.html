@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+	<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+	<title>帮助中心</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.css" />
+	<style>
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell{ margin-bottom: -1px; }
+	</style>
+</head>
+<body>
+<div class="mui-content">
+	<div class="title input-gold-title">
+		常见问题
+	</div>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell list-menu" onclick="safeH5()">
+			<a class="mui-navigate-right">
+				金算子平台安全吗？
+			</a>
+		</li>
+		<li class="mui-table-view-cell list-menu" onclick="safe(2)">
+			<a class="mui-navigate-right">
+				为什么存黄金会有收益？
+			</a>
+		</li>
+		<li class="mui-table-view-cell list-menu" onclick="safe(3)">
+			<a class="mui-navigate-right">
+				如何配置我的黄金资产？
+			</a>
+		</li>
+	</ul>
+
+	<div class="title input-gold-title">
+		问题分类
+	</div>
+	<ul class="mui-table-view mui-grid-view mui-grid-9 help-box">
+		<script id="helpType-template" type="text/x-dot-template">
+			<li tapmode onclick="helpCenter();" class="mui-table-view-cell mui-media mui-col-xs-4">
+				<span class="help-icon"><img src="../image/help/help-icon07.png"> </span>
+				<div class="mui-media-body">新手指引</div></li>
+			{{ for(var i=0; i< it.length; i++) { }}
+			<li class="mui-table-view-cell mui-media mui-col-xs-4" onclick="helpCategory({{=it[i].id}},'{{=it[i].name}}')">
+				<span class="help-icon"><img src="../image/help/{{=it[i].icon}}"> </span>
+				<div class="mui-media-body">{{=it[i].name}}</div></li>
+			{{ } }}
+		</script>
+		<div id="helpType-content">
+		</div>
+	</ul>
+	<div class="service-phone">
+		<div class="service-phone-l">
+			<i><img src="../image/help/help-logo.png"></i>
+			<div class="service-phone-l">
+				<span>客服热线(周一至周日 9:00-19:00)</span>
+				<em>4006-832-999</em>
+			</div>
+		</div>
+		<div class="service-phone-r">
+			<button class="mui-btn mui-btn-warning" onclick="call('4006-832-999');">
+				拨打电话
+			</button>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/library/doT.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript" src="../script/common/page.js"></script>
+<script type="text/javascript" src="../script/common/cache.js"></script>
+<script type="text/javascript" src="../script/portal/helpList.js"></script>
+<script type="text/javascript" src="../script/common/h5url.js"></script>
+<script type="text/javascript" src="../script/library/mui.js"></script>
+</html>

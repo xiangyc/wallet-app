@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提金详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.css" />
+    <style>
+        .mui-content{ padding-bottom: 60px; }
+        .mui-content>.mui-table-view:first-child{margin-top:0;}
+        .mui-input-tb{padding:10px 15px;}
+        .mui-input-group .mui-input-row label,.mui-input-group .mui-input-row span{padding:0;line-height:35px!important;width:33.5%!important;}
+        .mui-input-group .mui-input-row span{float:right;text-align:right;width:66.5%!important;}
+        .mui-input-group .mui-input-row:after{height:0;}
+        .mui-input-row.input-row-f .input-span-sm{float:right;text-align:right;}
+        .mui-input-row.input-row-f .input-span-sm h3{font-weight:normal;margin:0;}
+        .mui-input-row.input-row-f .input-span-sm h3 em{font-size:14px;}
+        .mui-input-row.input-row-f .input-span-sm p{line-height:17px;font-size:14px;margin:0;}
+        .mui-input-row.input-row-f .input-span-sm em{line-height:17px!important;padding:0 0 0 5px;display:inline-block;color:#2d2d2d;}
+        .mui-input-group.mui-input-tb:before{height:0;}
+        .contain-cost{padding:0;}
+        .contain-cost p{padding-top:0;padding-bottom:5px;line-height:1.5;}
+        .mui-record-more{color:#2d2d2d;right:15px;}
+        .mui-input-row.input-row-f.mui-navigate-right:after{height:0;content:none;}
+        .mui-btn, button{color:#0e88ea;}
+
+        .mui-table-view.address-list-box{ border: none; }
+        .mui-table-view.address-list-box:before,.mui-table-view.address-list-box:after{ height: 0; }
+        .mui-input-group.mui-input-tb.goldBuy:before,.mui-input-group.mui-input-tb.goldBuy:after{ height: 0; }
+        .mui-input-group.mui-input-tb:before{ height: 0; }
+        .mui-input-row.input-row-f.mui-navigate-right.mui-border-tb{ border-top: 1px solid #e8e8e8 !important; }
+        .mui-input-group.mui-input-tb.mui-input-bno:after{ height: 0; }
+        .mui-input-group.mui-input-tb:after{ left: 15px; right: 15px; }
+   </style>
+
+</head>
+<body>
+<div class="mui-content">
+    <div class="mui-table-view address-list-box">
+        <div tapmode id="detailBtn" class="record-list-b mui-clearfix">
+            <div class="record-list-lc">
+                <span>提金</span>
+                <em>订单号：<i id="applyNo"></i></em>
+            </div>
+
+            <div class="record-list-rc">
+                <span class="red"><i id="statusName"></i><a class="mui-navigate-right"></a></span>
+                <em id="createTime"></em>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailDiv" class="mui-input-group mui-input-tb mui-mt10">
+        <div class="mui-input-row input-row-f">
+            <label>提金克重(克)</label>
+            <span id="amount">0.000</span>
+        </div>
+        <div class="mui-input-row input-row-f">
+            <label>提金方式</label>
+            <span id="expressType"></span>
+        </div>
+        <div class="mui-input-row input-row-f hide" id="reciveAddress">
+            <label>收货地址</label>
+            <span id="deliveryAddress" class="input-span-sm">
+                <h3><em id="addressName"></em><em id="addressMobile"></em></h3>
+                <p><em id="detailAddress"></em></p>
+            </span>
+        </div>
+        <div class="mui-input-row input-row-f mui-mt10 hide" id="extractAddress">
+            <label>提货地址</label>
+            <span class="input-span-sm">
+                <h3><em>客服电话：4006-832-999</em></h3>
+                <p><em>深圳市罗湖区嘉宾路2002号彭年广场写字楼38楼</em></p>
+            </span>
+        </div>
+    </div>
+
+    <div class="mui-input-group mui-input-tb mui-input-bno">
+        <div class="mui-input-row input-row-f">
+            <label>提金费用(元)</label>
+            <span><em id="totalFee">0.00</em>
+                     <div class="contain-cost">
+                         <p>加工费(元) ：<em id="serviceFee">0.00</em></p>
+                         <p>运费(元)：<em id="expressFee">0.00</em></p>
+                         <p>保价费(元)：<em id="insuredFee">0.00</em></p>
+                         <p id="diffDiv">提金补差价(元)：<em id="diffEm">0.00</em></p>
+                     </div>
+            </span>
+        </div>
+        <div class="mui-input-row input-row-f hide" id="surplusDiv">
+            <label>剩余克重回款(元)</label>
+            <span><em id="surplusEm" class="">0.00</em></span>
+        </div>
+        <div class="mui-input-row input-row-f">
+            <label>费用总计(元)</label>
+            <span><em id="fee" class="">0.00</em></span>
+        </div>
+    </div>
+
+    <div class="mui-bg-white mui-mt10" id="expressDiv">
+        <div class="mui-input-row input-row-f mui-navigate-right">
+            <label>配送方式</label>
+            <span class="mui-record-more" id="companyNo"></span>
+        </div>
+    </div>
+
+    <button class="mui-btn mui-btn-block mui-btn-fb hide" id="hideBtn" onclick="cancleApply();">取消提金</button>
+    <button class="mui-btn mui-btn-block mui-btn-fb hide" id="reciveBtn" onclick="confirmRecive();">确认收货</button>
+</div>
+<!--确定要取消提金申请吗-->
+<div class="bomb-box bomb-box-s hide" id="cancleApply">
+    <div class="mui-popup-inner">
+<!--随心金提示文字-->
+        <div class="mui-popup-title">确定要取消提金申请吗？</div>
+<!--安心金提示文字-->
+        <div id="periodDiv" class="mui-popup-title hide">取消提金，则平台自动回购该笔黄金，相应的黄金回购款和提金时补的差价自动发放到您资金账户。确定取消提金申请？</div>
+    </div>
+    <div class="mui-popup-buttons">
+	    <span onclick="showDiv()" class="mui-popup-button">取消</span>
+	    <button onclick="cancleWithdrawGold();" class="mui-popup-button yellow" id="confirmBtn" >确认</button>
+    </div>
+</div>
+<div class="mui-backdrop mui-active hide" id="cancleApplyDiv" onclick="showDiv();"></div>
+
+<!--确定要确认收货吗-->
+<div class="bomb-box bomb-box-s hide" id="confirmRecive">
+    <div class="mui-popup-inner">
+        <div class="mui-popup-title">确定收到货物吗？</div>
+    </div>
+    <div class="mui-popup-buttons"><span class="mui-popup-button" onclick="cancelRecive()">取消</span><button class="mui-popup-button yellow" id="confirmReciveBtn" tapmode onclick="reciveWithdrawGold();" >确认</button></div>
+</div>
+
+<div class="mui-backdrop mui-active hide" id="confirmReciveDiv" tapmode onclick="showReciveDiv();"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/goldExtractionDetail.js"></script>
+</html>

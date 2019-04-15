@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+	<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+	<title>订单</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+     <style> 
+	    #incomeListUl.incomeListUl-line{margin:0 5px;display:block;}
+	    #incomeListUl.incomeListUl-line li{width:100%;overflow:hidden;}
+	    #incomeListUl.incomeListUl-line li span{float:left;width:40%;display:block;}
+	    #incomeListUl.incomeListUl-line li i{float:left;width:20%;display:block;}
+	    #incomeListUl.incomeListUl-line li em{float:right;width:60%;text-align:right;display:block;}
+	    .buy-back-box #errPwdInfo{margin-top:10px;text-align:center;}
+		.select-coupons-barrage .select-coupons-list .mui-btn:disabled{ background-color: #fbd074; opacity: 1; }
+		.select-coupons-barrage .select-coupons-list button:disabled{  background-color: #fbd074; opacity: 1; }
+		.bomb-box.bomb-box-s{ z-index: 1001; }
+		.bomb-box.buy-back-box{ z-index: 1001; }
+		.mui-backdrop.mui-backdrop-s{ z-index: 1000; }
+    </style>
+</head>
+<body>
+<div class="mui-content">
+
+	<div class="real-price prA-t-new">
+		<span class="real-price-b">实时金价(元/克)</span>
+		<span class="real-price-t"><em id="lastPrice">0.00</em></span>
+	</div>
+
+	<div class="prA-list-recharge">可用余额：<span><em id="useBalance">0.00</em>元</span>
+		<div tapmode onclick="recharge();" class="recharge-button">充值</div>
+	</div>
+
+	<div class="mui-input-group mui-input-tb prAbuy-list-li">
+			<div class="mui-input-row input-row-f">
+				<label>购买克重</label>
+				<span><em id="amount">0.000</em>克</span>
+			</div>
+			<div class="mui-input-row input-row-f">
+				<label>订单总额</label>
+				<span><em id="balance">0.00</em>元</span>
+			</div>
+			<div id="comeItemDiv" class="mui-table-view-cell list-menu" tapmode onclick="showInCome()">
+				<a class="mui-navigate-right color6">
+					<span class="list-right"><em id='totalIncome'>0.00</em>元</span>
+					赠金收益
+				</a>
+			</div>
+
+<!-- 			<div class="mui-input-row input-row-f">
+				<label>赠金收益</label>
+				<span>收益不足1分，无法发放</span>
+			</div> -->
+
+		</div>
+
+	   <div class="mui-input-group mui-input-tb prAbuy-list-li mui-ptb8 mui-mt10">
+			<div id="couponDiv" class="mui-table-view-cell list-menu" tapmode onclick="selectCoupon()">
+				<a class="mui-navigate-right color6">
+					<span id="couponSpan" class="list-right red hide">暂无可用</span>
+					<!-- <span id="couponSpan" class="list-right hide ">不用优惠券</span> -->
+					优惠券<em class="couponem hide" id='couponChoice'>已选推荐</em> <!-- <em class="couponem hide">已选1张</em> -->
+				</a>
+			</div>
+	   </div>
+	<div class="pr-payment-countdown" id="timeoutInfo1">还剩<em id='intervalEm' class="red">300</em>秒支付</div>
+	<div class="pr-payment-countdown hide" id="timeoutInfo2">订单已超时，请重新下单！</div>
+
+	<div class="pr-btn-fb">
+		<span><em id='orderMoney'>0.00</em>元<i id="concession" class="hide"></i></span>
+		<button id="submitBtn" tapmode onclick="submitOrder();">提交订单</button>
+	</div>
+
+</div>
+
+<!--回款计划-->
+<div id="incomeDiv" class="bomb-box bomb-payment-box hide">
+	<div class="bomb-c">
+		<h3>回款计划</h3><i class="close-icon" tapmode onclick="showInCome();"></i>
+		<ul id="incomeListUl" class="incomeListUl-line">
+		</ul>
+	</div>
+</div>
+<div id="incomeDropDiv" tapmode onclick="showInCome();" class="mui-backdrop hide"></div>
+
+
+<!--选择优惠券-->
+<div id="couponsDiv" class="select-coupons-barrage hide">       
+
+	<div class="select-coupons-list">
+       <h3>选择优惠券</h3> <i class="close-icon" tapmode onclick="closeCoupon();"></i>
+       <div class="coupons-list-ul scrollbar-line">
+ 			  <script id="coupon-template" type="text/x-dot-template">
+ 			    {{ for(var i=0; i< it.length; i++) { }}
+
+ 					{{ if(it[i].canUse ){ }}
+ 						  <div class="coupons-list mui-checkbox">
+ 					 {{ } else { }}
+                          <div class="coupons-list coupons-list-no mui-checkbox">
+                    {{ } }}	  	
+
+                       <div id="name{{=it[i].id}}" class="hide">{{=it[i].categoryName}}{{=it[i].couponValue}}{{=it[i].unitName}}</div>
+
+
+                        <div class="coupon-name">{{=it[i].categoryName}}</div>
+
+                    	<div  tapmode onclick="choiceCoupon({{=it[i].id}}, {{=it[i].canUse}})" class="coupons-list-l">
+							<span>{{=it[i].couponValue}}<small>{{=it[i].unitName}}</small></span>
+							
+							{{ if(it[i].paramsMap && it[i].paramsMap.minPurchaseWeight){ }}
+								 {{ if( it[i].paramsMap.minPurchaseWeight == 0){ }}
+								 	<em>无门槛</em>
+								 {{ } else { }}						
+									<em>满{{=it[i].paramsMap.minPurchaseWeight}}克可用</em>
+								 {{ } }}			 
+							{{ } else { }}
+		                        {{ if(it[i].paramsMap && it[i].paramsMap.minPurchaseFee){ }}
+									 {{ if( it[i].paramsMap.minPurchaseFee == 0){ }}
+									 	<em>无门槛</em>
+									 {{ } else { }}						
+										<em>满{{=it[i].paramsMap.minPurchaseFee}}元可用</em>
+									 {{ } }}			 
+								{{ } else { }}
+			                         <em>无门槛</em>
+			                    {{ } }}	 
+		                    {{ } }}	 
+		                    							
+						</div>
+					   <div  tapmode onclick="choiceCoupon({{=it[i].id}}, {{=it[i].canUse}})" class="coupons-list-r">
+					   	   <em class="mui-ellipsis">{{=it[i].instanceDetail}}</em>
+						   <!--<span>有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</span>-->
+						   <span>{{=global.formatDate(it[i].startTime, 'yyyy.MM.dd') }}-{{=global.formatDate(it[i].expiredTime, 'yyyy.MM.dd') }}</span>
+					   </div>
+	
+					<!--    <input tapmode onclick="choiceCoupon({{=it[i].id}})" id="radio{{=it[i].id}}" name="radioCoupon" value="{{=it[i].id }}" type="checkbox" /> -->
+					    <div class="select_cutover" onclick="choiceCoupon({{=it[i].id}}, {{=it[i].canUse}})" id="select_cutover{{=it[i].id}}"></div>
+				   </div>
+
+				  {{ } }}
+		      </script>
+
+			<div id="coupon-content">
+			</div>
+
+		   <div id="noCoupons" class="no-address no-coupons hide">
+			   <i></i>
+			   暂无优惠券
+		   </div>
+	 </div>
+	    <button id="confirmCouponBtn" tapmode onclick="confimCoupon();" class="mui-btn mui-btn-block mui-btn-warning">确认</button>
+	</div>
+</div>
+<div id="couponsDropDiv" class="mui-backdrop hide" tapmode onclick="closeCoupon();"></div>
+
+
+<!--订单已超时，请重新下单-->
+<div id="refreshGoldDiv" class="bomb-box bomb-box-s hide">
+	<div class="mui-popup-inner">
+		<div class="mui-popup-title title-c">订单已超时，请重新下单！</div>
+	</div>
+	<div class="mui-popup-buttons">
+		<span tapmode onclick="api.closeWin();" class="mui-popup-button blue">确定</span>
+	</div>
+</div>
+<div id="refreshGoldDropDiv" class="mui-backdrop mui-backdrop-s hide"></div>
+
+<!--输入交易密码-->
+<div id="submitDiv" class="bomb-box hide">
+	<h4>提交订单</h4>
+	<div class="bomb-c">
+		<div class="prompt-title">
+			付款金额(元)：<em id="payAmount"></em>
+		</div>
+		<div class="mui-input-row input-row-f bomb-input-row">
+			<input id="password" maxlength="20" placeholder="请输入交易密码" type="password">
+		</div>
+		<div class="link-forget">
+			<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+		</div>
+		<button id="confirmBtn" tapmode onclick="buy();" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">
+			确认
+		</button>
+	</div>
+</div>
+<div id="submitDropDiv" tapmode onclick="showSubmit();" class="mui-backdrop hide"></div>
+
+<!--输入交易密码错误后提示-->
+<div id="errPwdDiv" class="bomb-box buy-back-box hide">
+    <div class="bomb-c">
+        <p id='errPwdInfo'></p>
+     </div>
+    <div class="mui-popup-buttons">
+        <span class="mui-popup-button blue" tapmode onclick="errOpenPayPassword();">忘记密码</span>
+        <span class="mui-popup-button blue" tapmode onclick="reInputPwd();">重新输入</span>
+    </div>
+</div>
+<div id="pwdDropDiv" class="mui-backdrop mui-backdrop-s hide"  tapmode onclick="hiddenErrPwd();" ></div>
+
+<!--您的账户余额不足，请充值后购买！-->
+<div class="bomb-box bomb-box-s hide">
+	<div class="mui-popup-inner">
+		<div class="mui-popup-title title-c">您的账户余额不足，请充值后购买！</div>
+	</div>
+	<div class="mui-popup-buttons">
+		<span class="mui-popup-button" tapmode onclick="">暂不充值</span>
+		<span class="mui-popup-button blue" tapmode onclick="">去充值</span>
+	</div>
+</div>
+<div class="mui-backdrop hide" tapmode onclick=""></div>
+
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common/validate.js"></script>
+<script type="text/javascript" src="../script/library/doT.js"></script>
+<script type="text/javascript" src="../script/common/countdown.js"></script>
+<script type="text/javascript" src="../script/common/calculate.js"></script>
+<script type="text/javascript" src="../script/common/h5url.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript" src="../script/library/base64.js"></script>
+<script type="text/javascript" src="../script/portal/productBuyTwo.js"></script>
+</html>

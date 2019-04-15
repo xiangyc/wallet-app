@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>银行限额表</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<!--<img id="bankListImg" src="" class="bank-quota">-->
+			<div class="bank-list">
+				<div class="bank-list-top"><span>银行名称</span><span>单笔限额(元)</span><span>单日限额(元)</span></div>
+
+				  <script id="bank-template" type="text/x-dot-template">
+		            {{ for(var i=0; i< it.length; i++) { }}  
+
+		            	<ul class="bank-list-ul">
+							<li>
+								<span><img 
+									onerror="this.src='../../image/member/bank-icon/bank-default-icon.png'" src="../../image/member/bank-icon/{{=it[i].icon}}"/>{{=it[i].bankName}}</span>
+								
+									{{if(it[i].status == 1){ }}
+										<i>
+											<span><em>{{=formatNum(it[i].maxSingleQuota)}}</em>万元</span>
+										    <span><em>{{=formatNum(it[i].maxQuota)}}</em>万元</span>
+										</i>
+
+									{{ }else{ }}
+										<span class="maintain-in">银行维护中，交易暂停</span> 
+
+									{{ } }}	
+							</li>
+
+						</ul>
+
+		             {{ } }}  
+		          </script>  
+ 				<ul id="bank-content"></ul>
+			</div>			
+
+			<div class="main-bomb-prompt">
+				<i></i>以上限额仅供参考，具体限额以银行限额为准。
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+    <script type="text/javascript" src="../../script/library/doT.js"></script>
+    <script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/portal/bankList.js"></script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body style="background:#fff;">
+<header>
+    <div class="loginHeader" tapmode onclick="api.closeWin();">
+        <img src="../../image/icon-close.png"/>
+    </div>
+</header>
+<div class="login">
+    <div class="mui-content">
+        <div class="logText">
+            <h1>您好</h1>
+            <p>欢迎来到金算子，赶紧注册吧！</p>
+        </div>
+        <div class="logInput">
+            <div><input id="mobile" maxlength="11" type="number" oninput="if(value.length>11)value=value.slice(0,11);" placeholder="请输入手机号码" /><i class="mui-icon mui-icon-closeempty hide"
+             id='cleanInputId' tapmode onclick="cleanInput();" ></i></div>
+            <div class="getCodeBox">
+               <input id="code" maxlength="6" type="number" oninput="if(value.length>6)value=value.slice(0,6);"  placeholder="请输入验证码" />
+               <input type="button" id="sendButton" onclick="sendSmsCode();" class="getCode" value="获取验证码" disabled/>
+            </div>
+            <div>
+            	<input id="password" maxlength="20" type="password" placeholder="请输入6-20位字母+数字的密码"
+                    onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" 
+                     oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" />
+          		 <em id='eye' tapmode onclick="showPassword();" ></em>
+            </div>
+            <div class="inviteMember"><input id="recommendMobile"  maxlength="11" type="text" placeholder="请输入邀请码或邀请人手机号" /></div>
+          
+            <div class="logBtn">
+                <button disabled id="registSpan" onclick="register();" type="button" class="mui-btn mui-btn-block mui-add-radius mui-btn-primary mui-btn-outlined"><!--<img id="imgId" />--><em id="regId">注册</em></button>
+            </div>
+        </div>
+
+        <div class="logThird">
+            <h5 tapmode onclick="loginForward();">已有账号?<a>登录</a></h5>
+        </div>
+    </div>
+
+    <div class="log-box">
+        <div class="logAgree">
+            注册即视为已阅读同意<a tapmode onclick="openAgreement();">《财易通智金用户服务协议》</a>
+        </div>
+    </div>
+
+</div>
+</body>
+	<script type="text/javascript" src="../../script/library/jquery.js"></script>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+	<script type="text/javascript" src="../../script/common/sms.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/member/register.js"></script>
+</html>

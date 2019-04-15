@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>黄金红包已包好</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/animate.css" />
+</head>
+<body>
+
+<div class="redpacket-adv-box" id="redPacket">
+    <div class="redpacket-adv-c">
+        <div class="redpacket-adv-top">
+            <h3><em id="amount">0</em>毫克</h3>
+            <span>价值 <em id="money">0.00</em> 元</span>
+            <div id="remark" class="red-wishes-default"></div>
+            <!-- <div class="redpacket-code" id="qrcodeDiv"></div> -->
+        </div>
+
+        <div class="red-packet-btn" id="redPacketBtn" onclick="codeshare();" type="button" ></div>
+        <div class="red-packet-wz red-href"><a onclick="share();" style="color:#fff;text-decoration:underline;" type="button">文字链接分享</a></div>
+    </div>
+    <div class="redpacket-adv-tips color6">发送的克重将从您的“红包金”账户扣除，24小时后无人领取将返还</div>
+</div>
+
+
+        <div id="shareDiv" class="share-box hide">
+            <ul class="share-box-ul share-box-ul-50 mui-clearfix">
+                <li onclick="shareWx('session');" class="wechat-icon">
+                    <i></i>微信好友
+                </li>
+                <li onclick="shareWx('timeline');"  class="friend-icon">
+                    <i></i>朋友圈
+                </li>
+            </ul>
+            <div class="mui-popup-buttons">
+                <span onclick="closeShare();" class="mui-popup-button">取消</span>
+            </div>
+        </div>
+        <div id="backdrop"  class="mui-backdrop hide"></div>
+
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/core/global.js"></script>
+<script type="text/javascript" src="../../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../../script/common/shareImage.js"></script>
+<script type="text/javascript" src="../../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../../script/library/qrcode.js"></script>
+<script type="text/javascript" src="../../../script/library/jqueryQrcode.js"></script>
+<script type="text/javascript" src="../../../script/redpacket/default/readyRed.js"></script>
+</body>
+</html>

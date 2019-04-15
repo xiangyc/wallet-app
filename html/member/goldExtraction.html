@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <script>
+        var addStyleLink = function(href){
+
+            var head = document.getElementsByTagName('head')[0];
+            var styleLink = document.createElement('link');
+            styleLink.setAttribute('rel','stylesheet');
+            styleLink.setAttribute('href',href);
+            head.appendChild(styleLink);
+
+        }
+
+//        // 苹果手机采用CSS1
+//        if(/iphone/i.test(navigator.userAgent))
+//            addStyleLink('../../css/miniphone.css');
+//        // 安卓手机采用CSS2
+//        if(/android/i.test(navigator.userAgent))
+//            addStyleLink('../../css/minandroid.css');
+
+    </script>
+    <style>
+        .mui-popup{border-radius:5px;width:300px;}
+        .mui-popup-inner{border-radius: 5px 5px 0 0; padding: 15px 15px 21px 15px; text-align:center;background:#fff;}
+        .mui-input-row.input-row-f.mui-navigate-right:after{color:#999;right:-5px;}
+        .mui-input-row.input-row-f label{width: 33.5%!important;}
+        .mui-input-row.input-row-f span{width:66.5%;text-align:right;padding-right:10px;color:#999;}
+
+
+        .goldway-t.mui-mt10 .mui-input-row.input-row-f label{width: 20%!important;}
+        .goldway-t.mui-mt10 .mui-input-row.input-row-f span{width:80%;text-align:right;padding-right:10px;color:#999;}
+
+        .input-gold-title{font-size:12px;color:#2d2d2d;}
+        .input-gold-title em{color:#2d2d2d;}
+        .mui-input-row .mui-numbox.mui-numbox-g{float:right;width:120px;margin:6px 15px 0 0;}
+        .mui-numbox{border:1px solid #ffb11b;border-radius:3px;background:none;}
+        .mui-numbox [class*=btn-numbox], .mui-numbox [class*=numbox-btn]{background:none;color:#ccc;}
+        .mui-numbox [class*=btn-numbox]:last-child, .mui-numbox [class*=numbox-btn]:last-child{color:#2d2d2d;}
+        .mui-numbox .mui-input-numbox, .mui-numbox .mui-numbox-input{color:#2d2d2d;border-right: 1px solid #ffb11b!important;border-left: 1px solid #ffb11b!important;}
+        .mui-btn-rsmall{top:8px;background:none;color:#ffb11b;border:1px solid #ffb11b;border-radius:3px;}
+        /*.mui-btn-warning{}*/
+        .main-bomb-prompt{color:#0e88ea;}
+        .mui-content .mui-input-row .textGrey{color:#2d2d2d;}
+        .goldway-t.mui-bg-white{padding:0 15px;}
+        .mui-input-row label{padding:16px 0;}
+        .bottom-btn{overflow:hidden;position:fixed;bottom:0;width:100%;background:#fff;}
+        .bottom-btn .gold-money{float:left;width:60%;padding-left:15px;}
+        .bottom-btn .gold-money span{display:block;color:#ec584a;line-height:22px;font-size:16px;}
+        .bottom-btn .gold-money em{color:#2d2d2d;font-size:14px;}
+        .bottom-btn .gold-money em a{color:#999;font-size:12px;padding-left:10px;}
+        .bottom-btn .gold-btn{float:left;width:40%;display:block;margin:0;}
+        .bottom-btn .gold-btn button{width:100%;background:#ffb11b;color:#fff;border-radius:0;height:45px;line-height:45px;padding:0!important;}
+        .bomb-box h4{background:none;color:#2d2d2d;border:none;}
+        .bomb-c .inkind-img{border:none;background:none;}
+        .bomb-c .inkind-img.current{color:#ffb11b!important;background:none;border:0;}
+        .bomb-c .inkind-img img{border:1px solid #e8e8e8;padding:10px;}
+        .bomb-c .inkind-img.current img{border:1px solid #ffb11b;}
+        .mui-input-row span p em{display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;}
+        .mui-popup-backdrop{z-index:1998;}
+    </style>
+
+</head>
+<body>
+
+<div class="mui-content" style="margin-bottom: 65px;background:#f8f8f8;">
+	<div id="priceDiv" class="real-price pr-d-t hide">
+		<span class="real-price-t"> <em id="lastPrice"></em>
+			<div id="refreshDiv" class="refresh-icon">
+				<img  onclick="refresh();" src="../../image/refresh-icon.png" alt="flash">
+			</div>
+		</span>
+		<span class="real-price-b">实时金价(元/克)</span>
+		<span class="real-price-locking">锁定金价<em id="intervalEm">300</em>秒</span>
+	</div>
+			
+   <div class="goldway-t mui-bg-white">
+        <div  onclick="selectExpressType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>提金方式</label>
+            <span id="expressTypeSpan">请选择提金方式</span>
+        </div>
+
+       <div id="selectAddressDiv"  onclick="selectAddress();" class="mui-input-row input-row-f hide">
+           <div class="mui-input-row input-row-f mui-navigate-right mui-border-no">
+               <label>收货地址</label>
+               <!-- <span class="input-span-sm" id="deliveryAddress" style="float: left;">请选择收货地址 -->
+               <span class="" id="deliveryAddress">请选择收货地址
+               </span>
+
+           </div>
+       </div>
+
+       <div id="addressDiv" class="mui-input-row input-row-f mui-mt10 mui-pb5 mui-border-no hide">
+           <label>提货地址</label>
+           <span class="input-span-sm">深圳市罗湖区彭年广场写字楼38楼
+                 <em>客服电话：4006-832-999</em>
+            </span>
+       </div>
+
+   </div>
+
+    <div class="title input-gold-title">可提黄金:<em id="activeBalance">0.00</em>克</div>
+
+    <div class="goldway-t mui-bg-white">
+        <div  onclick="selectGoldType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>金条规格</label>
+            <span id="goldType">请选择金条规格</span>
+        </div>
+
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>提金数量</label>
+            <div class="mui-numbox mui-numbox-g" data-numbox-step="10" data-numbox-min="1" data-numbox-max="90">
+                <button  onclick="computCount(-1);" class="mui-btn mui-btn-g mui-btn-numbox-minus" type="button">-</button>
+                <input  onkeyup="keyup();" class="mui-input-numbox" maxlength="4" id="applyCount" value="1">
+                <button  onclick="computCount(1);" class="mui-btn mui-btn-g  mui-btn-numbox-plus" type="button">+</button>
+            </div>
+
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+			<label>提金克重</label>
+			<span class="textGrey"><em id="amount">0.00</em>克</span>
+		</div>
+		 
+		<div id="periodDiv" class="hide">
+	        <div class="mui-input-row input-row-f mui-border-b">
+	            <label>购金原价</label>
+	            <span><em id="oldGlodPriceEm"></em>(元/克)</span>
+	        </div>
+	        <div class="mui-input-row input-row-f mui-border-b">
+	            <label  onclick="showSub();">剩余克重回款<i class="q-mark-g"></i></label>
+	            <span><em id="moneyEm"></em>元</span>
+	        </div>
+		</div>
+  
+    </div>
+
+    <div class="goldway-t mui-bg-white mui-mt10">
+        <div class="mui-input-row input-row-f">
+            <label>可用余额</label>
+            <span style="text-align:left;color:#2d2d2d;"><em id="useBalance">0.00</em>元</span>
+            <button  onclick="recharge();" class="mui-btn-warning mui-btn-rsmall">充值</button>
+        </div>
+    </div>
+    <div onclick="showMessage();" class="main-bomb-prompt">
+	   提金提示
+	</div>
+
+    <div class="bottom-btn">
+        <div class="gold-money"  onclick="feeDetail();">
+            <span>￥<i id="totalFee">0.00</i></span>
+            <em>提金费用<a>明细 > </a></em>
+        </div>
+        <div class="gold-btn">
+            <button class="mui-btn mui-btn-warning"  onclick="applySubmit();">提交申请</button>
+        </div>
+    </div>
+
+
+</div>
+<!--输入交易密码-->
+<div class="mui-popup mui-popup-in pay-pw-box hide" id="passwordDialog">
+    <div class="mui-popup-inner">
+        <h3 class="lineAfter">输入交易密码<i class="mui-icon mui-icon-closeempty"  onclick="showSubmit();"></i></h3>
+        <div class="pay-pw-c">
+            <div class="pay-way-top lineAfter">
+                <P>付款金额</P>
+                <h5><i id="totalPayFee"></i>元</h5>
+            </div>
+            <input id="password" type="password" maxlength="20" placeholder="请输入交易密码">
+            <span><a  onclick="openPayPassword();" class="fpwd">忘记密码</a></span>
+        </div>
+        <button type="button" class="mui-btn-primary pay-pw-confirm mui-mt10"   onclick="applyWithdrawGold();" id="confirmBtn">确定</button>
+    </div>
+</div>
+<div class="mui-popup-backdrop mui-active hide"  id="passwordDialogDiv"   onclick="showSubmit();"></div>
+
+<!--输入交易密码成功后提示-->
+<div class="bomb-box buy-back-box hide">
+    <div class="bomb-c">
+        <p>提金申请已经成功提交，1-5日将会安排发货！</p>
+     </div>
+    <div class="mui-popup-buttons">
+        <span class="mui-popup-button">查看订单</span><span class="mui-popup-button">继续提金</span>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!-- 不可提金 -->
+<div class="bomb-box hide">
+    <h4>提示</h4>
+    <div class="bomb-c">
+        <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!--剩余克重回款-->
+<div id="sub" class="bomb-box hide">
+    <h4>剩余克重回款</h4>
+    <div class="bomb-c">
+        <p>在一个订单当中支持用户提取部分黄金，那剩下的黄金平台按购买时原价自动回购，回购款自动发放到客户资金账户</p>
+        <p>计算公式：剩余克重回款=提金后剩余克重x购金原价</p>
+    </div>
+</div>
+<div id="subDiv"  onclick="showSub();" class="mui-backdrop hide"></div>
+
+<!--提金补差价-->
+
+<div class="mui-popup mui-popup-in pay-pw-box hide" id="difference">
+    <div class="mui-popup-inner">
+        <h3 class="lineAfter">提金补差价<i class="mui-icon mui-icon-closeempty floatRight" onclick="closeDifference();"></i></h3>
+        <div class="pay-pw-c">
+            <p>提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+            <p>计算公式：提金补差价=提金克重x(现时金价-购金原价）</p>
+        </div>
+    </div>
+</div>
+<div class="mui-popup-backdrop mui-active hide"  id="differenceDiv"  onclick="closeDifference();"></div>
+
+
+
+<!--提金提示-->
+<div id="messageDiv" class="mui-popup mui-popup-in pay-pw-box hide">
+    <div class="mui-popup-inner">
+        <h3>提金提示</h3>
+        <div id="proSuiprompt" class="pay-pw-c hide">
+            <p>1.快递提金费用：加工费12元/克+物流保险费1.5元/克+快递费20元；</p>
+            <p>2.自提提金费用：仅收取12元/克加工费。</p>
+        </div>
+        <div id="proAnprompt" class="pay-pw-c hide">
+            <p>1.快递提金费用：加工费12元/克+物流保险费1.5元/克+快递费20元；</p>
+            <p>2.自提提金费用：仅收取12元/克加工费。</p>
+            <p>3.提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+            <p>4.提交提金申请后，用户如果取消提金，平台按照购买时原价自动回购。</p>
+        </div>
+    </div>
+</div>
+<div id="messageDropDiv"  onclick="showMessage();" class="mui-popup-backdrop mui-active hide"></div>
+
+<!--黄金实物图-->
+<div id="kindType" class="bomb-box bomb-box-spec hide">
+    <h4>金条规格</h4>
+    <div class="bomb-c mui-clearfix">
+        <div id="ghj"  onclick="confirm(5);" class="inkind-img"><img src="../../image/member/ghj.jpg">工行金5克/条</div>
+        <div id="paj"  onclick="confirm(10);" class="inkind-img"><img src="../../image/member/inkind-img03.jpg">平安金10克/条</div>
+
+    </div>
+</div>
+<div id="kindTypeDiv"  onclick="showGoldType();" class="mui-backdrop mui-active hide"></div>
+
+<!--提金方式-->
+<div class="mui-popup mui-popup-in pay-pw-box hide" id="expressType">
+    <div class="mui-popup-inner">
+        <h2 class="lineAfter">选择提金方式</h2>
+        <ul class="gold-style">
+            <li  id="style2"  onclick="goodStyle(2)"><a>快递</a></li>
+            <li  id="style1"  onclick="goodStyle(1)"><a>自提</a></li>
+        </ul>
+    </div>
+</div>
+<div class="mui-popup-backdrop mui-active hide"  id="expressTypeDiv"   onclick="selectExpressType();"></div>
+
+<!--提金费用明细-->
+<div class="mui-popup mui-popup-in pay-pw-box hide" id="feeDetail">
+    <div class="mui-popup-inner">
+        <h3 class="lineAfter">费用明细<i class="mui-icon mui-icon-closeempty floatRight"  onclick="closeFeeDetail()"></i></h3>
+        <ul class="gold-fee">
+            <li >
+                <span>加工费</span>
+                <i><em id="serviceFee">0.00</em>元</i>
+            </li>
+            <li >
+                <span>运费</span>
+                <i><em id="expressFee">0.00</em>元</i>
+            </li>
+            <li >
+                <span>保价费</span>
+                <i><em id="insuredFee">0.00</em>元</i>
+            </li>
+            <li >
+                <span>提金补差价<em  onclick="showDifference();">?</em></span>
+                <i><em id="differenceEm">0.00</em>元</i>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="mui-popup-backdrop mui-active hide"  id="feeDetailDiv"  onclick="closeFeeDetail()"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/common/countdown.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/member/goldExtraction.js"></script>
+</html>

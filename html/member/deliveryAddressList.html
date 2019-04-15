@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>收货地址</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+
+        <script id="address-template" type="text/x-dot-template">
+            {{ for(var i=0; i< it.length; i++) { }}
+                {{ if(it[i].id == addressId){}}
+                <div class="mui-table-view address-list-box mui-mb10 mui-bg-syellow" id="{{=it[i].id}}">
+                {{ } else { }}
+                <div class="mui-table-view address-list-box mui-mb10" id="{{=it[i].id}}">
+                {{ } }}
+                    <div class="address-top" tapmode onclick="selectAddress({{=it[i].id }}, '{{=it[i].consignee }}','{{=it[i].hideMobile }}','{{=it[i].region.province.name }}','{{=it[i].region.regionName }}','{{=it[i].addressDetail }}','{{=it[i].region.id }}');">
+                         <div class="address-top-tilte">
+                            <span id="consigneeId{{=it[i].id}}">{{=it[i].consignee }}</span>
+                            <em id="mobileId{{=it[i].id}}">{{=it[i].hideMobile }}</em>
+                         </div>
+                        <input id="regionId{{=it[i].id}}" type="hidden" value={{=it[i].region.regionName}}></input>
+                        <span id="detailId{{=it[i].id}}">{{=it[i].addressDetail }}</span>
+                    </div>
+                    <div class="mui-table-view-cell mui-left">
+                        <span class="address-delete" tapmode onclick="del({{=it[i].id}});"><i></i>删除</span>
+
+                        <em class="setto-default">设为默认</em>
+
+                         {{ if(it[i].isDefault == 1){ setDefaultId(it[i].id); }}
+                            <div class="mui-switch mui-switch-blue mui-switch-mini mui-active" data-switch="8" style="transition-duration: 0.2s;" id="defaultParentDivId{{=it[i].id}}" onclick="setDefault({{=it[i].id}});">
+                                <div id="defaultChildDivId{{=it[i].id}}" class="mui-switch-handle" style="transition-duration: 0.2s; transform: translate(16px, 0px);"></div>
+                            </div>
+                         {{ } else { }}
+                            <div class="mui-switch mui-switch-blue mui-switch-mini" data-switch="8" style="transition-duration: 0.2s;" id="defaultParentDivId{{=it[i].id}}" onclick="setDefault({{=it[i].id}});">
+                                <div id="defaultChildDivId{{=it[i].id}}" class="mui-switch-handle" style="transition-duration: 0.2s; transform: translate(0px, 0px);"></div>
+                            </div>
+                         {{ } }}
+
+                    </div>
+                </div>
+            {{ } }}
+        </script>
+
+     <div id="address-content" class="mui-mb60"></div>
+
+    <div class="no-address-receipt hide" id="nonAddressId">
+        <img src="../../image/member/noaddress-receipt.png">
+        <button class="addAddress" tapmode onclick="addAddress();">新建地址</button>
+     </div>
+
+    <button class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb" tapmode onclick="addAddress();"><i></i>新增收货地址</button>
+
+</div>
+<!--确认删除此收货地址-->
+<div class="bomb-box bomb-box-s hide" id="delDivId">
+    <div class="mui-popup-inner">
+        <div class="mui-popup-title">确认删除此收货地址？</div>
+    </div>
+    <div class="mui-popup-buttons"><span class="mui-popup-button" onclick="cancel()">取消</span><span class="mui-popup-button yellow" onclick="confirm();">确认</span></div>
+</div>
+
+<div class="mui-backdrop hide" id="dropDivId"></div>
+
+</body>
+
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/library/doT.js"></script>
+    <script type="text/javascript" src="../../script/core/global.js"></script>
+    <script type="text/javascript" src="../../script/common/page.js"></script>
+    <script type="text/javascript" src="../../script/member/deliveryAddressList.js"></script>
+</html>

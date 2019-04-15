@@ -1,0 +1,265 @@
+ <!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>订单详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+    <link rel="stylesheet" href="../../css/mui.css" />
+    <style>
+        .mui-content>.mui-table-view:first-child{margin-top:0;}
+        .record-list-b span i{ font-size: 12px;  display: inline-block;height:auto; line-height: 1.5;  margin: 0 10px; padding: 0 5px; border-radius: 6px 0 6px 0;   }
+        #showHt{padding:0 15px;}
+        #showHt .mui-border-tb{border-bottom:0!important;}
+        #showHt .mui-input-row label,#showHt .mui-input-row span{padding:0;line-height:35px!important;}
+        #showHt .mui-input-row:first-child{height:40px!important;line-height:40px!important;}
+        #showHt .mui-input-row:first-child label{padding:0;line-height:40px!important;}
+        #showHt .mui-input-row:first-child span{padding:0;line-height:40px!important;}
+
+        .goldBuy .mui-input-row.input-row-f span{padding:0;float:right;line-height:35px!important;}
+        .goldBuy.mui-input-group .mui-input-row{height:35px!important;line-height:35px!important;padding:0 15px;}
+        .goldBuy.mui-input-group .mui-input-row label{padding:0;line-height:35px!important;}
+        .goldBuy.mui-input-group .mui-input-row:first-child{height:40px!important;line-height:40px!important;}
+        .goldBuy.mui-input-group .mui-input-row:first-child label{padding:0;line-height:40px!important;}
+        .goldBuy.mui-input-group .mui-input-row:first-child span{padding:0;line-height:40px!important;}
+        .goldBuy.mui-input-group .mui-input-row:first-child:after{height: 1px;background-color:#e8e8e8;}
+        .goldBuy.mui-input-group .mui-input-row:after{position: absolute;right: 0;bottom: 0;left: 15px;height: 0;content: '';-webkit-transform: scaleY(.5);transform: scaleY(.5);background-color: #f1f3f8;}
+
+        .bomb-box.bomb-payment-box .bomb-c h3{margin:0 15px 5px;position:relative;}
+        .bomb-box.bomb-payment-box .bomb-c .close-icon{top: 50%;left: 0;right: 0;margin-top: -13px;}
+        #incomeListUl.incomeListUl-line{margin:0 5px;display:block;}
+        #incomeListUl.incomeListUl-line li{width:100%;overflow:hidden;}
+        #incomeListUl.incomeListUl-line li.grey{color:#ccc!important;}
+        #incomeListUl.incomeListUl-line li span{float:left;width:40%;display:block;}
+        #incomeListUl.incomeListUl-line li i{float:left;width:20%;display:block;}
+        #incomeListUl.incomeListUl-line li em{float:right;width:40%;text-align:right;display:block;}
+
+        .beforeIncome{margin:0 5px;display:block;}
+        .beforeIncome li span{float:left;width:50%;text-align:left;}
+        .beforeIncome li em{float:left;width:50%;text-align:right;}
+
+        .mui-table-view.address-list-box{ border: none; }
+        .mui-table-view.address-list-box:before,.mui-table-view.address-list-box:after{ height: 0; }
+        .mui-input-group.mui-input-tb.goldBuy:before,.mui-input-group.mui-input-tb.goldBuy:after{ height: 0; }
+        .mui-input-group.mui-input-tb:before,.mui-input-group.mui-input-tb:after{ height: 0; }
+        .mui-input-row.input-row-f.mui-navigate-right.mui-border-tb{ border-top: 1px solid #e8e8e8 !important; }
+
+    </style>
+
+</head>
+<body>
+<div class="mui-content">
+
+    <div class="mui-table-view address-list-box">
+
+        <div class="record-list-b mui-clearfix">
+
+            <div class="record-list-lc">
+                <span><label id="name"></label><i id="activityI" class="pr-ac-label"></i></span>
+                <em>订单号：<i id="orderNo"></i></em>
+            </div>
+
+            <div class="record-list-rc">
+                <span id="statusName" class="red"></span>
+                <em id="createTime"></em>
+            </div>
+
+        </div>
+        <div class="mui-bg-white" id="showHt">
+            <div class="mui-input-row input-row-f mui-navigate-right mui-border-tb" onclick="viewContract()">
+                <label>购买合同</label>
+                <span class="mui-record-more"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mui-input-group mui-input-tb goldBuy">
+
+        <div class="mui-input-row input-row-f mui-mt10">
+            <label>支付金额(元)</label>
+            <span id="money">0.00</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>订单金额(元)</label>
+            <span id="originalPrice">0.00</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>优惠</label>
+            <span id="couponMoney">--</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>买入克重(克)</label>
+            <span id="amount">0.000</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>买时金价(元/克)</label>
+            <span id="goldPrice">0.00</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>年化赠金</label>
+            <span id="profitRate">0.00%</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>产品期限</label>
+            <span id="goldPeriod"></span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>还款方式</label>
+            <span id="hkType"></span>
+        </div>
+
+        <div class="mui-input-row input-row-f hide" id="comeTypeDiv">
+            <label>到期处理</label>
+            <span id="comeType"></span>
+        </div>
+
+        <div class="mui-input-row input-row-f hide" id="perMoneyDiv">
+            <label>每日赠金(元)</label>
+            <span id="perMoney">0.00</span>
+        </div>
+
+    </div>
+
+    <div class="mui-bg-white mui-mt10 hide" id="backDetailDiv">
+        <div class="mui-input-row input-row-f mui-navigate-right" onclick="backDetail()">
+            <label>回款详情</label>
+            <span class="mui-record-more"></span>
+        </div>
+    </div>
+
+    <div class="mui-bg-white mui-mt10 hide" id="beforeBackDiv">
+        <div class="mui-input-row input-row-f mui-navigate-right" onclick="beforeBack()">
+            <label>提前赎回</label>
+            <span class="mui-record-more"></span>
+        </div>
+    </div>
+
+
+    <div class="mui-input-group mui-input-tb hide" id="showPeriodGold">
+
+        <div class="mui-input-row input-row-f mui-mt10">
+            <label>赠金(元)</label>
+            <span id="reciveValue">0.00</span>
+        </div>
+        <div class="mui-input-row input-row-f">
+            <label>到期日期</label>
+            <span id="endTime"></span>
+        </div>
+        <div class="mui-input-row input-row-f">
+            <label>回款日期</label>
+            <span id="incomeTime"></span>
+        </div>
+    </div>
+
+    <!-- 半年产品还款计划开始 -->
+    <!--<div class="mui-input-group mui-mt10 mui-input-tb hide" id="planDiv">-->
+       <!--<ul id="incomeListUl" class="repayment-list repayment-list-4">-->
+           <!--<li><span>回款日期</span><span>状态</span><span>购金款及赠金(元)</span></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--回款计划-->
+    <div id="backDiv" class="bomb-box bomb-payment-box hide">
+        <div class="bomb-c">
+            <h3><i class="close-icon" onclick="backDetail()"></i>回款计划</h3>
+            <ul id="incomeListUl" class="incomeListUl-line">
+            </ul>
+        </div>
+
+    </div>
+    <div id="backDropDiv" onclick="backDetail();" class="mui-backdrop hide"></div>
+
+
+    <!--提前赎回-->
+    <div class="bomb-box bomb-payment-box hide" id="beforeDiv">
+        <div class="bomb-c">
+            <h3><i class="close-icon" onclick="beforeBack()"></i>提前赎回</h3>
+            <ul id="beforeListUl" class="beforeIncome">
+                <li>
+                    <span>违约金</span>
+                    <em id="fee">0.00元</em>
+                </li>
+                <li>
+                    <span>扣除已发赠金</span>
+                    <em id="deductIncome">0.00元</em>
+                </li>
+                <li>
+                    <span>实际回款</span>
+                    <em id="realMoney">0.00元</em>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div onclick="beforeBack()" class="mui-backdrop hide" id="beforeDropDiv"></div>
+
+    <!-- 半年产品还款计划开始 -->
+     
+
+    <div id="contract" class="bomb-box-contract hide">
+       <div style="font-size: 13px;margin-top: 3px;">
+        <button id="prev" onclick="goPrevious()">上一页</button>
+        <button id="next" onclick="goNext()">下一页</button>
+        &nbsp; &nbsp;
+        <span style="margin-top: 7px;">页码: <span id="page_num"></span> / <span id="page_count"></span></span>
+        <button onclick="showOrderDetail()" style="margin-left: 20%;">关闭</button>
+       </div>
+       <div>
+          <canvas id="the-canvas" style="border:1px solid black; max-width: 100%;"></canvas>
+       </div>
+    </div>
+
+    <div id="contractDiv" tapmode onclick="showOrderDetail();" class="mui-backdrop hide"></div>
+
+    <!-- 平台回购 -->
+    <div id="comeDiv" class="bomb-box buy-back-box hide">
+        <div class="bomb-c">
+           <p>将按照购买时金价进行回购，回购金额发放到您的资金账户，确定申请回购黄金？</p>
+        </div>
+         <div class="mui-popup-buttons">
+            <span tapmode onclick="showCome();" class="mui-popup-button">取消</span><span tapmode onclick="comeGold();" class="mui-popup-button yellow">确认</span>
+         </div>
+    </div>
+    <div id="comeDropDiv" tapmode onclick="showCome();" class="mui-backdrop hide"></div>
+
+	<!--筛选-->
+	<div id="conditionDiv" tapmode class="filter-box hide">
+		<ul class="buy-detail-header-r">
+			<li id="buyLi" onclick="selectType(2);">
+				        平台回购  
+			</li>
+			<li onclick="selectType(1);" class="mui-active">
+				提金
+			</li>
+		</ul>
+	</div>
+	<div id="conditionDropDiv" tapmode onclick="showCondition();" class="mui-backdrop hide"></div>
+</div>
+
+		<!--不可提金提示 -->
+        <div id="carryDiv" class="bomb-box hide">
+            <h4>提示</h4>
+            <div class="bomb-c">
+                <p>
+                    当前不支持提金，提金时间段为上海黄金交易所交易时间（9:00-15:00）
+                </p>
+            </div>
+        </div>
+
+		<div id="carryDropDiv" tapmode onclick="showCarry();" class="mui-backdrop hide"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/pdf.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/member/goldBuyDetail.js"></script>
+</html>

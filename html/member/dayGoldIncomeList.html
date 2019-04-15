@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>资金流水</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<script id="tradeLog-template" type="text/x-dot-template">
+				{{ for(var i=0; i< it.length; i++) { }}
+				<div class="water-list-box mui-border-eb mui-m0">
+					<div class="water-list-b mui-clearfix">
+						<div class="day-water-list">
+							<span>{{=it[i].productName }}</span>
+							<i>{{=global.formatDate(it[i].incomeTime, 'yyyy-MM-dd') }}</i>
+							<em class="yellow">{{=global.formatNumber(it[i].incomeMoney,2) }}元</em>
+						</div>
+					</div>
+				</div>
+				{{ } }}
+			</script>
+
+			<div id="tradeLog-content"> </div>
+			
+			<div id="no-records" class="no-address hide">
+				<i></i>
+				暂无记录
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/doT.js"></script>
+	<script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/member/dayGoldIncomeList.js"></script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<style type="text/css">
+			a.right{ color: #fff; }
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a tapmode onclick="api.closeWin()" class="back-icon"></a>
+				<h1>天天金</h1>
+				<a tapmode onclick="doList()" class="right">交易明细</a>
+			</div>
+
+			 <div class="real-price pr-d-t pr-day-t">
+	            <div class="pr-rate">
+	                <span class="real-price-t"><em id="perdiemAmount">0.000</em>克</span>
+	                <span class="real-price-b">价值：<em id="perdiemMoney">0.00</em>元<i tapmode onclick="showMessage();"></i></span>
+	            </div>
+
+	            <div class="pr-c-points mui-mt10 mui-clearfix">
+	                <div class="pr-points-li mui-col-sm-6">
+	                    <span class="title-t" id="yesterdayIncome">0.00</span>
+	                    <span class="title-b">昨日赠金(元)</span>
+	                </div>
+	              
+	                <div class="pr-points-li mui-col-sm-6" onclick="income();">
+	                  <a class="mui-navigate-right">
+	                    <span class="title-t" id="perdiemTotalIncome">0.00</span>
+	                    <span class="title-b">累计赠金(元)</span>
+	                  </a>
+	                </div>
+	               
+	            </div>
+	        </div>
+
+			  <div class="pr-day-list" style="padding-bottom: 62px;">
+			            <h5>持有订单</h5>
+			      <!--       <ul class="mui-table-view dayOrder-list-ul">
+			               
+			            </ul> -->
+			  </div>
+
+		    <div class="account-day-bt bt-btn-fixed">
+		        <div tapmode onclick="sale();" class="btn">卖金</div>
+		        <div tapmode onclick="buy();" class="btn">买金</div>
+		    </div>
+
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+	<script type="text/javascript" src="../../script/member/dayAccountHeader.js"></script>
+</html>

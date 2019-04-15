@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>奖励明细</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	<link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body class="bgf8">
+<div class="mui-content mui-navigate-right-box">
+    <ul class="part-tab hide">
+        <li id="active1" class="current" tapmode onclick="queryPartAchieve(1);">邀请</li>
+        <li id="active2" tapmode onclick="queryPartAchieve(2);">佣金</li>
+    </ul>
+    <div class="part-box">
+    <div class="mui-card part-member-details">
+         <script id="personalAchieve0-template" type="text/x-dot-template">
+			{{ for(var i=0; i< it.length; i++) { }}
+				<div class="mui-table-view-cell mui-m0">
+					<a class="mui-navigate-right-none">
+						<div class="part-bal-con part-bal-detail">
+							<p>
+								{{ if(!it[i].isOrg){ }}
+								{{ if(it[i].bindCard) { }}
+								{{ if(it[i].purchase) { }}
+								<span class="fs12">已购买</span>
+								{{ }else { }}
+								<span class="fs12">已实名绑卡</span>
+								{{ } }}
+								{{ }else { }}
+								<span class="fs12 havecolor">未实名绑卡</span>
+								{{ } }}
+								{{ } }}
+								<i> {{ if(it[i].hideName && it[i].hideName != 'null') { }}
+									{{=it[i].hideName}}
+									{{ } }}
+									{{=it[i].hideMobile}}
+								</i>
+							</p>
+							<p>
+								<span>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm')}}</span>
+								身份：
+								{{ if(it[i].isOrg){ }}
+								  {{=it[i].recommendOrgName}}
+								{{ }else{ }}
+								  {{=it[i].recommendOrgName}}
+								{{ } }}
+							</p>
+						</div>
+					</a>
+				</div>
+		   {{ } }}
+
+        </script>
+		</div>
+        <div id="personalAchieve0-content" class="mui-card part-member-details mui-mt10">
+		</div>
+        
+        <script id="personalAchieve1-template" type="text/x-dot-template">
+        <ul class="personalAchieve-ul">
+            {{ for(var i=0; i< it.length; i++) { }}
+			<li id="li{{=it[i].id}}" tapmode onclick="openDetail({{=it[i].tradeType}},{{=it[i].id}});">
+				<div class="personalAchieve-list-t clearfix">
+					<div>
+						<span>{{=it[i].tradeName }}</span>
+						<p>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm')}}</p>
+					</div>
+					<div>+{{=global.formatNumber(it[i].tradeAmount, 2)}}</div>
+				</div>
+				<div class="personalAchieve-list-b">
+					{{if(it[i].note && it[i].note != 'null' ){ }}
+					{{=it[i].note }}
+					{{ } }}
+				</div>
+			</li>
+            {{ } }}
+        </ul>
+        </script>
+
+        <div id="personalAchieve1-content"></div>
+
+        </div> 
+        
+        <!--筛选-->
+		<div id="conditionDiv" class="filter-pera-box hide">
+				<ul id="typeUl" class="filter-pera-list">
+				</ul>
+				<script id="type-template" type="text/x-dot-template">
+					<li tapmode onclick="selectType('', this);" class="mui-active">
+						全部
+					</li>
+					{{ for(var i=0; i< it.length; i++) { }}
+					<li tapmode onclick="selectType({{=it[i].id}}, this);">
+						{{=it[i].name}}
+					</li>
+					{{ } }}
+				</script>
+				<ul id="periodUl" class="filter-pera-list line-t">
+					<li onclick="selectPeriod(3, this);" class="mui-active">
+						三个月内
+					</li>
+					<li onclick="selectPeriod(4, this);">
+						半年内
+					</li>
+					<li onclick="selectPeriod(5, this);" >
+						一年内
+					</li>
+				</ul>
+			</div>
+			<div id="conditionDropDiv" onclick="showCondition();" class="mui-backdrop hide"></div>
+   		</div>
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/personalAchieve.js"></script>
+</html>

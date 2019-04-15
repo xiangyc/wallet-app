@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>奖励详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+    <style type="text/css">
+        html, body {background: #f1f3f8!important;}
+    </style>
+</head>
+<body>
+<!-- 自动分账个人 -->
+<script id="reward5-template" type="text/x-dot-template">
+<div class="mui-content">
+   <div class="commission-detail-box">
+        <h4><em>{{=global.formatNumber(it.brokerageMoney, 2)}}</em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+         <div class="commission-detail-li">
+             <span>自动分账</span><label>发放方式</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.rewardTypeName }}</span><label>类型</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=global.formatDate(it.createTime, 'yyyy-MM-dd hh:mm')}}</span><label>创建时间</label>
+        </div>
+         <div class="commission-detail-li hide">
+             <span>{{=it.orderNo }}</span><label>订单号</label>
+        </div>
+         <div class="commission-detail-li line-t">
+             <span>{{=global.formatNumber(it.incomeMoney, 2)}}</span><label>佣金业绩</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.recommendRate }}%</span><label>年化奖励</label>
+        </div>
+         <div class="commission-detail-li line-b">
+             <span>{{=it.brokerageRate }}%</span><label>分成比例</label>
+        </div>
+        <div class="commission-detail-li">
+            <span>{{=it.recommenderIdentity }}</span><label>身份</label>
+        </div>
+   </div>
+
+     <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <span>{{=it.investorHide }} {{=it.investorMobileHide }}</span><label>购金者</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.investmentProductName }}</span><label>产品</label>
+        </div>
+         <!-- <div class="commission-detail-li">
+             <span>{{=global.formatNumber(it.originalPrice, 2)}}</span><label>购金应付(元)</label>
+        </div> -->
+   </div>
+</div>
+</script>
+
+<!-- 自动分账机构邀请奖励 -->
+<script id="reward4-template" type="text/x-dot-template">
+<div class="mui-content">
+   <div class="commission-detail-box">
+        <h4><em>{{=global.formatNumber(it.brokerageMoney, 2)}}</em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <span>自动分账</span><label>发放方式</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.rewardTypeName }} </span><label>类型</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=global.formatDate(it.createTime, 'yyyy-MM-dd hh:mm')}}</span><label>创建时间</label>
+        </div>
+         <div class="commission-detail-li hide">
+             <span>{{=it.orderNo }}</span><label>订单号</label>
+        </div>
+         <div class="commission-detail-li line-t">
+             <span>{{=global.formatNumber(it.incomeMoney, 2)}}</span><label>佣金业绩</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.recommendRate }}%</span><label>年化奖励</label>
+        </div>
+         <div class="commission-detail-li line-b">
+             <span>{{=it.brokerageRate }}%</span><label>分成比例</label>
+        </div>
+   </div>
+
+     <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <span>{{=it.investorHide }} {{=it.investorMobileHide }}</span><label>购金者</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.investmentProductName }}</span><label>产品</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=global.formatNumber(it.originalPrice, 2)}}</span><label>购金应付(元)</label>
+        </div>
+       <div class="commission-detail-li">
+           <span class="wjg">{{=it.recommendOrgName }}</span><label>被推荐机构</label>
+        </div>
+   </div>
+</div>
+</script>
+
+<!-- 手动转账 -->
+<script id="reward3-template" type="text/x-dot-template">
+<div class="mui-content">
+   <div class="commission-detail-box">
+        <h4><em>{{=global.formatNumber(it.brokerageMoney, 2)}}</em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li hide">
+            <span>{{=it.hideMemberName }} {{=it.hideMemberMobile }}</span><label>收款账户</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>手动分账</span><label>发放方式</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=it.rewardTypeName }}</span><label>分账类型</label>
+        </div>
+         <div class="commission-detail-li">
+             <span>{{=global.formatDate(it.createTime, 'yyyy-MM-dd hh:mm')}}</span><label>创建时间</label>
+        </div>
+         <div class="commission-detail-li hide">
+             <span>{{=it.orderNo }}</span><label>订单号</label>
+        </div>
+        <div class="commission-detail-li hide">
+             <span>{{=it.note }}</span><label>备注</label>
+        </div>
+        <div class="commission-detail-li">
+            <span>{{=it.recommenderIdentity }}</span><label>身份</label>
+        </div>
+        <div class="commission-detail-li">
+            <span class="wjg">
+            {{if(it.orgName){}}
+            	{{=it.orgName }}
+            {{ }else{ }}
+            	无
+            {{ } }}
+            </span><label>所在机构</label>
+        </div>
+   </div>
+</div>
+</script>
+
+<div id="reward-content"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/nrewardDetails.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提现记录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+<div class="with-detail-list">
+    <script id="withdrawList-template" type="text/x-dot-template">
+        {{ for(var i=0; i< it.length; i++) { }}
+            <dl>
+                <dt onclick="detail({{=it[i].id}})">
+                    <span><i>{{=global.formatCurrency(it[i].withdrawAmount)}}</i>元</span>
+                    {{ if(it[i].status > 1 ){ }}
+                    <em>{{=it[i].statusValue}}</em>
+                    {{ }else{ }}
+                    <em class="checking">{{=it[i].statusValue}}</em>
+                    {{ } }}
+                </dt>
+                <dd>
+                    <span>申请日期：<i>{{=global.formatDate(it[i].applyTime, 'yyyy-MM-dd hh:mm:ss') }}</i></span>
+                </dd>
+            </dl>           
+        {{ } }}
+    </script>
+
+    <div id="withdrawList-content"></div>
+
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+    
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/withdrawList.js"></script>
+</html>

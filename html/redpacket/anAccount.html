@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>安心金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+</head>
+<body>
+
+<div class="mui-content">
+    <div class="real-price pr-d-t">
+        <div class="pr-rate">
+            <span class="real-price-t"><em id="periodGoldAmount">0.000</em></span>
+            <span class="real-price-b">安心金(克)</span>
+        </div>
+
+        <div class="pr-c-points mui-mt10 mui-clearfix">
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="totalPeriodMoney">0.00</span>
+                <span class="title-b">待收购金款(元)</span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="collectIncome">0.00</span>
+                <span class="title-b">待收赠金(元)</span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="waitWithDrawPeriod">0.000</span>
+                <span class="title-b">待提金克重(克)</span>
+            </div>
+
+            <div class="pr-points-li mui-col-sm-6 border-right-none">
+                <span class="title-t" id="periodTotalIncome">0.00</span>
+                <span class="title-b">累计赠金(元)</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <div class="account-bt bt-btn-fixed hide" id="anHide">
+        <div tapmode onclick="openSubWin(2);" class="btn3 btn100 btn-buy"><i class="buy-icon"></i>买金</div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/anAccount.js"></script>
+</html>

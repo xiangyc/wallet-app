@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>已获奖励</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+
+<div class="rec-list-box">
+
+    <ul class="rec-list-top">
+        <li class="col_1">用户名</li>
+        <li class="col_2">已发放奖励</li>
+        <li class="col_3">待发放奖励</li>
+    </ul>
+
+    <div class="rec-list-li">
+        <script id="inviteReward-template" type="text/x-dot-template">
+            {{ for(var i=0; i< it.length; i++) { }}
+            <ul class="rec-list-ul">
+                <li class="col_1">{{=it[i].name}}({{=it[i].mobile}})</li>
+                <li class="col_2">{{=global.formatNumber(it[i].receivedIncome)}}元</li>
+                <li class="col_3">{{=global.formatNumber(it[i].unReceivedIncome)}}元</li>
+            </ul>
+            {{ } }}
+        </script>
+        <div id="inviteReward-content"></div>
+    </div>
+
+	<div id="no-records" class="no-address hide">
+		<i></i>
+		暂无记录
+	</div>
+
+</div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/portal/inviteReward.js"></script>
+</html>

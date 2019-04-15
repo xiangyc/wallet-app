@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+        <style type="text/css">
+           html,body { background-color: transparent !important; }
+        </style>
+    </head>
+    <body>
+       
+    <!--日日生金账户价值-->
+    <div id='totalGoldMoneyDiv' class="bomb-box">
+        <h4>价值</h4>
+        <div class="bomb-c">
+            <p class="mui-text-center">当前持有订单购买款总和。</p>
+        </div>
+    </div>
+
+    <div id="backdropId" class="mui-backdrop" tapmode onclick="closeMessage();"></div>
+    </body>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/core/global.js"></script>
+
+     <script type="text/javascript" >
+        function closeMessage(){
+           api.closeFrame();
+        }
+
+     </script>
+   
+
+</html>

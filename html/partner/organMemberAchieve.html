@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>机构业绩(机构成员)</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body>
+<div class="mui-content mb15">
+    <ul class="part-tab">
+        <li id="active0" tapmode class="current" onclick="queryPartAchieve(0);">邀请</li>
+        <li id="active1"  tapmode onclick="queryPartAchieve(1);">奖励</li>
+    </ul>
+    <div class="part-box">
+        <div id="part-invitation">
+        </div>
+        <div id="part-reward">
+     
+         <script id="organMemberAchieve0-template" type="text/x-dot-template">
+            {{ for(var i=0; i< it.length; i++) { }}
+                <div class="part-con">
+                    <p><span class="part-grey">{{=global.formatDate(it[i].incomeTime, 'yyyy-MM-dd')}}</span>{{=it[i].recommendedName}}</p>
+                    <p><span class="part-orange">+{{=global.formatNumber(it[i].incomeMoney, 2)}}元</span><i class="part-grey">{{=it[i].mobile}}</i></p>
+
+                    {{if(it[i].recommendOrgName){ }} 
+                        <p class="part-blue">{{=it[i].recommendOrgName}}<em>机构</em></p>  
+                    {{ } else { }}   
+                        <p class="part-grey">个人</p>
+
+                    {{ } }}    
+                </div>
+
+            {{ } }}
+        </script>
+
+        <div id="organMemberAchieve0-content"></div> 
+
+        <script id="organMemberAchieve1-template" type="text/x-dot-template">
+            {{ for(var i=0; i< it.length; i++) { }}
+                <div class="part-con">
+                    <p><span class="part-grey">{{=global.formatDate(it[i].incomeTime, 'yyyy-MM-dd')}}</span>{{=it[i].recommendedName}}</p>
+                    <p><span class="part-orange">+{{=global.formatNumber(it[i].incomeMoney, 2)}}元</span><i class="part-grey">{{=it[i].mobile}}</i></p>
+
+                    {{if(it[i].recommendOrgName){ }} 
+                        <p class="part-blue">{{=it[i].recommendOrgName}}<em>机构</em></p>  
+                    {{ } else { }}   
+                        <p class="part-grey">个人</p>
+
+                    {{ } }}    
+                </div>
+
+            {{ } }}
+        </script>
+
+        <div id="organMemberAchieve1-content" class="hide"></div>
+
+        </div>
+    </div>
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/organMemberAchieve.js"></script>
+</html>

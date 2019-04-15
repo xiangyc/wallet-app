@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html class="mui-bg-white">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>红包主题</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/swipe4.css" />
+    <style>
+            .swiper-container2 {
+		      height: 400px;
+		      overflow: hidden;
+		    }
+
+        #slide{ height: auto; }
+        .swipe-wrap > div{ height: auto; }
+        .swiper-container2 img{ height: 412px; width:100%; }
+        .swipe .swipe-wrap div p{ font-size: 18px;  color: #333;  text-align: center; padding-top: 4px;  }
+        .swiper-pagination-bullet {
+        font-size: 10px; 
+	    width: 8px;
+	    height: 8px;
+	    margin: 7px 5px;
+	    background-color: #ccc;
+	    opacity: 1;	   
+        }
+       .swiper-pagination-bullet-active{ background-color: #fd432f;}
+       .swiper-pagination{ top: 400px;}
+   
+        @media (max-width:768px) {
+            .red-theme{ padding: 28px 2.8%; }
+            .swiper-container2 img{ height: 740px; }
+            .swiper-pagination{ top: 715px;}
+        }
+        @media (max-width:525px) {
+            .red-theme{ padding: 28px 2.8%; }
+            .swiper-container2 img{ height: 487px; }
+            .swiper-pagination{ top: 482px;}
+        }
+        @media (max-width:425px) {
+            .red-theme{ padding: 28px 2.8%; }
+            .swiper-container2 img{ height: 487px; }
+            .swiper-pagination{ top: 482px;}
+        }
+        @media (max-width:414px) {
+            .red-theme{ padding: 32px 2.8%; }
+            .swiper-container2 img{ height: 474px; }
+            .swiper-pagination{ top: 469px;}
+        }
+        @media (max-width:412px) {
+            .red-theme{ padding: 26px 2.8%; }
+            .swiper-container2 img{ height: 471px; }
+            .swiper-pagination{ top: 466px;}
+           .redtheme-preview-box .redtheme-use-btn{ bottom:15px;}    
+        }
+        @media (max-width:375px) {
+            .red-theme{ padding: 12px 2.8%; }
+            .swiper-container2 img{ height: 429px; }
+            .swiper-pagination{ top: 420px;}
+            .redtheme-preview-box .redtheme-use-btn{ bottom:15px;}    
+        }
+        @media (max-width:360px) {
+            .red-theme{ padding: 12px 2.8%; }
+            .swiper-container2 img{ height: 411px; }
+            .swiper-pagination{ top: 410px;}
+            .redtheme-preview-box .redtheme-use-btn{ bottom:15px;}    
+        }
+        @media (max-width:320px) {
+            .red-theme{ padding: 8px 2.8%; }
+            .swiper-container2x img{ height: 365px; }
+            .swiper-pagination{ top: 365px;}   
+            .redtheme-preview-box .redtheme-use-btn{ bottom:20px;}    
+        }
+    </style>
+</head>
+<body class="mui-bg-white">
+<div class="red-theme">
+
+     <script id="redTheme-template" type="text/x-dot-template">
+        {{ for(var i=0; i< it.length; i++) { }}
+           <div class="red-theme-list">
+
+                {{if(it[i].isDefault === 1){}}
+                   <i class="theme-default-icon show"></i>
+                {{ }else{ }}
+                   <i class="theme-default-icon"></i>
+                {{ } }}
+
+                <h4>{{=it[i].name}}</h4>
+                <div tapmode onclick='selectTheme("{{=it[i].code}}",&apos;{{=it[i].config}}&apos;,{{=it[i].endTime}})'; class="red-theme-img">
+                {{if(it[i].code =='newyear'){}}
+                    <img src="../../image/redpacket/them_newyear/theme-list-img01.jpg"/>
+                {{ }else if(it[i].code =='wedding'){ }}
+                   <img src="../../image/redpacket/them_wedding/theme-list-img02.jpg"/>
+                {{ }else{ }}
+                    <img src="../../image/redpacket/them_default/theme-list-img03.jpg"/>
+                {{ } }}
+
+                </div>
+                <div class="red-theme-preview-btn" onclick='browse({{=it[i].id }}, "{{=it[i].code }}", &apos;{{=it[i].config}}&apos;,{{=it[i].endTime}});'>预览</div>
+            </div>
+        {{ } }}
+    </script>
+            
+    <div id="redTheme-content"></div>
+
+</div>
+
+<div id="detailId" class="redtheme-preview-box hide">
+    <div id='slide' class='swiper-container2'>
+        <div id="contentDiv" class='swiper-wrapper'>
+          <div class="swiper-slide"><img id="subDetailId1" src="../../image/redpacket/them_newyear/preview-img11.jpg"></div>
+        </div>
+     	<div class="swiper-pagination"></div>
+   </div>
+   <div class="redtheme-use-btn" tapmode onclick="use();">使用按钮</div>
+</div>
+
+<div id="backDropId" class="mui-backdrop hide" onclick="redthemeClose();"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/library/swipe4.js"></script>
+<script type="text/javascript" src="../../script/redpacket/redTheme.js"></script>
+</html>

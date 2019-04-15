@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>邀请有礼</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" href="../../css/mui.css" />
+		<style>
+		.share-wm-box{ position: fixed; bottom:0; background-color: #efefef; padding-top: 15px; width: 100%; text-align: center; font-size:12px; color: #666; z-index: 999; }	
+		.share-wm-box h6{ text-align: center; font-size:16px; color: #666; padding-bottom: 10px; padding-top: 0;   }
+		.share-wm-box p{ text-align: center; font-size:12px; color: #999; padding-bottom: 6px; padding-top: 0;  }
+		</style>
+	</head>
+	
+	<body class="activity-invite-bg">
+		<div class="mui-content">
+			<div class="activity-invite">
+				<div class="activity-invite-banner">
+					<img src="../../image/activity/activity-banner01.jpg" width="50%" >
+				</div>
+				<div id="totalDiv" class="activity-invite-number">
+					<div class="invite-number invite-number-people" tapmode onclick="inviteFriends()">
+						<i></i>
+						<span class="number"> <em id="inviteNum">0</em>人</span>
+						<span>成功邀请</span>
+					</div>
+					<div class="invite-number invite-number-money" tapmode onclick="inviteReward()">
+						<i></i>
+						<span class="number"> <em id='inviteMoney'>0</em>元</span>
+						<span>已获奖励</span>
+					</div>
+				</div>
+				<div class="activity-invite-count">
+					<h4>奖励计算</h4>
+					<div class="activity-invite-title">
+						邀请奖励：购金款×1%÷365天×购金天数
+					</div>
+					<div class="invite-example">
+						<p>
+							例如：好友于活动期间内购买100万元90天安心金，您的邀请奖励如下：
+						</p>
+						<span>100万×1%÷365×90=2465元</span>
+						<p>好友继续复投，并持续投资一年，您一年的邀请奖励如下：</p>
+						<span>100万×1%=1万</span>
+
+					</div>
+					<div>
+					<button id="immediateInvite" tapmode onclick="share();" class="mui-btn-block mui-btn-warning btn-go-invite">
+						分享邀请
+					</button>
+					<button id="codeInvite" tapmode onclick="codeShare();" class="mui-btn-block mui-btn-warning btn-go-invite">
+						二维码邀请
+					</button>
+					</div>
+				</div>
+				<div class="activity-invite-count activity-invite-rule">
+					<h4>活动规则</h4>
+					<div class="activity-invite-rule-titler">
+						<p>1、邀请奖励仅限安心金产品；</p>
+						<p>2、活动期间，用户邀请好友注册金算子账户，被邀请人发生的每次购金行为，邀请人均可获得被邀请人购金款的年化1%邀请奖励；</p>
+						<p>3、本活动的邀请奖励将以现金的形式即时结算至用户资金账户；</p>
+						<p>4、在法律规定范围内，本次活动最终解释权归金算子平台所有；</p>
+						<p>5、金算子平台客服热线：4006-832-999</p>
+					</div>
+				</div>
+				<div class="activity-invite-count activity-invite-rule">
+					<h4>邀请达人榜</h4>
+					<div class="activity-ranking-title">
+						<div class="ranking-top">
+							<em>排名</em>
+							<span>邀请达人</span>
+							<span class="mui-text-right">邀请奖励</span>
+						</div>
+						<ul>
+							<script id="invites-template" type="text/x-dot-template">
+								{{ for(var i=0; i< it.length; i++) { }}
+								<li><em>{{=i+1}}</em><span>{{=it[i].mobile}}</span><span class="mui-text-right">{{=global.formatCurrency(it[i].totalRecommendIncome)}}</span></li>
+								{{ } }}
+							</script>
+							<div id="invites-content"></div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="shareDiv" class="share-box hide">
+			<ul class="share-box-ul mui-clearfix">
+				<li onclick="shareWx('session');" class="wechat-icon">
+                    <i></i>微信好友
+                </li>
+                <li onclick="shareQzone('qfriend');"  class="qq-icon">
+                    <i></i>QQ好友
+                </li>
+                <li onclick="shareWx('timeline');"  class="friend-icon">
+                    <i></i>朋友圈
+                </li>
+                 <li onclick="shareQzone('qzone');"  class="qzone-icon">
+					<i></i>QQ空间
+				</li>
+			</ul>
+			<div class="mui-popup-buttons">
+				<span onclick="closeShare();" class="mui-popup-button">取消</span>
+			</div>
+		</div>
+		<div id="buybackdrop" class="mui-backdrop hide"></div>
+
+		<div id="codeDiv" class="share-wm-box hide">
+            <h6>分享好友邀请注册</h6>
+            <div id="qrcodeDiv" style="margin:0 auto;"></div>
+            <p>扫码注册金算子账号</p>
+			<div class="mui-popup-buttons">
+				<span onclick="closeCodeShare();" class="mui-popup-button">取消</span>
+			</div>
+		</div>
+		<div id="codebackdrop" class="mui-backdrop hide"></div>
+		
+		<div id="declare" class="invite-example hide">
+          <p>活动声明：</p>
+          <p>该活动与苹果公司(https://www.apple.com)无关</p>
+          <p>活动最终解释权归属深圳市财易通智金互联网股份有限公司所有</p>
+    	</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/doT.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/library/jquery.js"></script>
+	<script type="text/javascript" src="../../script/library/jqueryQrcode.js"></script>
+	<script type="text/javascript" src="../../script/library/qrcode.js"></script>
+	<script type="text/javascript" src="../../script/portal/activityInvite.js"></script>
+</html>

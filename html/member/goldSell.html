@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>卖出黄金</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+
+			<div class="real-price prA-t-new">
+				<span class="real-price-b">实时金价(元/克)</span>
+				<span class="real-price-t"><em id="lastPrice">0.00</em></span>
+				<span class="real-price-locking mui-pb0 hide">锁定金价<em id="intervalEm">300</em>秒</span>
+			</div>
+
+			<div class="prA-list-recharge">可卖<em id="redOrSui">随心金</em>:<span><em id="totalGoldAmount">0.00</em>克</span>
+				<div tapmode onclick="allRedSell()" class="recharge-button">全部卖出</div>
+			</div>
+
+			<div class="mui-input-group mui-input-tb prAbuy-list-li thirdlogin">
+
+				<div class="mui-input-row input-row-f input-row-switch">
+					<input id="amount" onkeyup="computeFee();" placeholder="请输入卖出克重" type="number" oninput="if(value.length>9)value=value.slice(0,9);" maxlength="9">
+					<div class="switch-btn unit-btn">克</div>
+				</div>
+
+				<div class="mui-input-row input-row-f">
+					<label>预计收入</label>
+					<span><em id="totalMoney" class="yellow">0.00</em>元</span>
+					<div id="messageEm" class="number-prompt hide"></div>
+				</div>
+
+			</div>
+
+			<div tapmode onclick="showMessage();" class="main-bomb-prompt">
+				卖金提示
+			</div>
+
+			<button id="submitBtn" tapmode onclick="submitOrder();" class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb">
+				确认卖金
+			</button>
+				
+		</div>
+		<!--输入交易密码-->
+		<div id="submitDiv" class="bomb-box hide">
+			<h4>请输入交易密码</h4>
+			<div class="bomb-c">
+				<div class="prompt-title">
+					预计收入(元)：<em id="payAmount"></em>
+				</div>
+				<div class="mui-input-row input-row-f bomb-input-row">
+					<input id="password" maxlength="20" placeholder="请输入交易密码" type="password">
+				</div>
+				<div class="link-forget">
+					
+					<a id="carryonDiv" class="fpwdts">请在<span id="intervalSpan">30</span>秒内完成支付</a>
+					<a id="overtimedDiv" class="fpwdts hide">订单<span>超时</span>，请重新购买</a>
+
+					<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+				</div>
+				<button id="confirmBtn" tapmode onclick="sell();" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">
+					确认
+				</button>
+			</div>
+		</div>
+		<div id="submitDropDiv" tapmode onclick="showSubmit();" class="mui-backdrop hide"></div>
+		<!--卖金提示-->
+		<div id="messageDiv" class="bomb-box hide">
+			<h4>买金提示<i tapmode onclick="showMessage();"><img src="../../image/icon-close.png"></i></h4>
+			<div id="activeTipDiv" class="bomb-c hide">
+				<p>
+					1.每位用户每日累计可买入1000克，卖出500克；
+				</p>
+				<p>
+					2.卖金手续费：0.7元/克；
+				</p>
+				<p>
+					3.手续费不足0.01元，按0.01元收取。
+				</p>
+			</div>
+			<div id="goldTipDiv" class="bomb-c hide">
+				<p>
+					1.每位用户每日卖出的红包金无克重限制；
+				</p>
+				<p>
+					2.卖金手续费：0.7元/克；
+				</p>
+				<p>
+					3.手续费不足0.01元，按0.01元收取。
+				</p>
+			</div>
+		</div>
+		<div id="messageDropDiv" tapmode onclick="showMessage();" class="mui-backdrop hide"></div>
+	</body>
+	
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/common/countdown.js"></script>
+	<script type="text/javascript" src="../../script/common/calculate.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/member/goldSell.js"></script>
+</html>

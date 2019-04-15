@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>订单详情</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a class="back-icon" tapmode onclick="api.closeWin()"></a>
+				<h1>买金订单详情</h1>
+				<a id="endA" class="header-more-icon hide" tapmode onclick="showCondition();"></a>
+			</div>
+		</div>
+	</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script>
+	var statusValue;
+	var productCategory;
+	var isWithdraw;
+	apiready = function(){
+	    var header = $api.byId('header');
+	    if(header){
+	        $api.fixIos7Bar(header);
+	    }
+	    var pos = $api.offset(header);
+	    var $body = $api.dom('body');
+	    //var body_h = api.winHeight;
+	    var body_h = $api.offset($body).h;
+	    var rect_h = body_h - pos.h;
+		
+		$api.html($api.byId('title'), api.pageParam.title);
+		statusValue = api.pageParam.statusValue;
+		productCategory = api.pageParam.productCategory;
+		isWithdraw = api.pageParam.isWithdraw;
+		initEvent();
+		
+	    api.openFrame({
+	        name: 'goldBuyDetailFrame',
+	        url: './goldBuyDetail.html',
+	        rect:{
+	            x: 0,
+	            y: pos.h,
+	            w: 'auto',
+	            h: 'auto'
+	        },
+	        pageParam : api.pageParam,
+	        bounces: false,
+	        vScrollBarEnabled: false
+	    });
+	}
+	
+	function showCondition(){
+		api.execScript({
+			frameName: 'goldBuyDetailFrame',
+		    script: 'showCondition();'
+	    });
+	}
+	
+	function initEvent(){ 
+	    api.addEventListener({
+	        name:'goldComeTypeEvent'
+        },function(ret,err){
+        // 	if(ret && ret.value){
+        // 		//监听h5事件
+        // 	  if(ret.value.statusValue === 1 && ((ret.value.productCategory === 2 && ret.value.isWithdraw === 1) || ret.value.productCategory === 2)  && ret.value.resultType){
+		   		 //  $api.removeCls($api.byId('endA'), 'hide');
+		   	  // }
+        // 	}
+
+        	//$api.removeCls($api.byId('endA'), 'hide');
+		   	if((statusValue === 1 && productCategory === 2 && isWithdraw === 1 && ret.value.resultType && ret.value.resultType ===1) || (productCategory === 3 && statusValue === 0 && ret.value.resultType && ret.value.resultType ===1)){
+		   	 	$api.removeCls($api.byId('endA'), 'hide');
+		   	 }
+        });
+
+        api.addEventListener({
+		    name : 'goldDetailRefreshEvent'
+		}, function(ret) {
+		    if (ret) {
+		        $api.addCls($api.byId('endA'), 'hide');
+		    }
+		});
+
+	}
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>活动详情</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" href="../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<img id="imgUrl" src="" class="pr-det-table">
+			<div class="activity-text">
+				<h4><span></span>活动主题</h4>
+				<P id="title"></P>
+			</div>
+			<div class="activity-text">
+				<h4><span></span>活动时间</h4>
+				<P id="activityTime"></P>
+			</div>
+			<div class="activity-text" id="content"></div>
+			<button tabmode id="submitBtn" onclick="buyGold();" class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb hide">
+				立即购买
+			</button>
+		</div>
+		<div id="declare" class="activity-text hide">
+			<p>
+				活动声明：
+			</p>
+			<p>
+				该活动与苹果公司(https://www.apple.com)无关
+			</p>
+			<p>
+				活动最终解释权归属深圳市财易通智金互联网股份有限公司所有
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/common/cache.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/portal/activityDetail.js"></script>
+</html>

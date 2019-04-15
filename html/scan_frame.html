@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>扫一扫</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/mui.css" />
+    <style>
+        html,body {
+            /*background-color: transparent !important;*/
+            border-color: #36445d;
+            background:url("../../image/scan.png") no-repeat center 130px;
+            background-size:210px 200px;
+        }
+        .scan-explain{ font-size: 13px; color:#95938e; text-align: center; position: absolute; top: 374px; width: 100%; }
+    </style>
+</head>
+<body>
+    <article class="zzsc-container">
+        <div style="user-select: none; overflow: hidden; position: relative; height: 460px;">
+            <div class="photo-clip-mask" style="position: absolute;left: 0px;top: 0px;width: 100%;height: 100%;pointer-events: none;">
+                <div class="photo-clip-mask-left" style="position: absolute; left: 0px; right: 50%; top: 50%; bottom: 50%; width: auto; height: 200px; margin-right: 105px; margin-top: -100px; margin-bottom: -100px; background-color: rgba(0, 0, 0, 0.2);">                
+                </div>
+                <div class="photo-clip-mask-right" style="position: absolute; left: 50%; right: 0px; top: 50%; bottom: 50%; margin-left: 105px; margin-top: -100px; margin-bottom: -100px; background-color: rgba(0, 0, 0, 0.2);"></div>
+                <div class="photo-clip-mask-top" style="position: absolute;left: 0px;right: 0px;top: 0px;bottom: 50%;margin-bottom: 100px;background-color: rgba(0, 0, 0, 0.2);"></div>
+                <div class="photo-clip-mask-bottom" style="position: absolute; left: 0px; right: 0px; top: 50%; bottom: 0px; margin-top: 100px; background-color: rgba(0, 0, 0, 0.2);"></div>
+            </div>
+             <div class="scan-explain">将二维码放入取景框中即可自动扫码</div>
+        </div>
+    </article>
+    <div style="width:100%; background-color: rgba(0, 0, 0, 0.2); height: 400px;"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <script>
+        var addStyleLink = function(href){
+            var head = document.getElementsByTagName('head')[0];
+            var styleLink = document.createElement('link');
+            styleLink.setAttribute('rel','stylesheet');
+            styleLink.setAttribute('href',href);
+            head.appendChild(styleLink);
+        }
+        // 苹果手机采用CSS1
+        if(/iphone/i.test(navigator.userAgent))
+            addStyleLink('../../css/miniphone.css');
+        // 安卓手机采用CSS2
+        if(/android/i.test(navigator.userAgent))
+            addStyleLink('../../css/minandroid.css');
+
+    </script>
+
+</head>
+<body>
+
+<div class="mui-content" style="margin-bottom: 65px;">
+			
+   <div class="goldway-t mui-bg-white">
+        <div tapmode onclick="selectExpressType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>提金方式</label>
+            <span id="expressTypeSpan">请选择提金方式</span>
+        </div>
+
+       <div id="selectAddressDiv" tapmode onclick="selectAddress();" class="mui-input-row input-row-f hide">
+           <div class="mui-input-row input-row-f mui-navigate-right mui-border-no">
+               <label>收货地址</label>
+               <!-- <span class="input-span-sm" id="deliveryAddress" style="float: left;">请选择收货地址 -->
+               <span class="" id="deliveryAddress">请选择收货地址
+               </span>
+
+           </div>
+       </div>
+
+       <div id="addressDiv" class="mui-input-row input-row-f mui-mt10 mui-pb5 mui-border-no hide">
+           <label>提货地址</label>
+            <span class="input-span-sm">深圳市罗湖区彭年广场写字楼38楼
+                 <em>客服电话：4006-832-999</em>
+            </span>
+       </div>
+
+   </div>
+
+    <div class="title input-gold-title">可提黄金:<em id="activeBalance">0.00</em>克</div>
+
+    <div class="goldway-t mui-bg-white">
+        <div onclick="selectGoldType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>金条规格</label>
+            <span id="goldType">请选择金条规格</span>
+        </div>
+
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>数量</label>
+            <div class="mui-numbox mui-numbox-g" data-numbox-step="10" data-numbox-min="1" data-numbox-max="90">
+                <button tapmode onclick="computCount(-1);" class="mui-btn mui-btn-g mui-btn-numbox-minus" type="button">-</button>
+                <input tapmode onkeyup="keyup();" class="mui-input-numbox" maxlength="4" id="applyCount" value="1">
+                <button tapmode onclick="computCount(1);" class="mui-btn mui-btn-g  mui-btn-numbox-plus" type="button">+</button>
+            </div>
+
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+			<label>提金克重</label>
+			<span><em id="amount" class="yellow">0.00</em>克</span>
+		</div>
+  
+    </div>
+
+
+    <div class="mui-content-padded">
+        <button class="mui-btn mui-btn-block mui-btn-warning" tapmode onclick="">下一步</button>
+    </div>
+
+</div>
+
+
+<!-- 不可提金 -->
+<div class="bomb-box hide">
+    <h4>提示</h4>
+    <div class="bomb-c">
+        <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!--黄金实物图-->
+<div id="kindType" class="bomb-box bomb-box-spec hide">
+    <h4>金条规格</h4>
+    <div class="bomb-c mui-clearfix">
+        <div id="ghj" tabmode onclick="confirm(5);" class="inkind-img"><img src="../../image/member/ghj.jpg">工行金5克/条</div>
+        <div id="paj" tabmode onclick="confirm(10);" class="inkind-img"><img src="../../image/member/inkind-img03.jpg">平安金10克/条</div>
+       <!-- <div id="jhj" tabmode onclick="confirm(50);" class="inkind-img"><img src="../../image/member/inkind-img04.jpg">建行金50克/条</div>-->
+
+    </div>
+</div>
+<div id="kindTypeDiv" tapmode onclick="showGoldType();" class="mui-backdrop mui-active hide"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/common/countdown.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/member/goldExtraction.js"></script>
+</html>

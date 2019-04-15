@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>奖励明细</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a tapmode onclick="api.closeWin()" class="back-icon"></a>
+				<h1>奖励明细</h1>
+				<a tapmode onclick="showCondition()" class="option-icon"></a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript">
+		apiready = function(){
+		    var header = $api.byId('header');
+		    if(header){
+		        $api.fixIos7Bar(header);
+		    }
+		    var pos = $api.offset(header);
+		    var $body = $api.dom('body');
+		    var body_h = $api.offset($body).h;
+		    var rect_h = body_h - pos.h;
+		    
+		    api.openFrame({
+		        name: 'personalAchieveFrame',
+		      	url: './personalAchieve.html',
+		        rect:{
+		            x: 0,
+		            y: pos.h,
+		            w: 'auto',
+		            h: rect_h
+		        },
+		        pageParam : api.pageParam,
+		        bounces: false,
+		        vScrollBarEnabled: false
+		    });
+		}
+
+		function showCondition(){
+			api.execScript({
+				frameName: 'personalAchieveFrame',
+			    script: 'showCondition();'
+		    });
+		}
+	</script>
+</html>

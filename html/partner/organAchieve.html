@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>机构成员业绩</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body class="bodybg">
+<div class="mui-content mb15 mui-navigate-right-box">
+    <div class="part-box">
+        <div>
+            <h1 id="timeId" class="part-title" ><span id="allTimeId" style="float: left;">全部时间段</span><span tapmode onclick="choice();"><i class="part-icon part-icon-screen" ></i>筛选</span></h1>
+            <div class="part-list part-list-jgyj">
+                <ul>
+                    <li class="first-child">
+                        <span>成员</span>
+                        <i>邀请人数</i>
+                        <i>佣金(元)</i>
+                    </li>   
+                    <script id="organ-Achieve-template" type="text/x-dot-template">
+                        {{ for(var i=0; i< it.length; i++) { }}
+                             <li tapmode onclick="openPersonalAchieve({{=it[i].memberId}});">
+
+                                <span>{{=it[i].memberName}}
+                                <p>{{=it[i].memberMobile}}</p></span>
+
+                                {{ if(type ==1 || type ==2) {}} 
+                                        <i>{{=it[i].customer}}</i>
+                                {{ }else if(type ==3){ }}
+
+                                        <i>-</i>
+                                 {{ } }}
+
+                                <i>{{=global.formatNumber(it[i].totalBrokerage, 2)}}</i>
+                            </li> 
+
+                        {{ } }}
+                    </script>
+
+                    <div id="organ-Achieve-content"></div>
+
+                </ul>
+            </div>
+            <div class="change-inviter-prompt part-grey">机构成员退出机构后，该成员在机构期间邀请的好友继续购金带来的邀请奖励，仍然归属机构。</div>
+        </div>
+
+
+    </div>
+
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/organAchieve.js"></script>
+</html>

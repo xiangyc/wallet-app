@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>机构成员列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body>
+    <div class="organ-manage-list mui-mt05">
+        <div class="part-list02">
+            <script id="member-template" type="text/x-dot-template">
+		        {{ for(var i=0; i< it.length; i++) { }}
+ 					<li tapmode onclick="openMemberDetail({{=it[i].memberId }})"><span>{{=it[i].memberMobile }}</span>
+ 					<i>{{=it[i].memberName }}</i>
+ 					<i>{{ if(it[i].brokerageRate && it[i].brokerageRate != 'null'){}} 
+ 							{{=it[i].brokerageRate }}% 
+ 						{{ }else{ }}
+ 						未设置
+ 						{{ } }}</i>
+ 					<i>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd') }}</i></li>
+		        {{ } }}
+		    </script>
+		    <ul>
+                <li class="part-orange"><span>成员</span><i>姓名</i><i>分成比例</i><i>加入日期</i></li>
+            </ul>
+		    <ul id="member-content"></ul>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/common/h5url.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/organMemberList.js"></script>
+</html>

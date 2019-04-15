@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+		<style>
+			#header .price_number{ padding-right: 15px; }
+			#header .red-skin-icon{
+				 background: url(../../image/redpacket/icon_skin.png) center 11px no-repeat;
+				 background-size:22px 22px;
+				 bottom: 0;
+				 display: block;
+				 width: 30px;
+				 height: 44px;
+				 line-height: 44px;
+				 right: 10px;
+				 position: absolute;
+			 }
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<a tapmode onclick="api.closeWin()" class="back-icon"></a>
+				<h1>黄金红包</h1>
+				<a class="red-skin-icon" tapmode onclick="showWallet();"></a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/redpacket/prepareHeader.js"></script>
+</html>

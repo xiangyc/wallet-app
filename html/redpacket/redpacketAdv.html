@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>营销红包</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body class="background-f8">
+
+<div class="red-box red-default">
+    <div class="red-html red-ready">
+        <div class="red-body-bg">
+            <div class="red-href">该红包将于<span id="endTime">2018-01-31 12:30</span>到期，到期无人领取将返还，同时平台补助将发放到您资金账户</div>
+        </div>
+        <div class="red-bg">
+            <div class="red-btn">
+                <img src="../../image/redpacket/them_default/packet-layout-btn.png" onclick="codeshare();" id="codesharebt"/>
+            </div>
+            <div class="red-href"><a id="redPacketBtn" tapmode onclick="share();" type="button">文字链接分享</a></div>
+            <p class="red-adv-text">新增注册用户平台补助<em id="subsidy">0</em>元/人</p>
+        </div>
+        <div class="red-con">
+            <div class="red-amout"><span id="totalAmount">0</span> 毫克</div>
+            <div class="red-price">价值 <span id="totalMoney">0.00</span> 元</div>
+            <div class="red-wishes" id="remark">财源滚滚， 日进斗金</div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="shareDiv" class="share-box hide">
+    <ul class="share-box-ul share-box-ul-50 mui-clearfix">
+        <li onclick="shareWx('session');" class="wechat-icon">
+            <i></i>微信好友
+        </li>
+        <li onclick="shareWx('timeline');"  class="friend-icon">
+            <i></i>朋友圈
+        </li>
+    </ul>
+    <div class="mui-popup-buttons">
+        <span onclick="closeShare();" class="mui-popup-button">取消</span>
+    </div>
+</div>
+<div id="backdrop"  class="mui-backdrop hide"></div>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/shareImage.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/library/qrcode.js"></script>
+<script type="text/javascript" src="../../script/library/jqueryQrcode.js"></script>
+<script type="text/javascript" src="../../script/redpacket/redpacketAdv.js"></script>
+</body>
+</html>

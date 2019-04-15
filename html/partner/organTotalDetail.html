@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>机构成员业绩邀请及奖励</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body class="bodybg">
+<div class="mui-content mui-navigate-right-box">
+    <ul class="part-tab">
+        <li id="active1" class="current" tapmode onclick="queryPartAchieve(1);">邀请</li>
+        <li id="active2" tapmode onclick="queryPartAchieve(2);">佣金</li>
+    </ul>
+    <div class="part-box">
+        <div id="part-invitation">
+            <script id="invitation-template" type="text/x-dot-template">
+				<ul class="mui-table-view help-list-box mui-m0">
+					{{ for(var i=0; i< it.length; i++) { }}
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right-none">
+							<div class="part-con">
+								<p><span class="part-grey">{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm') }}</span>
+								  {{if(it[i].hideName && it[i].hideName!='null'){ }}
+										{{=it[i].hideName }}
+										<i class="part-grey pdx10">{{=it[i].hideMobile }}</i></p>
+								  {{ }else{ }}
+									<i class="part-grey">{{=it[i].hideMobile }}</i></p>
+								  {{ } }}
+
+								<p>邀请人：
+									{{=it[i].recommendName }}
+
+									<span class="part-grey">
+									{{ if(it[i].bindCard){ }}
+										已实名绑卡
+									{{ }else{ }}
+										未实名绑卡
+									{{ } }}</span>
+								</p>
+							</div>
+						</a>
+					</li>
+					{{ } }}
+				</ul>
+		    </script>
+
+		    <div id="invitation-content"></div>
+        </div>
+        <div id="part-reward" class="hide">
+        		<script id="reward-template" type="text/x-dot-template">
+					<ul>
+						{{ for(var i=0; i< it.length; i++) { }}
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">
+									<div class="part-con" onclick="detail({{=it[i].id }});">
+										<p><span class="part-orange">{{=global.formatNumber(it[i].incomeMoney, 2) }}</span><i class="part-grey"> {{=global.formatDate(it[i].incomeTime, 'yyyy-MM-dd hh:mm') }}</i></p>
+										<p><span class="part-grey">{{=it[i].mobile }}</span>邀请人：
+										{{ if(it[i].recommendOrgName && it[i].recommendOrgName != 'null'){ }}
+											{{=it[i].recommendOrgName}}, {{=it[i].recommendMemberName }}
+										{{ }else if(it[i].recommendMemberName){ }}
+											{{=it[i].recommendMemberName }}
+										{{ }else{ }}
+											无
+										{{ } }}
+										</p>
+									</div>
+								</a>
+							</li>
+						{{ } }}
+					</ul>
+		        </script>
+		    <div id="reward-content"></div>
+        </div>
+    </div>
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/organTotalDetail.js"></script>
+</html>

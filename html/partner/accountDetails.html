@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>帐户余额明细</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body class="bodybg">
+<div class="mui-content mui-navigate-right-box">
+    <ul class="part-tab02 mb10">
+        <h6></h6>
+        <li><span id="inSpan" class="part-orange"></span>收入</li>
+        <li class="taright"><span id="outSpan" class="part-orange"></span>支出</li>
+    </ul>
+    <div class="part-box">
+            <script id="detail-template" type="text/x-dot-template">
+                <ul>
+                    {{ for(var i=0; i< it.length; i++) { }}
+                        <li onclick="detail({{=it[i].id }},{{=it[i].tradeType}})" class="mui-table-view-cell">
+                            <a class="mui-navigate-right-none">
+                                 <div>
+                                    <h1 class="part-bal-title"><span class="part-orange">{{=global.formatNumber(it[i].tradeAmount, 2) }}元</span>{{=it[i].tradeTypeName }}</h1>
+                                    <div class="part-bal-con">
+                                        <p><span class="part-grey">账户余额：{{=global.formatNumber(it[i].currentBalance, 2) }}</span>{{=global.formatDate(it[i].tradeTime, 'yyyy-MM-dd hh:mm') }}</p>
+                                        <p>
+                                            {{if(it[i].note){ }}
+                                                {{=it[i].note }}
+                                            {{ } }}
+                                        </p>
+                                    </div>
+
+                                 </div>
+                            </a>
+                        </li>
+                    {{ } }}
+                </ul>
+		    </script>
+		   
+         <div id="detail-content"></div>
+    </div>
+
+     <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/accountDetails.js"></script>
+</html>

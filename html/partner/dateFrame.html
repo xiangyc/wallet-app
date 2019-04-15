@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<style>
+	    	html,body {
+				background-color: transparent !important;
+			}
+    	</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script>
+		var src = 1;//1:账户明细；2:
+		apiready = function(){
+			src = api.pageParam.src;
+			var startTime;
+			var endTime;
+			var year;
+			var month;
+			
+			var UIActionSelector = api.require('UIActionSelector');
+		    UIActionSelector.open({
+		        datas: 'widget://res/UIYearAndMonth.json',
+		        layout: {
+		            row: 5,
+		            col: 2,
+		            height: 30,
+		            size: 12,
+		            sizeActive: 14,
+		            rowSpacing: 6,
+		            colSpacing: 10,
+		            maskBg: 'rgba(0,0,0,0.6)',
+		            bg: '#fff',
+		            color: '#999',
+		            colorActive: '#333',
+		            colorSelected: '#333'
+		        },
+		        animation: true,
+		        cancel: {
+		            text: '取消',
+		            size: 12,
+		            w: 90,
+		            h: 35,
+		            bg: '#f7f7f7',
+		            bgActive: '#f7f7f7',
+		            color: '#ff9d00',
+		            colorActive: '#ff9d00'
+		        },
+		        ok: {
+		            text: '完成',
+		            size: 12,
+		            w: 90,
+		            h: 35,
+		            bg: '#f7f7f7',
+		            bgActive: '#f7f7f7',
+		            color: '#ff9d00',
+		            colorActive: '#ff9d00'
+		        },
+		        title: {
+		            text: '选择年月',
+		            size: 15,
+		            h: 42,
+		            bg: '#f7f7f7',
+		            color: '#333'
+		        },
+		        fixedOn: api.frameName
+		    }, function(ret, err) {
+		        if (ret) {
+		            if(ret.eventType == 'ok'){
+		            	if(src === 1){
+			                year = ret.selectedInfo[0].p_id;
+			                if(year === 'all'){
+			                }else{
+			                    month = ret.selectedInfo[1].c_id;
+			                    startTime = year +'-' + month+'-01';
+			                    var eDate = new Date(year, month, 1);
+			                    eDate.setMonth(eDate.getMonth() +1);
+			                    endTime = eDate.getFullYear() +'-' + eDate.getMonth() +'-01';
+			                }
+		                }else{
+				       		year = ret.selectedInfo[0].p_id;
+				       		if(year === 'all'){
+				       			month = '';
+				       			year = '';
+				       		}else{
+				       			month = ret.selectedInfo[1].c_id;
+				       		}
+						}
+				
+		               api.sendEvent({
+	                       name:'selectDateEvent',
+	                       extra: {
+	                       		startTime: startTime,
+	                       		endTime: endTime,
+	                       		year: year,
+	                       		month: month
+	                       }
+                       });
+                       
+                       setTimeout("api.closeFrame();", 300); 
+		            }else{
+		            	api.closeFrame();
+		            }
+		        }
+		    });
+		} 
+	</script>
+</html>

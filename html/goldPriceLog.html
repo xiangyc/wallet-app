@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>公告</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/swipe.css" />
+ 		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="real-price">
+				<span class="real-price-t"> <em id="lastPrice"></em>
+					<div id="refreshDiv" class="refresh-icon">
+						<img onclick="refresh();" src="../image/refresh-icon.png" alt="flash" >
+					</div> </span>
+				<span class="real-price-b">实时金价(元/克)</span>
+			</div>
+			<div class="find-media mui-bg-white mui-mtb10">
+				<ul class="trend-switch">
+					<li id="timeInteval1" class="current" onclick="load(1);">
+						24小时
+					</li>
+					<li id="timeInteval2" onclick="load(2);">
+						7天
+					</li>
+					<li id="timeInteval3" onclick="load(3);">
+						30天
+					</li>
+					<div class="main-price-prompt" onclick="goldSource();">
+						金价来源？
+					</div>
+				</ul>
+				<div id="container" style="height: 320px; padding-right: 10px;"></div>
+			</div>
+<!-- 		    <div class="account-bt bt-btn-fixed">
+		        <div class="btn btn-buy" onclick="buy();"><i class="buy-icon"></i>买金</div>
+		        <div class="btn btn-sell" onclick="sell();"><i class="sell-icon"></i>卖金</div>
+		                </div> -->
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/library/highcharts.js"></script><!--
+	<script type="text/javascript" src="../script/library/highcharts-zh_CN.js"></script>-->
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/portal/goldPriceLog.js"></script>
+</html>

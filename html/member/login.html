@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body style="background:#fff;">
+<header>
+    <div class="loginHeader" tapmode onclick="api.closeWin();">
+        <img src="../../image/icon-close.png"/>
+    </div>
+</header>
+<div class="login">
+    <div class="mui-content">
+        <div class="logText">
+            <h1>您好</h1>
+            <p>欢迎来到金算子，赶紧登录吧！</p>
+        </div>
+        <div class="logInput">
+            <div><input id='userName' type="number" oninput="if(value.length>11)value=value.slice(0,11);" tapmode onfocus="validateMobile();" maxlength="11" placeholder="请输入你的手机号码" />
+           	 <i id='cleanInputId' tapmode onclick="cleanInput();" class="mui-icon mui-icon-closeempty hide"></i>
+            </div>
+            <div id='pwdDiv'>
+            	<input id='password' type="password" maxlength="20"  placeholder="请输入密码" />
+            	<em id='eye' tapmode onclick="showPassword();" ></em>
+            </div>
+            <div class="getCodeBox hide" id="sendSmsLogin">
+                <input id="code" maxlength="6" type="number" oninput="if(value.length>6)value=value.slice(0,6);"  placeholder="请输入验证码" />
+                <input type="button" id="sendButton" tapmode onclick="sendSmsCode();" class="getCode" value="获取验证码" disabled/>
+            </div>
+
+            <div class="forgetPassword " id="smsLogin">
+	            <a class="changeLogin" id="codeLoginID" tapmode onclick="smsCodeLogin();">验证码登录</a>
+	            <a class="changeLogin hide" id="pwdLoginID" tapmode onclick="pwdLogin();">密码登录</a>
+	            <a tapmode onclick="openSubWin(2);" id="forgotPwdID" class="">忘记密码</a>
+            </div>
+          <!--   <div class="forgetPassword" id="passwordLogin"><a class="changeLogin" tapmode onclick="pwdLogin();">密码登录</a></div> -->
+            <div class="logBtn">
+                <button id="loginBt" tapmode onclick="login();" type="button" class="mui-btn mui-btn-block mui-btn-primary mui-add-radius" disabled>登录</button>
+              
+                <div tapmode onclick="openSubWin(1);" type="button" class="mui-btn mui-btn-block mui-add-radius mui-btn-danger mui-btn-outlined" id="regId">注册</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="log-box">
+        <div class="logThird mui-hidden" id="authDiv">
+            <h6>第三方账号登录</h6>
+            <p id="wxLoginId" tapmode onclick="wxLogin();"><img src="../../image/icon-wechat.jpg" /></p>
+        </div>
+<!--        <div class="logAgree">
+            登录注册即视为已阅读同意<a tapmode onclick="openAgreement();">《财易通智金用户服务协议》</a>
+        </div>-->
+    </div>
+
+</div>
+</body>
+	<script type="text/javascript" src="../../script/library/jquery.js"></script>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/common/sms.js"></script>
+	<script type="text/javascript" src="../../script/member/login.js"></script>
+	<script type="text/javascript" src="../../script/member/loginDataWrapper.js"></script>
+</html>

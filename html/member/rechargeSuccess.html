@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>充值成功</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+<div class="rechange rechange-success">
+    <div class="rechange-overseas">
+        <h1><img src="../../image/icon-success.png" /></h1>
+        <h6>充值成功</h6>
+        <p>￥<i id="amountI">0.00</i></p>
+    </div>
+    <!-- <div class="rechange-btn">
+        <button type="button" tapmode onclick="openlargeRecharge();" class="mui-btn mui-btn-block mui-btn-primary">更多充值方式</button>
+    </div> -->
+</div>
+
+<div class="mui-content mui-bg-white">
+      <div class="mui-content-box">
+          <div class="rg-success">
+              <p id="remarkId" class="hide">您已经获得</p>
+
+			  <div class="coupon-package hide" id="couponPackageDiv">
+				  <img src="../../image/member/register-package.png">
+				  <div class="coupon-package-p">
+					  <h4 class="red"><em id="couponId">一</em>张优惠券大礼包</h4>
+					  <span class="color9">您可以从“我的->优惠券”查看详情。</span>
+				  </div>
+			  </div>
+
+    		  <div class="draw-chance hide" id="drawChanceDiv">
+				  恭喜您，获得<em id="chanceId">一</em>次抽奖机会！
+			  </div>
+
+			  <div class="coupon-package smashing-eggs hide" id="eggsPackageDiv">
+				  <img src="../../image/member/smashing-eggs.png">
+				  <div class="coupon-package-p">
+					  <h4 class="red">您获得<em id="smashingeggsId">0</em>次砸金蛋机会</h4>
+					  <span>点击砸蛋领取大奖</span>
+				  </div>
+			  </div>
+
+			  <div class="draw-chance hide" id="cashBackDiv">
+				  恭喜您，获得<em id="cashBackId"></em>
+			  </div>
+
+          </div>
+      </div>
+</div>
+
+<div class="rechange-activity">
+    <div id="recommendDiv" class="mui-content">
+       <!-- <p>活动</p>-->
+        <div class="rechange-activity-con">
+            <img id="newerGoldImg" onerror="src='../../image/member/rechange-activity.jpg'" />
+        </div>
+    </div>
+</div>
+</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+	<script type="text/javascript" src="../../script/member/rechargeSuccess.js"></script>
+</html>

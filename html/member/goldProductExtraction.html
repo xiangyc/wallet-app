@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+     <div class="real-price pr-d-t mui-border-no">
+         <span class="real-price-t"> 
+            <em id="lastPrice">322.556</em>
+         </span>
+         <span class="real-price-b">实时金价(元/克)</span>
+         <span class="real-price-locking">锁定金价<em id="intervalEm">300</em>秒</span>
+     </div>
+
+
+
+   <div class="goldway-t mui-bg-white mui-mt10">
+        <div tapmode onclick="selectExpressType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>提金方式</label>
+            <span id="expressTypeSpan">请选择提金方式</span>
+        </div>
+
+       <div id="selectAddressDiv" tapmode onclick="selectAddress();" class="mui-input-row input-row-f mui-mt10 hide">
+           <div class="mui-input-row input-row-f mui-navigate-right mui-border-no">
+               <label>收货地址</label>
+               <!-- <span class="input-span-sm" id="deliveryAddress" style="float: left;">请选择收货地址 -->
+               <span class="" id="deliveryAddress">请选择收货地址
+               </span>
+
+           </div>
+       </div>
+
+       <div id="addressDiv" class="mui-input-row input-row-f mui-mt10 mui-pb5 mui-border-no hide">
+           <label>提货地址</label>
+           <span class="input-span-sm">深圳市罗湖区彭年广场写字楼38楼
+                 <em>客服电话：4006-832-999</em>
+            </span>
+       </div>
+
+   </div>
+
+    <div class="title input-gold-title">可提黄金:<em id="activeBalance">0.00</em>克</div>
+
+    <div class="goldway-t mui-bg-white">
+        <div onclick="selectGoldType();" class="mui-input-row input-row-f mui-navigate-right">
+            <label>金条规格</label>
+            <span id="goldType">请选择金条规格</span>
+        </div>
+
+        <div class="mui-input-row input-row-f mui-border-b">
+
+            <label>数量</label>
+            <div class="mui-numbox mui-numbox-g" data-numbox-step="10" data-numbox-min="1" data-numbox-max="90">
+                <button tapmode onclick="computCount(-1);" class="mui-btn mui-btn-g mui-btn-numbox-minus" type="button">-</button>
+                <input tapmode onkeyup="keyup();" class="mui-input-numbox" maxlength="4" id="applyCount" value="1">
+                <button tapmode onclick="computCount(1);" class="mui-btn mui-btn-g  mui-btn-numbox-plus" type="button">+</button>
+            </div>
+
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+			<label>提金克重</label>
+			<span><em id="amount">0.00</em>克</span>
+		</div>
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>剩余克重</label>
+            <span><em>0.000</em>克</span>
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>购金原价</label>
+            <span><em>280.46</em>(元/克)</span>
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>剩余克重回款<i class="q-mark-g"></i></label>
+            <span><em>0.00</em>元</span>
+        </div>
+    </div>
+
+  <div class="goldway-t mui-bg-white mui-mt10">
+
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>提金补差价<i class="q-mark-g"></i></label>
+            <span><em>0.00</em>元</span>
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>提金费用</label>
+            <span><em class="yellow" id="totalFee">0.00</em>元
+                     <div class="contain-cost">
+                         <p>加工费(元)：<em id="serviceFee">0.00</em></p>
+                         <p>运费(元)：<em id="expressFee">0.00</em></p>
+                         <p>保价费(元)：<em id="insuredFee">0.00</em></p>
+                    </div>
+            </span>
+        </div>
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>支付费用</label>
+            <span><em class="yellow">0.00</em>元</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>可用余额</label>
+            <span><em id="useBalance">0.00</em>元</span>
+            <button tapmode onclick="recharge();" class="mui-btn-warning mui-btn-rsmall">充值</button>
+        </div>        
+
+    </div>
+
+	<div tapmode onclick="showMessage();" class="main-bomb-prompt">
+				<i></i>提金提示
+	</div>
+
+    <div class="mui-content-padded">
+        <button class="mui-btn mui-btn-block mui-btn-warning mui-mt10" tapmode onclick="applySubmit();">提交申请</button>
+    </div>
+
+</div>
+<!--输入交易密码-->
+<div id="passwordDialog" class="bomb-box hide">
+	<h4>提金申请</h4>
+	<div class="bomb-c">
+
+        <div class="bomb-top">
+             <span>支付费用:<em>320.00</em>元</span>
+             <p>金价倒计时结束会自动更新支付费用</p>
+        </div>
+
+		<div class="mui-input-row input-row-f bomb-input-row">
+			<input id="password" maxlength="20" placeholder="请输入交易密码" type="password">
+		</div>
+		<div class="link-forget">
+			<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+		</div>
+		<button id="confirmBtn" tapmode onclick="applyWithdrawGold();" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">
+			确认
+		</button>
+	</div>
+</div>
+<div id="passwordDialogDiv" tapmode onclick="showSubmit();" class="mui-backdrop hide"></div>
+
+
+<!--输入交易密码成功后提示-->
+<div class="bomb-box buy-back-box hide">
+        <div class="bomb-c">
+           <p>提金申请已经成功提交，1-5日将会安排发货！</p>
+        </div>
+         <div class="mui-popup-buttons">
+            <span class="mui-popup-button">查看订单</span><span class="mui-popup-button">继续提金</span>
+         </div>
+</div>
+
+<div class="mui-backdrop hide"></div>
+
+<!--提金提示-->
+<div id="messageDiv" class="bomb-box hide">
+    <h4>提金提示</h4>
+    <div class="bomb-c">
+        <p>1.快递提金费用：加工费12元/克+物流保险费1.5元/克+快递费20元；</p>
+        <p>2.自提提金费用：仅收取12元/克加工费。</p>
+        <p>3.提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+        <p>4.提交提金申请后，用户如果取消提金，平台按照购买时原价自动回购。</p>
+    </div>
+</div>
+<div id="messageDropDiv" tapmode onclick="showMessage();" class="mui-backdrop hide"></div>
+
+<!--提金提示-->
+<div class="bomb-box hide">
+    <h4>剩余克重回款</h4>
+    <div class="bomb-c">
+        <p>在一个订单当中支持用户提取部分黄金，那剩下的黄金平台按购买时原价自动回购，回购款自动发放到客户资金账户</p>
+        <p>计算公式：提金不差价=提金后剩余克重x购金原价</p>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!--提金提示-->
+<div class="bomb-box hide">
+    <h4>提金不差价</h4>
+    <div class="bomb-c">
+        <p>提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+        <p>计算公式：提金不差价=提金克重x(现时金价-购金原价）</p>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!--黄金实物图-->
+<div id="kindType" class="bomb-box hide">
+    <h4>金条规格</h4>
+    <div class="bomb-c mui-clearfix">
+        <div id="paj" tabmode onclick="confirm(10);" class="inkind-img"><img src="../../image/member/inkind-img03.jpg">平安金10克/条</div>
+       <!-- <div id="jhj" tabmode onclick="confirm(50);" class="inkind-img"><img src="../../image/member/inkind-img04.jpg">建行金50克/条</div>-->
+
+    </div>
+</div>
+<div id="kindTypeDiv" tapmode onclick="showGoldType();" class="mui-backdrop mui-active hide"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/member/goldExtraction.js"></script>
+</html>

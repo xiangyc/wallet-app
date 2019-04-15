@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>设置</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+		<style>
+			.mui-content-padded{position:fixed;width:100%;margin:0;padding:0;bottom:0;}
+			.mui-btn-signout{margin:0;font-size:16px;color:#2d2d2d;border-radius:0;background:#fff;border:0;padding:0;height:50px;line-height:50px;}
+
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view address-list-box mui-mt10 contact-b">
+				<li tapmode onclick="openSubWin(1);" class="mui-table-view-cell list-menu">
+					<a class="mui-navigate-right"> <span id="cardDiv" class="list-right">已实名未绑卡</span>实名绑卡 </a>
+				</li>
+				<li tapmode onclick="openSubWin(2);" class="mui-table-view-cell list-menu">
+					<a class="mui-navigate-right"> 地址管理 </a>
+				</li>
+				<li tapmode onclick="openSubWin(3);" class="mui-table-view-cell list-menu">
+					<a class="mui-navigate-right"> <span class="list-right"></span> 登录密码 </a>
+				</li>
+				<li tapmode onclick="openSubWin(4);" class="mui-table-view-cell list-menu">
+					<a class="mui-navigate-right"> <span id="payPwdDiv" class="list-right"></span> 交易密码 </a>
+				</li>
+			</ul>
+			<ul class="mui-table-view address-list-box mui-mt10 contact-b">
+				<li tapmode onclick="openSubWin(5);" class="mui-table-view-cell list-menu">
+					<a class="mui-navigate-right"> <span class="list-right" id="phoneId"></span>注册手机号 </a>
+				</li>
+				<li id='thirdAccountId' tapmode onclick="openSubWin(6);" class="mui-table-view-cell list-menu hide">
+					<a class="mui-navigate-right"> 第三方账号 </a>
+				</li>
+			</ul>
+			<ul class="mui-table-view address-list-box mui-mt10 contact-b">
+				<li class="mui-table-view-cell list-menu">
+					<a><span class="list-right mui-p0" id="code">U003</span>我的邀请码 </a>
+				</li>
+				<li id="inviterLi" tapmode class="mui-table-view-cell list-menu">
+					<a id="arrowA"><span id="mobile" class="list-right">邹*昌  139****7865</span>我的邀请人</a>
+				</li>
+			</ul>
+			<div tapmode onclick="showMessage();" class="mui-content-padded">
+				<div class="mui-btn-signout">
+					退出登录
+				</div>
+			</div>
+		</div>
+		<!--确认退出当前账户？-->
+		<div id="confirmDiv" class="bomb-box bomb-box-s hide">
+			<div class="mui-popup-inner">
+				<div class="mui-popup-title">
+					确认退出当前账户？
+				</div>
+			</div>
+			<div class="mui-popup-buttons">
+				<span onclick="showMessage();" class="mui-popup-button">取消</span><span onclick="logOut();" class="mui-popup-button blue">确认</span>
+			</div>
+		</div>
+		<div id="confirmDropDiv" class="mui-backdrop hide"></div>
+	</body>
+	
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/mui.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/member/set.js"></script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>版本更新</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" href="../../css/mui.css" />
+	    <style>
+	    	html,body {
+				background-color:transparent;
+				/*background-color:rgba(0,0,0,0.6);*/
+			}
+			.aui-mask-in {
+                    width: 100%;
+                    height: 100%;
+					visibility: visible;
+					background-color:rgba(0,0,0,0.6);
+					position: fixed;
+					z-index: 999;
+					left: 0; 
+					top: 0;
+				}
+				.bomb-box{ top: 32%; }
+	    </style>
+	</head>
+	<body>
+	  <div class="aui-mask aui-mask-in"></div>
+		<div class="mui-content ">
+			<div id="versionUpdate" class="bomb-box">
+		    	<div class="main">
+			        <h4 class="title">更新内容</h4>
+			        <div class="bomb-c mui-popup-inner"><p id="versionDescription"></p></div>
+		        </div>
+		        <div id="updateBt1" class="mui-popup-buttons hide"><button id="submitBtn" class="mui-popup-button yellow" tapmode onclick="download();">更新</button></div>
+		        <div id="updateBt2" class="mui-popup-buttons noUpdate hide"><button class="mui-popup-button " tapmode onclick="api.closeFrame();">下次再说</button><button id="submitBtn" class="mui-popup-button yellow" tapmode onclick="download();">更新</button></div>
+		    </div>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/library/mui.js"></script>
+	<script type="text/javascript" src="../../script/portal/version.js"></script>
+</html>

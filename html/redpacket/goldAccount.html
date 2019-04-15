@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>黄金资产</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+    <div class="gold-account-top">
+        <div class="gold-total">
+            <span>总克重(克)</span>
+            <div>6000.003</div>
+        </div>
+        <ul class="gold-account-ul mui-clearfix">
+            <li class="mui-table-view-cell gold-account-li">
+                <span>黄金现值(元)<i class="q-mark-w"></i></span>
+                <div>3.516.93</div>
+            </li>
+            <li class="gold-account-li">
+                <span>提金中(克)</span>
+                <div>1010.000</div>
+            </li>
+        </ul>
+    </div>
+    <!--随心金-->
+    <div class="gold-account-list">
+        <h3 class="mui-table-view-cell"><span>随心金</span><a class="mui-navigate-right">交易明细</a></h3>
+        <div class="gold-account-list-top mui-clearfix">
+           <div class="gold-account-list-li">
+               <span class="red-label">982.210克</span>
+               <div>浮动盈亏(元):<em>2126.86</em></div>
+           </div>
+            <div class="gold-account-list-li">
+                <span>272.32</span>
+                <div>买入均价(元/克)</div>
+            </div>
+            <div class="gold-account-list-li">
+                <span>686.76</span>
+                <div>历史盈亏(元)<i class="q-mark-gd"></i></div>
+            </div>
+            <div class="gold-account-list-li">
+                <span>33,875,875.48</span>
+                <div>累计赠金(元)</div>
+            </div>
+        </div>
+        <div class="gold-account-list-btn">
+            <button type="button" class="mui-btn mui-btn-gray">提金</button>
+            <button type="button" class="mui-btn mui-btn-outlined">卖金</button>
+            <button type="button" class="mui-btn mui-btn-primary">买金</button>
+        </div>
+    </div>
+    <!--安心金-->
+    <div class="gold-account-list">
+        <h3 class="mui-table-view-cell"><span>安心金</span><a class="mui-navigate-right">交易明细</a></h3>
+        <div class="gold-account-list-top mui-clearfix">
+            <div class="gold-account-list-li">
+                <span class="red-label">982.210克</span>
+                <div>价值(元):<em>2126.86</em></div>
+            </div>
+            <div class="gold-account-list-li">
+                <span>272.32</span>
+                <div>待收收益(元)</div>
+            </div>
+            <div class="gold-account-list-li">
+                <span>686.76</span>
+                <div>昨日赠金(元)</div>
+            </div>
+            <div class="gold-account-list-li">
+                <span>33,875,875.48</span>
+                <div>累计赠金(元)</div>
+            </div>
+        </div>
+        <div class="gold-account-list-btn">
+            <button type="button" class="mui-btn mui-btn-primary">买金</button>
+        </div>
+    </div>
+
+    <!--天天金-->
+    <div class="gold-account-list">
+        <h3 class="mui-table-view-cell"><span>天天金</span><a class="mui-navigate-right">交易明细</a></h3>
+        <div class="gold-account-list-top mui-clearfix">
+            <div class="gold-account-list-li width100">
+                <span class="red-label">982.210克</span>
+                <div>价值(元):<em>2126.86</em></div>
+            </div>
+
+            <div class="gold-account-list-li paddingone">
+                <span>686.76</span>
+                <div>昨日赠金(元)</div>
+            </div>
+            <div class="gold-account-list-li paddingtwo">
+                <span>33,875,875.48</span>
+                <div>累计赠金(元)</div>
+            </div>
+        </div>
+        <div class="gold-account-list-btn">
+            <button type="button" class="mui-btn mui-btn-outlined">卖金</button>
+            <button type="button" class="mui-btn mui-btn-primary">买金</button>
+        </div>
+    </div>
+
+    <!--红包金-->
+    <div class="gold-account-list">
+        <h3 class="mui-table-view-cell"><span>红包金</span><i class="q-mark-gd"></i><!--i跳红包金介绍页面--><a class="mui-navigate-right">交易明细</a></h3>
+        <div class="gold-account-list-top mui-clearfix">
+            <div class="gold-account-list-li width100">
+                <span class="red-label">982.210克</span>
+                <div>现值(元):<em>2126.86</em></div>
+            </div>
+        </div>
+        <div class="gold-account-list-btn">
+            <button type="button" class="mui-btn mui-btn-gray">提金</button>
+            <button type="button" class="mui-btn mui-btn-outlined">卖金</button>
+            <button type="button" class="mui-btn mui-btn-primary">买金</button>
+        </div>
+    </div>
+
+    <!--黄金现值-->
+    <div id="showDiv" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div  id="showDivTitle"  class="mui-popup-title"></div>
+            <div  id="showDivContent"  class="mui-popup-text">
+                    您账户的可计价黄金基于当前浏览页面时金价的价值。<br/>
+                    公式：黄金现值=黄金总克重x浏览页面时金价
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelShow();" >知道了</span></div>
+    </div>
+    <div id="dropDiv" class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelShow();" ></div>
+
+    <!--不可提金提示-->
+    <div id="carryDiv" class="bomb-box hide">
+        <h4>提示</h4>
+        <div class="bomb-c">
+            <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+        </div>
+    </div>
+    <div id="carryDropDiv" tapmode onclick="showCarry();" class="mui-backdrop hide"></div>
+    <!--随心金交易时间段-->
+    <div id="showDiv" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div  id="showDivTitle"  class="mui-popup-title"></div>
+            <div  id="showDivContent"  class="mui-popup-text">
+                上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelShow();" >知道了</span></div>
+    </div>
+    <div id="dropDiv" class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelShow();" ></div>
+
+    <!--历史盈亏-->
+    <div id="showDiv" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div  id="showDivTitle"  class="mui-popup-title"></div>
+            <div  id="showDivContent"  class="mui-popup-text">
+                历史盈亏=随心金每日赠金累计+随心金卖出的盈亏累计。
+                某次卖出随心金的盈亏=（卖出金价-买入均价）x卖金克重-卖金手续费。
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelShow();" >知道了</span></div>
+    </div>
+    <div id="dropDiv" class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelShow();" ></div>
+
+
+<!--老的-->
+<!--<div class="mui-content">
+
+    <div id="loginDiv" class="account-box">
+        <div class="account-total">
+            <span class="title-t" id="totalGoldAmount">0.000</span>
+            <span class="title-b">黄金总克重(克)</span>
+        </div>
+
+        <div class="account-income">
+            <div class="account-income-li mui-col-sm-6">
+                <span class="title-t" id="totalGoldMoney">0.00</span>
+                <span class="title-b" tapmode onclick="showMessage('totalGoldMoneyDiv');" >黄金现值(元)<i></i></span>
+            </div>
+
+            <div class="account-income-li mui-col-sm-6" tapmode onclick="openSubWin(1);">
+                <a class="mui-navigate-right mui-navigate-right-50">
+                    <span class="title-t" id="frozenActiveAmount">0.000</span>
+                    <span class="title-b">提金中(克)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="mui-table-view gold-account-list mui-mt10">
+        <li tapmode onclick="openSubWin(2);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right"><span class="list-right"><em id="activeBalance">0.000</em></span>随心金(克)</a>
+        </li>
+    </ul>
+    <ul class="mui-table-view gold-account-list mui-mt10">
+        <li tapmode onclick="openSubWin(3);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right"><span class="list-right"><em id="periodGoldAmount">0.000</em></span>安心金(克)</a>
+        </li>
+    </ul>
+    <ul class="mui-table-view gold-account-list mui-mt10">
+        <li tapmode onclick="openSubWin(4);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right"><span class="list-right"><em id="envelopeAmount">0.000</em></span>红包金(克)</a>
+        </li>
+    </ul>
+    <ul class="mui-table-view gold-account-list mui-mt10">
+        <li tapmode onclick="openSubWin(5);" class="mui-table-view-cell list-menu">
+            <a class="mui-navigate-right"><span class="list-right"><em id="daydayAmount">0.000</em></span>天天金(克)</a>
+        </li>
+    </ul>
+
+</div>
+
+	<div id="messageDropDiv" tapmode onclick="showMessage('');" class="mui-backdrop hide"></div>
+		<div id="totalGoldMoneyDiv" class="bomb-box hide">
+			<h4>黄金现值</h4>
+			<div class="bomb-c">
+				<p>
+					您账户的可计价黄金基于当前浏览页面时金价的价值。
+				</p>
+				<p>
+					公式：黄金现值=黄金总克重x浏览页面时金价
+                </p>
+			</div>
+		</div>
+
+		&lt;!&ndash;不可提金提示 &ndash;&gt;
+        <div id="carryDiv" class="bomb-box hide">
+            <h4>提示</h4>
+            <div class="bomb-c">
+                <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+            </div>
+        </div>
+		<div id="carryDropDiv" tapmode onclick="showCarry();" class="mui-backdrop hide"></div>-->
+<!--老的-->
+
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/goldAccount.js"></script>
+</html>

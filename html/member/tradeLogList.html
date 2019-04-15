@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>资金明细</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	</head>
+	<body>
+	<script id="tradeLog-template" type="text/x-dot-template">
+	{{ for(var i=0; i< it.length; i++) { }}
+	<div class="water-list-b">
+		<div class="water-list-lc">
+			<span>{{=it[i].tradeTypeName }}</span>
+			<em>
+			{{ switch(it[i].tradeKind) {
+				case 1: }}
+				-
+				{{ break;
+				case 2: }}
+				+
+				{{ break;
+				default: }}
+				未知
+				{{ break; } }}
+			{{=global.formatNumber(it[i].tradeAmount, 2)}}
+			</em>
+			<div class="water-list-rc">
+				<span>{{=global.formatDate(it[i].tradeTime, 'yyyy-MM-dd hh:mm:ss') }}</span>
+				<i>账户余额:{{=global.formatNumber(it[i].currentAmount, 2)}}</i>
+			</div>
+		</div>
+		{{if(it[i].note){}}
+		<div class="water-list-remarks">
+			备注:{{=it[i].note}}
+		</div>
+		{{ } }}
+	</div>
+	{{ } }}
+	</script>	
+		
+	<div id="tradeLog-content" class="water-list-deta">
+	</div>
+
+	<script id="tradeLogType-template" type="text/x-dot-template">
+		<li tapmode onclick="selectTradeLogType('', this);" class="mui-active">
+				全部
+			</li>
+			{{ for(var i=0; i< it.length; i++) { }}
+			<li tapmode onclick="selectTradeLogType({{=it[i].id}}, this);">
+				{{=it[i].name}}
+			</li>
+			{{ } }}
+		</script>
+		<!--筛选-->
+		<div id="conditionDiv" tapmode class="filter-box hide">
+			<ul id="tradeLogTypeUl" tapmode class="filter-list mui-clearfix">
+			</ul>
+			<ul id="periodUl" class="filter-list mui-clearfix">
+				<li tapmode onclick="selectPeriod(3, this);">
+					三个月内
+				</li>
+				<li tapmode onclick="selectPeriod(4, this);" class="mui-active">
+					半年内
+				</li>
+				<li tapmode onclick="selectPeriod(5, this);" >
+					一年内
+				</li>
+			</ul>
+		</div>
+	<div id="conditionDropDiv" tapmode onclick="showCondition();" class="mui-backdrop hide"></div>
+			
+			
+	<!--暂无记录显示的时候 加上backgwhite 不显示就移除 <body class="backgwhite">  <html class="backgwhite">-->
+	<div id="no-records" class="no-address-news hide">
+		<i><img src="../../image/error-icon-order.png"></i>
+		近<em id="periodEm">半年内</em>暂无记录
+	</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/doT.js"></script>
+	<script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/member/tradeLogList.js"></script>
+</html>

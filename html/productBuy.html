@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>订单</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<style>			
+			.buy-back-box #errPwdInfo{margin-top:10px;text-align:center;}
+		</style>
+		<script>
+            var addStyleLink = function(href){
+
+                var head = document.getElementsByTagName('head')[0];
+                var styleLink = document.createElement('link');
+                styleLink.setAttribute('rel','stylesheet');
+                styleLink.setAttribute('href',href);
+                head.appendChild(styleLink);
+
+            }
+
+            // 苹果手机采用CSS1
+            if(/iphone/i.test(navigator.userAgent))
+                addStyleLink('../css/mui.miniphone.css');
+		</script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="real-price pr-d-t">
+				<span class="real-price-t"> <em id="lastPrice"></em>
+					<div id="refreshDiv" class="refresh-icon">
+						<img tapmode onclick="refresh();" src="../image/refresh-icon.png" alt="flash">
+					</div>
+				</span>
+				<span class="real-price-b">实时金价(元/克)</span>
+				<span class="real-price-locking">锁定金价<em id="intervalEm">300</em>秒</span>
+			</div>
+			<div class="mui-input-group mui-mt10 mui-input-tb">
+
+				<div class="mui-input-row input-row-f input-row-switch">
+					<label id="buyWayStrId">买入克重</label>
+					<input id="amount" placeholder="1克起购" type="number" oninput="if(value.length>10)value=value.slice(0,10);" maxlength="10" onkeyup="computeBalance();" />
+
+					<input id="money" type="number" class="hide" oninput="if(value.length>10)value=value.slice(0,10);" maxlength="10" placeholder="请输入购买金额" onkeyup="computeMoney();" />
+
+					<div id="switchToBuyWayStrId" class="switch-bt" onclick="switchToBuyWay();">切换为按金额购买</div>
+				</div>
+
+		        <div id="couponDiv" class="mui-table-view-cell list-menu" onclick="selectCoupon()">
+		            <a class="mui-navigate-right color6">
+						<span id="couponSpan" class="list-right yellow"></span>
+		            	优惠券
+		            </a>
+		        </div>
+				<div class="mui-input-row input-row-f">
+					<label id="balanceStr">付款金额</label>
+					<span><em id="balance" class="yellow">0.00</em><em id="balanceType">元</em></span>
+					<div id="couponEm" class="number-prompt hide"></div>
+				</div>
+
+				<div id='realityDiv' class="mui-input-row input-row-f hide">
+					<label>付款金额</label>
+					<span><em id="realityBalance" class="yellow">0.00</em>元</span>
+
+					<div id="realityCouponEm" class="number-prompt hide"></div>
+				</div>
+
+				<div class="mui-input-row input-row-f">
+					<label>可用余额</label>
+					<span><em id="useBalance" class="yellow">0.00</em>元</span>
+					<button tapmode onclick="recharge();" class="mui-btn-warning mui-btn-rsmall">充值</button>
+				</div>
+			    <div id="comeItemDiv" class="mui-table-view-cell list-menu" onclick="showComeType()">
+		            <a class="mui-navigate-right color6">
+						<span id="comeSpan" class="list-right">到期回款</span>
+		            	到期后
+		            </a>
+		        </div>
+
+			</div>
+			<div class="mui-input-group mui-mt10 mui-input-tb">
+				<div class="mui-input-row input-row-f">
+					<label>赠金计算起始日</label>
+					<span id="startTime"></span>
+				</div>
+				<div class="mui-input-row input-row-f hide">
+					<label>到期日</label>
+					<span id="endTime"></span>
+				</div>
+				<div id="dayIncomeDiv" class="mui-input-row input-row-f hide">
+					<label>每日赠金</label>
+					<span id="noIncome1"><em id="income" class="yellow">0.00</em>元</span>
+					<span id="noIncome2" class="hide"><em class="red">赠金不足1分，无法发放</em></span>
+				</div>
+			</div>
+		    <!-- 半年产品还款计划开始 -->
+		    <div id="incomePlandiv" class="mui-input-group mui-mt10 mui-input-tb" id="planDiv">
+		       <ul id="incomeListUl" class="repayment-list repayment-list-6">
+		           <li><span>回款日期</span><span>购金款及赠金（元）</span></li>
+		        </ul>
+		    </div>
+		    <!-- 半年产品还款计划开始 -->
+			<div class="fm-agreement">
+				<p class="common_protocol">
+					<span id="argeeId" class="icon_protocol current" onclick="agreement()"></span>阅读并同意 <span class="protocol_text"><a target="_blank" onclick="openAgreement();">《购买黄金租赁服务协议》</a></span>
+				</p>
+			</div>
+			<div tapmode onclick="showMessage();" class="main-bomb-prompt" style="margin-bottom: 60px;">
+				买金提示
+			</div>
+			<button id="submitBtn" tapmode onclick="submitOrder();" class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb">
+				提交订单
+			</button>
+		</div>
+		<!--输入交易密码-->
+		<div id="submitDiv" class="bomb-box hide">
+			<h4>提交订单</h4>
+			<div class="bomb-c">
+				<div class="prompt-title">
+					付款金额(元)：<em id="payAmount"></em>
+				</div>
+				<div class="mui-input-row input-row-f bomb-input-row">
+					<input id="password" maxlength="20" placeholder="请输入交易密码" type="password">
+				</div>
+				<div class="link-forget">
+					<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+				</div>
+				<button id="confirmBtn" tapmode onclick="buy();" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">
+					确认
+				</button>
+			</div>
+		</div>
+		<div id="submitDropDiv" tapmode onclick="showSubmit();" class="mui-backdrop hide"></div>
+		<!--买金提示-->
+		<div id="messageDiv" class="bomb-box hide">
+			<h4>买金提示<i tapmode onclick="showMessage();"><img src="../image/icon-close.png"></i></h4>
+			<div id="periodDiv" class="bomb-c hide">
+				<p>
+					1.不支持提前赎回、安心金产品到期后资金自动结算到您的账户余额；
+				</p>
+				<p>
+					2.保值稳健型，无金价波动风险；
+				</p>
+				<p>
+					3.按金额购买，购买的黄金克重精确小数点后3位数，小数点后4位起全部省略不计。
+				</p>
+				
+			</div>
+			<div id="dayDiv" class="bomb-c hide">
+				<p>
+					1.每笔订单购买金额<=50万，每个用户每日的累计买入金额不限制；
+				</p>
+				<p>
+					2.每日随时可买入，买入不收手续费；
+				</p>
+				<p>
+					3.赠金收益不足1分时，不发放也不进行累积。
+				</p>
+				
+			</div>
+		</div>
+		<div id="messageDropDiv" tapmode onclick="showMessage();" class="mui-backdrop hide"></div>
+		
+		<!--到期后选择-->
+		<div id="comeDiv" class="bomb-box bomb-choice-box hide">
+			<div class="bomb-c">
+				<ul class="mui-table-view mui-table-view-radio">
+					<li id="come1Li" tapmode onclick="selectComeType(0, '到期回款');" class="mui-table-view-cell mui-selected">
+						<a class="mui-navigate-right">到期回款</a>
+					</li>
+					<li id="come2Li" tapmode onclick="selectComeType(1, '提取金条');" class="mui-table-view-cell">
+						<a class="mui-navigate-right">提取金条</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<div id="comeDropDiv" tapmode onclick="showComeType();" class="mui-backdrop hide"></div>
+		
+			<!--输入交易密码错误后提示-->
+
+	<div id="errPwdDiv" class="bomb-box buy-back-box hide">
+	    <div class="bomb-c">
+	        <p id='errPwdInfo'></p>
+	     </div>
+	    <div class="mui-popup-buttons">
+	        <span class="mui-popup-button blue" tapmode onclick="errOpenPayPassword();">忘记密码</span>
+	        <span class="mui-popup-button blue" tapmode onclick="reInputPwd();">重新输入</span>
+	    </div>
+	</div>
+	<div id="pwdDropDiv" class="mui-backdrop hide"  tapmode onclick="hiddenErrPwd();" ></div>
+		
+	</body>
+
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/common/validate.js"></script>
+	<script type="text/javascript" src="../script/common/countdown.js"></script>
+	<script type="text/javascript" src="../script/common/calculate.js"></script>
+	<script type="text/javascript" src="../script/core/global.js"></script>
+	<script type="text/javascript" src="../script/library/base64.js"></script>
+	<script type="text/javascript" src="../script/portal/productBuy.js"></script>
+</html>

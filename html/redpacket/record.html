@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>收到的红包/发出的红包</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body>
+<div class="red-box red-padding-box">
+    <ul class="red-tab">
+        <li tapmode onclick="switchDiv(1);" id="receiveLi" class="active" >收到的红包</li>
+        <li tapmode onclick="switchDiv(2);" id="sendLi">发出的红包</li>
+    </ul>
+    <div class="red-record-con" style="padding-bottom: 56px;">
+        <div id="receiveDiv" class="reach-con">
+            <div class="red-record-num">
+                <p class="mui-pb5">您共收到<br /><span id="totalReceived">0</span>毫克</p>
+                <p class="hide" id="PReturn">到期退回<em id="totalReturn"></em>克</p>
+            </div>
+            <div class="reach-text">
+                <ul>
+                    <li>
+                        <span><i id="totalReceivedNum">0</i>个</span>
+                        收到黄金红包
+                    </li>
+                    <li>
+                        <span><i id="rebOptimum">0</i>个</span>
+                        手气最佳
+                    </li>
+                </ul>
+            </div>
+            <script id="received-template" type="text/x-dot-template">
+                <div class="red-record-list red-record-list-arrow">
+                    <ul>
+                        {{ for(var i=0; i< it.length; i++) { }}
+                        <li tapmode onclick="openDetail('{{=it[i].securityCode}}',1,{{=it[i].amount}});" >
+                            {{if(it[i].status == 3) { }}
+                            <i class="retreated-icon"></i>
+                            {{ } }}
+                            {{ switch(it[i].geType) {
+                            case 1: }}
+                            <h6 class="red-record-luck">拼</h6>
+                            {{ break;
+                            case 2: }}
+                            <h6 class="red-record-default">普</h6>
+                            {{ break;
+                            default: }}
+                            }
+                            {{ } }}
+                            <div class="red-record-list-con">
+                                <div class="red-record-list-con-left">
+                                    <span>{{=it[i].securityMemberName }}</span>
+                                    <i>{{=it[i].securityMobile }}</i>
+                                </div>
+                                <div class="red-record-list-con-right">
+                                    <span>{{=it[i].amount}}毫克</span>
+                                    <i>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm:ss') }}</i>
+                                </div>
+                            </div>
+                        </li>
+                        {{ } }}
+                    </ul>
+                </div>
+            </script>
+
+            <div id="received-content">
+<!--                <div class="red-record-list red-record-list-arrow">
+                    <ul>
+                        <li tapmode onclick="openDetail('{{=it[i].securityCode}}',1,{{=it[i].amount}});" >
+                            <i class="retreated-icon"></i>
+                            <h6 class="red-record-luck">拼</h6>
+                            <div class="red-record-list-con">
+                                <div class="red-record-list-con-left">
+                                    <span>securityMemberName</span>
+                                    <i>securityMobile</i>
+                                </div>
+                                <div class="red-record-list-con-right">
+                                    <span>amount毫克</span>
+                                    <i>yyyy-MM-dd hh:mm:ss</i>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>-->
+            </div>
+
+        </div>
+
+        <div id="sendDiv" class="send-con hide">
+            <div class="red-record-num">
+                <p>您共发出<br /><span id="totalIssue">0.000</span>毫克</p>
+            </div>
+            <div class="send-text">发出黄金红包<i id="totalIssueNum">0</i>个</div>
+
+            <script id="send-template" type="text/x-dot-template">
+                <div class="red-record-list red-record-list-arrow">
+                    <ul>
+                        {{ for(var i=0; i< it.length; i++) { }}
+                        <li tapmode onclick="openDetail('{{=it[i].securityCode}}',2,{{=it[i].amount}});" >
+                            <div class="red-record-list-con">
+                                {{ switch(it[i].geType) {
+                                case 1: }}
+                                <h6 class="red-record-luck">拼</h6>
+                                {{ break;
+                                case 2: }}
+                                <h6 class="red-record-default">普</h6>
+                                {{ break;
+                                default: }}
+                                }
+                                {{ } }}
+                                <div class="red-record-list-con-left">
+                                    <span>
+                                        {{if(it[i].remark){}}
+                                            {{=it[i].remark }}
+                                        {{ }else{ }}
+                                            财源滚滚，日进斗金
+                                        {{ } }}
+                                    </span>
+                                    <i>{{=global.formatDate(it[i].sendTime, 'yyyy-MM-dd hh:mm:ss') }}</i>
+                                </div>
+                                <div class="red-record-list-con-right red-record-list-con-right-line">
+                                    {{if(it[i].useage == 4){}}
+                                        <span>超级红包</span>
+                                    {{ }else{ }}
+                                        <span>{{=it[i].amount}}毫克</span>
+                                    {{ } }}
+                                </div>
+                            </div>
+                        </li>
+                        {{ } }}
+                    </ul>
+                </div>
+            </script>
+            <div id="send-content"> </div>
+
+        </div>
+
+    </div>
+    <div id="no-records" class="no-address hide" style="padding-top: 8%;">
+        <i></i>
+        暂无记录
+    </div>
+
+</div>
+
+
+
+<div class="account-bt bt-btn-fixed">
+    <div tapmode onclick="openSubWin(4);" class="btn3 btn-sell"><i class="sell-icon"></i>卖金</div>
+    <div tapmode onclick="openSubWin(5);" class="btn3 btn-sell"><i class="buy-icon"></i>买金</div>
+    <div tapmode onclick="carryGold();" class="btn3 btn-sell"><i class="goldrecord-icon"></i>提金</div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/redpacket/record.js"></script>
+</html>

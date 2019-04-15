@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>天天金卖金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+
+</head>
+<body class="backdrop-f8f8f8">
+
+    <div class="water-list-deta dayOrder-list-deta">
+        
+        <script id="order-sell-template" type="text/x-dot-template">
+     
+              {{ for(var i=0; i< it.length; i++) { }}                 
+                
+                <div class="water-list-b mui-checkbox"   onclick="choiceGold({{=it[i].id }});">
+                    <input name="checkbox1" id="chk{{=it[i].id }}" value="{{=it[i].id }}" type="checkbox"  onclick="choiceGold({{=it[i].id }});">
+                    <input id='money{{=it[i].id }}' value="{{=it[i].money }}" type="input" class="hide"/>
+                    <input id='amount{{=it[i].id }}' value="{{=it[i].amount }}" type="input" class="hide">
+                    
+                    <div class="water-list-lc">
+                        <span>天天金</span>
+                        <em>{{=global.formatNumber(it[i].amount/1000,3) }}克</em>
+                        <div class="water-list-rc">
+                            <span>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm') }}</span>
+                            <i>支付金额{{=global.formatNumber(it[i].money,2) }}元</i>
+                        </div>
+                    </div>
+                </div>
+
+              {{ } }}
+                
+         </script>   
+
+        <div id="order-sell-content">        
+
+    </div>
+
+    <div class="dayOrder-achoice-btn">
+        <div class="dayOrder-Weight mui-checkbox">
+            <input name="all" id="all" value="" type="checkbox"  onclick="checkAll()">全选
+            <span>总计：<em id='choiceGoldAmount'>0.000</em>克</span>
+        </div>
+        <div class="btn mui-btn-primary"   onclick="preSell()">确认选择</div>
+
+    </div>
+
+    <!--每日卖金限额-->
+    <div id="showDiv1" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div  id="showDivTitle"  class="mui-popup-title"></div>
+            <div  id="showDivContent1"  class="mui-popup-text">
+                    
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button"   onclick="cancelShow();" >知道了</span></div>
+    </div>
+    <!-- <div id="dropDiv" class="mui-popup-backdrop mui-active hide"   onclick="cancelShow();" ></div> -->
+
+    <!--已选择-->
+    <div id="showDiv2" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div  id="showDivTitle"  class="mui-popup-title"></div>
+            <div  id="showDivContent2"  class="mui-popup-text">
+             
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button color-999"   onclick="cancelShow();" >取消</span>
+        <span class="mui-popup-button"   onclick="pre2Sell();" >确定卖出</span></div>
+    </div>
+   <!--  <div id="dropDiv" class="mui-popup-backdrop mui-active hide"   onclick="cancelShow();" ></div> -->
+
+
+    <!--已成功卖出-->
+    <div id="showDiv3" class="mui-popup mui-popup-in hide">
+        <div class="mui-popup-inner">
+            <div class="mui-popup-title"></div>
+            <div class="mui-popup-text">
+                黄金已成功卖出，资金<span id='sellOkMoney'>0.00</span>元,已结算到您的账户余额！
+            </div>
+        </div>
+        <div class="mui-popup-buttons"><span   onclick="api.closeWin();" class="mui-popup-button">确定</span></div>
+    </div>
+    <div id="dropDiv" class="mui-popup-backdrop mui-active hide"   onclick="cancelShow();" ></div>
+
+    <div id="no-records" class="no-address hide">
+        <i></i>
+        暂无记录
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/dayAccountListFrame.js"></script>
+</html>

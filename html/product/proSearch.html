@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>搜索</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/product.css" />
+    <style>
+        body,.mui-content{background:#fff;}
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <a class="back-icon" tapmode onclick="closeWin();"></a>
+        <h1>
+            <div class="search-input">
+                <i id="searchClose" class="hide" onclick="cleanInput();"></i>
+                <input id="searchValue" type="text" maxlength="10" oninput="if(value.length>10)value=value.slice(0,10);" />
+            </div>
+        </h1>
+        <span class="search-text-btn" id="searchBtn" tapmode onclick="searchBegin();">搜索</span>
+    </div>
+    <div class="mui-content">
+        <div class="search hide" id="searchHistory">
+            <h1><i id="clearBtn" onclick="clearHistory();"><img src="../../image/search-delete.png" /></i>历史记录</h1>
+            <ul id="historyList-content"></ul>
+            <div id="no-records" class="no-address hide">
+                <i></i>
+                暂无记录
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--确定删除历史记录-->
+<div id="clearHistoryCon" class="mui-popup mui-popup-in hide">
+    <div class="mui-popup-inner">
+        <div  id="showDivContent" class="mui-popup-text">
+            确定删除所有历史记录？
+        </div>
+    </div>
+    <div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelDelete();" >取消</span><span class="mui-popup-button grey" tapmode onclick="sureDelete();" >确定</span></div>
+</div>
+<div id="clearHistoryConDiv" class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelDelete();"></div>
+
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/header.js"></script>
+<script type="text/javascript" src="../../script/product/proSearch.js"></script>
+</body>
+</html>

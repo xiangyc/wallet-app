@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>实名绑卡</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	</head>
+	<body>
+		<div class="bind-bcard">
+             <!--已绑定-->
+			<div id="bankDivId1" class="bankcard-box">
+				<div class="bankcard-content">
+					<div class="bankcard-top">
+						<div id="bankDivId" class="bank-info-top">
+							<i><img id="icon" src="../../image/member/bank-icon/bank-icon-default.png"></i>
+							<em id="bankName"></em>
+							<span id="quotaName"></span>
+						</div>
+						<div class="bank-info-b">
+							<span id="name"></span>
+							<em id="account"></em>
+							<div id="unBundlingId" tapmode><i id="unBundlingName">解绑<!--解绑中--></i></div>
+						</div>
+					</div>
+					<div class="bankcard-btn" ><a tapmode onclick="openBankList();">银行限额表</a></div>
+				</div>
+			</div>
+
+			<div id="bankDivId2" class="mui-content">
+				<div class="prompt-text-ordinary backdrop-f8f8f8">实名资料（不可更改）</div>
+				<ul class="mui-table-view bank-info-list">
+					<li class="mui-table-view-cell">
+						 <span class="list-right" id="hideName"></span>真实姓名
+					</li>
+					<li class="mui-table-view-cell">
+						<span class="list-right">身份证</span>证件类型
+					</li>
+					<li class="mui-table-view-cell">
+						<span class="list-right" id="idCard"></span>证件号码
+					</li>
+					<li class="mui-table-view-cell">
+						<span class="list-right" id="hideBankMobile"></span>银行预留手机号
+					</li>
+				</ul>
+
+			</div>
+
+			<!--重新绑定-->
+			<div id="rebankDivId1" class="bankcard-box hide">
+				<div class="bankcard-rebinding">
+					<div class="rebinding-btn" tapmode onclick="bindCard();">
+						<div><i class="mui-icon mui-icon-plusempty"></i><span>添加银行卡</span></div>
+					</div>
+					<div class="bankcard-btn" tapmode onclick="openBankList();"><a>银行限额表</a></div>
+				</div>
+			</div>
+
+			<div id="rebankDivId2" class="mui-content hide">
+				<div class="prompt-text-ordinary backdrop-f8f8f8">实名资料（不可更改）</div>
+				<ul class="mui-table-view bank-info-list">
+					<li class="mui-table-view-cell">
+						<span class="list-right" id="hideName2"></span>真实姓名
+					</li>
+					<li class="mui-table-view-cell">
+						<span class="list-right">身份证</span>证件类型
+					</li>
+					<li class="mui-table-view-cell">
+						<span class="list-right" id="idCard2"></span>证件号码
+					</li>
+				</ul>
+			</div>
+
+			<div class="prompt-text-ordinary">
+				<h5>安全保障</h5>
+				<p>1.仅支持绑定一张银行卡，确保资金同卡进出；</p>
+				<p>2.对身份信息进行银行级加密处理，确保您的信息安全。</p>
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/member/bankCard.js"></script>
+</html>

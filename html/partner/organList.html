@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>机构列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+</head>
+<body class="bgf8">
+<div class="mui-content mb15 mui-navigate-right-box">
+    <script id="organ-template" type="text/x-dot-template">
+    {{ for(var i=0; i< it.length; i++) { }}
+        <div id="li{{=it[i].id}}" class="mui-table-view-cell mui-m0">
+            <a class="mui-navigate-right-none" tapmode onclick="showDetail({{=it[i].orgId}});">
+                <div class="part-bal-con part-bal-detail">
+                    <p>
+                        <span class="fs16">{{=global.formatNumber(it[i].incomeMoney, 2)}}元</span>
+                        <i>{{=it[i].orgName }}</i>
+                    </p>
+                    <p>
+                        <span>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd')}}</span>
+                        {{=it[i].recommenderIdentity }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    {{ } }}
+    </script>
+   <div id="organ-content"  class="mui-card part-member-details mui-mt10"> </div>
+</div>
+
+<div id="no-records" class="no-address hide">
+    <i></i>
+    暂无记录
+</div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/organList.js"></script>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>提金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <script>
+        var addStyleLink = function(href){
+            var head = document.getElementsByTagName('head')[0];
+            var styleLink = document.createElement('link');
+            styleLink.setAttribute('rel','stylesheet');
+            styleLink.setAttribute('href',href);
+            head.appendChild(styleLink);
+        }
+        // 苹果手机采用CSS1
+        if(/iphone/i.test(navigator.userAgent))
+            addStyleLink('../../css/miniphone.css');
+        // 安卓手机采用CSS2
+        if(/android/i.test(navigator.userAgent))
+            addStyleLink('../../css/minandroid.css');
+
+    </script>
+
+</head>
+<body>
+
+<div class="mui-content" style="margin-bottom: 65px;">
+	<div id="priceDiv" class="real-price pr-d-t mui-border-no">
+		<span class="real-price-t"> <em id="lastPrice"></em>
+			<div id="refreshDiv" class="refresh-icon">
+				<img tapmode onclick="refresh();" src="../../image/refresh-icon.png" alt="flash">
+			</div>
+		</span>
+		<span class="real-price-b">实时金价(元/克)</span>
+		<span class="real-price-locking">锁定金价<em id="intervalEm">300</em>秒</span>
+	</div>
+
+    <div class="goldway-t mui-bg-white mui-mt10">
+
+		<div id="periodDiv">
+	        <div class="mui-input-row input-row-f mui-border-b">
+	            <label>剩余克重</label>
+	            <span><em id="surplusEm"></em>克</span>
+	        </div>
+            <div class="mui-input-row input-row-f mui-border-b">
+                <label>购金原价</label>
+                <span><em id="oldGlodPriceEm"></em>(元/克)</span>
+            </div>
+	        <div class="mui-input-row input-row-f">
+	            <label tapmode onclick="showSub();">剩余克重回款<i class="q-mark-g"></i></label>
+	            <span><em id="moneyEm"></em>元</span>
+	        </div>
+            <div class="mui-input-row input-row-f mui-border-b">
+                <div class="extraction-interval-hr"></div>
+                <label tapmode onclick="showDifference();">提金补差价<i class="q-mark-g"></i></label>
+	            <span><em id="differenceEm">0.00</em>元</span>
+	        </div>
+		</div>
+
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>提金费用</label>
+            <span><em class="" id="totalFee">0.00</em>元
+                     <div class="contain-cost">
+                         <p>加工费(元)：<em id="serviceFee">0.00</em></p>
+                         <p>运费(元)：<em id="expressFee">0.00</em></p>
+                         <p>保价费(元)：<em id="insuredFee">0.00</em></p>
+                    </div>
+            </span>
+
+        </div>
+
+        <div class="mui-input-row input-row-f mui-border-b">
+            <label>总费用</label>
+            <span><em id="" class="yellow">0.00</em>元</span>
+        </div>
+
+        <div class="mui-input-row input-row-f">
+            <label>可用余额</label>
+            <span><em id="useBalance">0.00</em>元</span>
+            <button tapmode onclick="recharge();" class="mui-btn-warning mui-btn-rsmall">充值</button>
+        </div>
+  
+    </div>
+
+	<div tapmode onclick="showMessage();" class="main-bomb-prompt">
+	   <i></i>提金提示
+	</div>
+
+    <button class="mui-btn mui-btn-block mui-btn-warning mui-btn-fb" tapmode="" onclick="applySubmit();">提交申请</button>   
+
+
+</div>
+<!--输入交易密码-->
+<div id="passwordDialog" class="bomb-box hide" style="top:22%;">
+	<h4>提金申请</h4>
+	<div class="bomb-c">
+        <div class="bomb-top">
+             <span>支付费用:<em id="totalPayFee"></em>元</span>
+        </div>
+	  <div class="mui-input-row input-row-f bomb-input-row">
+			<input id="password" maxlength="20" placeholder="请输入交易密码" type="password">
+		</div>
+		<div class="link-forget">
+			<a tapmode onclick="openPayPassword();" class="fpwd">忘记交易密码</a>
+		</div>
+		<button id="confirmBtn" tapmode onclick="applyWithdrawGold();" class="mui-btn mui-btn-block mui-btn-warning mui-mt10">
+			确认
+		</button>
+	</div>
+</div>
+<div id="passwordDialogDiv" tapmode onclick="showSubmit();" class="mui-backdrop hide"></div>
+
+<!--输入交易密码成功后提示-->
+<div class="bomb-box buy-back-box hide">
+    <div class="bomb-c">
+        <p>提金申请已经成功提交，1-5日将会安排发货！</p>
+     </div>
+    <div class="mui-popup-buttons">
+        <span class="mui-popup-button">查看订单</span><span class="mui-popup-button">继续提金</span>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!-- 不可提金 -->
+<div class="bomb-box hide">
+    <h4>提示</h4>
+    <div class="bomb-c">
+        <p>上海黄金交易所正常交易日上午9点~下午3点之前可申请提金，其余时间段不支持申请提金。</p>
+    </div>
+</div>
+<div class="mui-backdrop hide"></div>
+
+<!--剩余克重回款-->
+<div id="sub" class="bomb-box hide">
+    <h4>剩余克重回款</h4>
+    <div class="bomb-c">
+        <p>在一个订单当中支持用户提取部分黄金，那剩下的黄金平台按购买时原价自动回购，回购款自动发放到客户资金账户。</p>
+        <p>计算公式：剩余克重回款=提金后剩余克重x购金原价</p>
+    </div>
+</div>
+<div id="subDiv" onclick="showSub();" class="mui-backdrop hide"></div>
+
+<!--提金补差价-->
+<div id="difference" class="bomb-box hide">
+    <h4>提金补差价</h4>
+    <div class="bomb-c">
+        <p>提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+        <p>计算公式：提金补差价=提金克重x(现时金价-购金原价）</p>
+    </div>
+</div>
+<div id="differenceDiv" onclick="showDifference();" class="mui-backdrop hide"></div>
+
+<!--可用余额不足-->
+<div id="" class="bomb-box bomb-box-s hide">
+    <div class="mui-popup-inner">
+        <div class="mui-popup-title color6">您当前账户可用余额不足，不够支付提金费用，请充值！</div>
+    </div>
+    <div class="mui-popup-buttons">
+        <span onclick="showMessage();" class="mui-popup-button">取消</span><span onclick="" class="mui-popup-button yellow">充值</span>
+    </div>
+</div>
+<div id="" class="mui-backdrop hide"></div>
+
+<!--提金申请成功-->
+<div id="" class="bomb-box bomb-box-s hide">
+    <h4>提金申请成功</h4>
+    <div class="mui-popup-inner">
+        <div class="mui-popup-title color6">提金申请提金成功, 工作人员将尽快为您发货!</div>
+    </div>
+    <div class="mui-popup-buttons">
+        <span onclick="showMessage();" class="mui-popup-button">查看提金记录</span><span onclick="" class="mui-popup-button yellow">关闭</span>
+    </div>
+</div>
+<div id="" class="mui-backdrop hide"></div>
+
+
+<!--提金提示-->
+<div id="messageDiv" class="bomb-box hide">
+    <h4>提金提示</h4>
+    <div id="proSuiprompt" class="bomb-c hide">
+        <p>1.快递提金费用：加工费12元/克+物流保险费1.5元/克+快递费20元；</p>
+        <p>2.自提提金费用：仅收取12元/克加工费。</p>
+    </div>
+    <div id="proAnprompt" class="bomb-c hide">
+        <p>1.快递提金费用：加工费12元/克+物流保险费1.5元/克+快递费20元；</p>
+        <p>2.自提提金费用：仅收取12元/克加工费。</p>
+        <p>3.提金时，黄金价格涨了，用户需要随行入市，针对提金的数量需要补足差价；</p>
+        <p>4.提交提金申请后，用户如果取消提金，平台按照购买时原价自动回购。</p>
+    </div>
+</div>
+<div id="messageDropDiv" tapmode onclick="showMessage();" class="mui-backdrop hide"></div>
+
+<!--黄金实物图-->
+<div id="kindType" class="bomb-box bomb-box-spec hide">
+    <h4>金条规格</h4>
+    <div class="bomb-c mui-clearfix">
+        <div id="ghj" tabmode onclick="confirm(5);" class="inkind-img"><img src="../../image/member/ghj.jpg">工行金5克/条</div>
+        <div id="paj" tabmode onclick="confirm(10);" class="inkind-img"><img src="../../image/member/inkind-img03.jpg">平安金10克/条</div>
+       <!-- <div id="jhj" tabmode onclick="confirm(50);" class="inkind-img"><img src="../../image/member/inkind-img04.jpg">建行金50克/条</div>-->
+
+    </div>
+</div>
+<div id="kindTypeDiv" tapmode onclick="showGoldType();" class="mui-backdrop mui-active hide"></div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/common/countdown.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/member/goldExtraction.js"></script>
+</html>

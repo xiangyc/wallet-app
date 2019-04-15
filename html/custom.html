@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>客服</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.css" />
+
+</head>
+<body id="custom">
+</body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/core/global.js"></script>
+    <script type="text/javascript" src="../script/library/kfSHA1.js"></script>
+<script>
+(function(a,h,c,b,f,g){a["UdeskApiObject"]=f;a[f]=a[f]||function(){(a[f].d=a[f].d||[]).push(arguments)};g=h.createElement(c);g.async=1;g.charset="utf-8";g.src=b;c=h.getElementsByTagName(c)[0];c.parentNode.insertBefore(g,c)})(window,document,"script","https://assets-cli.udesk.cn/im_client/js/udeskApi.js","ud");
+    var timestamp = new Date().getTime();
+    var webToken = global.getSecurityMobile();
+	var title = global.getHelpTitle();
+    var imUserKey = "aad48d544fea0b99e301d2fda3eb021c";
+
+    var sign_str = "nonce=" + timestamp+ "&timestamp=" +timestamp+ "&web_token=" + webToken + "&" + imUserKey;
+    sign_str = hex_sha1(sign_str);
+    sign_str = sign_str.toUpperCase();
+    ud({
+        "code": "265ghfa1",
+        "link": "http://jsz.udesk.cn/im_client/?web_plugin_id=42732",
+        "mobile": {
+            "targetSelector": "#custom"
+        },
+        "mode": "blank",
+        "customer": {
+            "nonce": timestamp,//随机数，动态的比静态随机数安全系数更高
+            "signature": sign_str,
+            "timestamp": timestamp,
+            "web_token": webToken,//客户唯一标示，推荐使用邮箱、手机号等
+            "c_name": global.getUserName(),
+            "c_phone": webToken,
+            "c_cn_title" : title
+        }
+    });
+
+    ud({
+        "onReady": function() {
+            ud.showPanel();
+
+        },
+    });
+</script>
+
+</html>

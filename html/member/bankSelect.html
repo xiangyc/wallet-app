@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>银行选择</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body>
+		<script id="bankList-template" type="text/x-dot-template">
+			<ul class="mui-table-view bank-list">
+			{{ for(var i = 0; i < it.length; i++) { }}
+			<li tapmode onclick="selectBank({{=it[i].id }}, '{{=it[i].bankName }}');" class="mui-table-view-cell mui-select-bank"><i class="bank-logo"><img src="../../image/member/bank-icon/{{=it[i].icon }}"></i>{{=it[i].bankName }}</li>
+			{{ } }}
+			</ul>
+		</script>
+		<div id="bankList-content" class="mui-content"></div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/doT.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/page.js"></script>
+	<script type="text/javascript" src="../../script/member/bankSelect.js"></script>
+</html>

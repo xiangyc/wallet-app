@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>实名绑卡</title>
+		 <link rel="stylesheet" type="text/css" href="../../css/api.css" /> 
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	</head>
+	<body>
+		<div class="bind-bcard">
+
+			<div class="prompt-text-ordinary" >
+				请绑定本人的银行卡<br/>
+				暂时仅支持绑定中国境内（不含港澳台）银行卡，其他情况请联系客服
+			</div>
+
+			<div class="mui-content">
+				<!--实名绑卡-->
+				<div class="mui-input-group bind-bcard-input">
+					<div class="mui-input-row">
+						<label>持卡人</label>
+						<input id='userName' type="text" maxlength="20" placeholder="请输入姓名">
+						<i id='cleanInputUserNameId' tapmode onclick="cleanInput('cleanInputUserNameId','userName');" class="mui-icon mui-icon-closeempty hide"></i>
+					</div>
+					<div class="mui-input-row ">
+						<label>身份证</label>
+						<input class="" id='idCardNo' type="text" tapmode maxlength="18" oninput="if(value.length>18)value=value.slice(0,18);"  onkeyup="validateIDCard();" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"  placeholder="请输入身份证号">
+						<i id='cleanInputIDId' tapmode onclick="cleanInput('cleanInputIDId','idCardNo');"  class="mui-icon mui-icon-closeempty hide"></i>
+					</div>
+					<div class="mui-input-row input-prompt-row">
+						<label>银行卡号</label>
+						<div id="cardShowDiv" class="input-prompt hide" >
+							<i></i>
+							<div class="input-prompt-box" id="cardNoDiv"></div>
+						</div>
+						<input class="" id='cardNo' type="number" maxlength="25" oninput="if(value.length>25)value=value.slice(0,25);"  onafterpaste="this.value=this.value.replace(/[^\d]/g,'') "
+						onfocus="validateBankCard0();"  onkeyup="validateBankCard1();" onblur="validateBankCard2();" placeholder="请输入银行卡号">
+						<div id="bankCardNoTips" class="bankcard-prompt hide"><span id="bankName"></span><span id="quotaName"></span></div>
+						<i id='cleanInputBankId' tapmode onclick="cleanInput('cleanInputBankId','cardNo');" class="mui-icon mui-icon-closeempty hide"></i>    
+					</div>
+
+					<div class="mui-input-row">
+						<label>手机号码</label>
+						<input id='mobile' type="number"  onkeyup="validateMobile();"  oninput="if(value.length>11)value=value.slice(0,11);" maxlength="11" placeholder="请输入银行预留手机号">
+
+						<i id='cleanInputMobileId' tapmode onclick="cleanInput('cleanInputMobileId','mobile');" class="mui-icon mui-icon-closeempty hide"></i>
+					</div>
+
+					<div class="mui-input-row">
+						<label>验证码</label>
+						<input id="smsCode" type="number" maxlength="6"  oninput="if(value.length>6)value=value.slice(0,6);" class="mui-input-clear mui-input" placeholder="请输入验证码">
+						<div>
+							<input id="sendSms" tapmode onclick="gainCode();" class="fm-item-btn" value="获取验证码" type="button" disabled>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="prompt-text-ordinary">
+				信息仅用于身份认证，加密处理保障您的信息安全。
+			</div>
+			<div class="rechange-btn">
+				<button type="button" class="mui-btn mui-btn-block mui-btn-primary" tapmode onclick="bindSubmit();" >确定</button>
+			</div>
+			<div class="rechange-more">
+				<a tapmode onclick="openBankList();">银行限额表</a>
+				<a tapmode onclick="question();">常见问题</a>
+			</div>
+			<div id="errDiv" class="toast-box hide">银行卡号输入错误</div>
+
+		</div>
+
+	<div class="layer-content hide" id="numKey">
+        <div class="form_edit clearfix">
+            <div class="form_edit_left">
+                <div class="num" tapmode onclick="callbackAddNumEric('1')">1</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('2')">2</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('3')">3</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('4')">4</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('5')">5</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('6')">6</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('7')">7</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('8')">8</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('9')">9</div>
+                <div id="numEricXID" class="num" tapmode onclick="callbackAddNumEric('X')">X</div>
+                <div class="num active" tapmode >.</div>
+                <div class="num" tapmode onclick="callbackAddNumEric('0')">0</div>
+            </div>
+            <div class="form_edit_right" >
+                <div id="remove" tapmode onclick="callbackRemoveNumEric()">
+                    <i>
+                        <img src='../../image/icon-delete.png' />
+                    </i>
+                </div>
+                <div class="closeWrap" id="beSure" tapmode onclick="callbackBeSure()">确定</div>
+            </div>
+        </div>
+    </div>
+
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/library/jquery.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/library/base64.js"></script>
+	<script type="text/javascript" src="../../script/member/bindNewBankCard.js"></script>
+	<script type="text/javascript" src="../../script/common/numEric.js"></script> 
+  	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>优惠券</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.css" />
+
+</head>
+<body>
+
+<div class="mui-content">
+	<ul class="coupon-tab">
+		<li id="active0" class="current" tapmode onclick="queryCouponList(0);">未使用</li>
+		<li id="active1" tapmode onclick="queryCouponList(1);">已使用</li>
+		<li id="active-1" tapmode onclick="queryCouponList(-1);">已过期</li>
+	</ul>
+    <div class="coupon-box">
+      <script id="coupon-template" type="text/x-dot-template">
+
+          {{ for(var i=0; i< it.length; i++) {}}
+                  {{ if(it[i].status === 0){ }}
+                    {{ if(it[i].expiredTime >= new Date().getTime()){ }}
+                         <div class="coupon-list coupon-bgc_{{=it[i].couponInstance.template.category.id}}">
+                    {{ } else { }}
+                          <div class="coupon-list coupon-bgc_gray coupon_expired">
+                    {{ } }}
+
+                  {{ } else if(it[i].status === 1) { }}
+                    <div class="coupon-list coupon-bgc_gray coupon_used">
+                  {{ } else if(it[i].status === -2){ }}
+                    <div class="coupon-list coupon-bgc_gray coupon_notactive">
+                  {{ } else { }}
+                    <div class="coupon-list coupon-bgc_gray coupon_expired">
+                  {{ } }}
+                    <div class="coupon-name">{{=it[i].couponInstance.template.category.name}}</div>
+                    <div class="coupon-c">
+                        <div class="coupon-c-top">
+                            <div tapmode onclick="openQRcode('{{=it[i].no}}', '{{=it[i].sign}}', '{{=it[i].timeStamp}}');" class="coupon-c-look">查看二维码<i></i></div>
+                            <div class="coupon_cdigit mui-clearfix">
+                            
+                                <p class="coupon_num"><span>{{=it[i].couponInstance.couponValue}}</span>{{=it[i].couponInstance.template.category.unitName}}</p>
+
+                                {{ if(it[i].status === 1){ }}
+                                  <p class="text-right ">使用时间：{{=global.formatDate(it[i].usedTime, 'yyyy-MM-dd') }}</p>
+                                {{ } else { }}
+                                  {{ if(it[i].expiredTime - new Date().getTime() <= 259200000 && it[i].expiredTime >= new Date().getTime()){ }}
+                                      <p class="text-right coupon_prompt">有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</p>
+                                  {{ } else { }}
+                                      <p class="text-right">有效期至：{{=global.formatDate(it[i].expiredTime, 'yyyy-MM-dd') }}</p>
+                                  {{ } }}
+
+                                {{ } }}
+
+                            </div>
+
+                            <div class="coupon_cdigit mui-clearfix">
+                                <p class="coupon_title">{{=it[i].couponInstance.name}}</p>
+                                <div class="triangle-facing-top" onclick="showDetail({{=it[i].id}})">详情<i></i></div>
+                            </div>
+
+                        </div>
+                        <div id="detail{{=it[i].id}}" class="coupon-c-desc hide">{{=it[i].couponInstance.detail}}</div>
+                    </div>
+              </div>
+          {{ } }}
+      </script>
+      <div id="coupon-content">
+      </div>
+	</div>
+	<div id="no-records" class="no-address hide">
+		<i></i>
+		暂无记录
+	</div>
+	
+	<div class="bomb-box bomb-coupon-box hide" id="redcodeDiv">
+	    <div class="bomb-c">
+	        <div class="couponcode-img" id="qrcodeDiv"></div>
+	        <p class="bomb-c-wz">优惠券二维码</p>
+	    </div>
+	</div>
+	<div class="mui-backdrop hide" id="redcodeBox" onclick="redcodeClose();"></div>
+	
+	
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/library/qrcode.js"></script>
+<script type="text/javascript" src="../../script/library/jqueryQrcode.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/couponList.js"></script>
+</html>

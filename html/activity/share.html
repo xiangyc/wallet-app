@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html style="background:none;">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>金算子</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+   		<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	</head>
+	<body style="background:none;">
+	 	<div id="shareDiv" class="share-box ">
+		<ul class="share-box-ul mui-clearfix">
+			<li onclick="shareWx('session');" class="wechat-icon">
+                <i></i>微信好友
+            </li>
+            <li onclick="shareQzone('qfriend');"  class="qq-icon">
+                <i></i>QQ好友
+            </li>
+            <li onclick="shareWx('timeline');"  class="friend-icon">
+                <i></i>朋友圈
+            </li>
+             <li onclick="shareQzone('qzone');"  class="qzone-icon">
+				<i></i>QQ空间
+			</li>
+		</ul>
+		<div class="mui-popup-buttons">
+          <span onclick="closeShare();" class="mui-popup-button">取消</span>
+       </div>
+	   </div>
+		<div id="buybackdrop" class="mui-backdrop "></div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript">
+		var linkSrc;
+		var title;
+		var subTitle;
+		var winName = "loginWin";
+		var params = { "title" : "登录" };
+		
+		apiready = function(){
+
+			linkSrc = api.pageParam.linkSrc ;
+			title = api.pageParam.title;
+			subTitle = api.pageParam.subTitle;
+
+		}
+
+		function closeShare(){
+			$api.removeCls($api.byId('shareDiv'), 'share-acin');
+			//$api.addCls($api.byId('shareDiv'), 'share-acout');
+			$api.addCls($api.byId('shareDiv'), 'hide');
+			//$api.addCls($api.byId('buybackdrop'), 'hide');
+			api.closeFrame();
+	
+		}
+		    
+		function shareQzone(shareType) {
+			if (!global.isValidUser()) {
+				global.openWinName(winName, '../member/login', params);
+				return;
+			}
+
+			var qq = api.require('qq');
+			qq.installed(function(ret, err) {
+				if (ret.status) {
+					qq.shareNews({
+						url : global.getShareUri() + linkSrc + '&share=1&src=1&memberId=' + global.getMemberId()+'&mobile=' + global.getUserMobile() ,
+						title : title,
+						description : subTitle,
+						imgUrl : global.getShareUri() + '/images/contact-logo.jpg',
+						type : shareType
+					},function(ret, err) {
+						if (ret.status) {
+							api.ajax({
+								method : 'put',
+								cache : false,
+								dataType : 'json',
+								returnAll : false,
+								url : global.getRequestUri() + '/members/update/shareStatistics',
+								headers : global.getRequestToken(),
+								data : {
+									values : {
+										'platType' : shareType,
+										'type' : 2
+									}
+								}
+							}, function(ret, err) {
+							});
+						} else {
+							//global.setToast('分享失败');
+						}
+					});
+				} else {
+					global.setToast('当前设备未安装QQ客户端');
+				}
+			});
+		}
+	
+		function shareWx(shareType) {
+			if (!global.isValidUser()) {
+				global.openWinName(winName, '../member/login', params);
+				return;
+			}
+	
+			var wx = api.require('wx');
+			wx.isInstalled(function(ret, err) {
+				if (ret.installed) {
+					wx.shareWebpage({
+						scene : shareType,
+						title : title,
+						description : subTitle,
+						thumb : 'widget://image/icon.png',
+						contentUrl :  global.getShareUri() + linkSrc + '&share=1&src=1&memberId=' + global.getMemberId()+'&mobile=' + global.getUserMobile() ,
+					}, function(ret, err) {
+						if (ret.status) {
+							api.ajax({
+								method : 'put',
+								cache : false,
+								dataType : 'json',
+								returnAll : false,
+								url : global.getRequestUri() + '/members/update/shareStatistics',
+								headers : global.getRequestToken(),
+								data : {
+									values : {
+										'platType' : shareType,
+										'type' : 2
+									}
+								}
+							}, function(ret, err) {
+							});
+						} else {
+							//global.setToast('分享失败');
+						}
+					});
+				} else {
+					global.setToast('当前设备未安装微信客户端');
+				}
+			});
+		}
+	</script>
+</html>

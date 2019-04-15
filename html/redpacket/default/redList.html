@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>红包详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/redpacket.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/animate.css"/>
+</head>
+<body>
+<div class="red-box red-default" id="00">
+    <div class="red-html red-detail mui-bg-white">
+
+        <div class="red-body-bg"></div>
+        <div class="red-bg"></div>
+
+         <div class="red-con">
+
+                <div class="red-info"><span id="receiveName">胡子珍</span>发的黄金红包</div>
+
+                <div class="red-details-icon">
+                    <i id="recordText">普</i>
+                </div>
+                <div class="red-details-text">
+                    <p id="receiveText">zsdfsdf</p>
+                    <h1 id="amountText"><span id="amountSpan">0</span><i>毫克</i></h1>
+                    <p id="priceText" class="color6">价值约<span id="priceEm">0.00</span>元</p>
+                </div>
+
+                <div class="red-details-codeshare <!--hide-->" id="redcodeshare">
+                    <a class="code-red-bt" onclick="codeshare();" id="codesharebt">二维码分享</a> <a class="sendout-red-bt" onclick="share();" id="sendoutRedbt">文字链接分享</a>
+                </div>
+
+                <div class=" red-details-register <!--hide-->" id="redRegisterCount">
+                    新增注册<em id="newUserCount">0</em>人，老用户<em id="oldUserCount">0</em>人</br>
+                    <!--进行中-->
+                    <div id="span1" class="">新增注册用户平台补助<em id="subsidy1">0</em>元/人，红包到期后补助自动结算</div>
+                    <!--已过期-->
+                    <div id="span2" class="">平台全额补助</div>
+                    <!--已抢完-->
+                    <div id="span3" class="">新增注册用户平台补助<em id="subsidy2">0</em>元/人，到期新增<em id="subsidy3">0</em>个用户</br>
+                        <em id="subsidy4">0</em>元补助已经发放到您资金账户</div>
+                </div>
+
+
+            <div class="red-details-con" id="redDetailsList">
+                <h1 id="redListDiv1" class="red-details-list-header">
+                    已领取<em id="pickCount">1111</em><em id="redCount">2222</em>，
+                    <em id="grabFinish"><em id="amount1Span">0</em><em id="amount2Span"></em>毫克<em id="statusName" class="status-name">已抢完</em></em>
+                </h1>
+
+                <script id="detail-template" type="text/x-dot-template">
+                    {{ for(var i=0; i< it.length; i++) { }}
+                    <li>
+                        <img src="{{=it[i].avatar}}" class="red-details-list-img" onerror="this.src='../../../image/redpacket/default-avatar-img.jpg'" />
+                        <div class="red-details-list-right">
+                            <div class="red-details-list-text">
+                                <div class="red-details-title"><i>
+                                    {{if(it[i].nickName){ }}
+                                    {{=it[i].nickName }}
+                                    {{ }else { }}
+                                    无
+                                    {{ } }}
+                                </i>
+                                    {{ if(it[i].quantity === pickCount && it[i].bestLuck === 1) { }}
+                                    <span><i><img src="../../../image/redpacket/luck-optimum-icon.png"/></i>手气最佳</span>
+                                    {{ } }}
+                                </div>
+                            </div>
+                            <div class="red-details-list-text">
+                                <span>{{=global.formatDate(it[i].createTime, 'yyyy-MM-dd hh:mm:ss') }}</span>
+                            </div>
+                            <div class="red-details-mg"><span>{{=it[i].amount}}</span>毫克</div>
+                        </div>
+                    </li>
+                    {{ } }}
+                </script>
+
+                <ul class="red-details-list-ul" id="detail-content">
+
+                    <li>
+                        <i class="news-icon"></i>
+                        <img src="../../../image/redpacket/default-avatar-img.jpg" class="red-details-list-img" onerror="this.src='../../../image/redpacket/default-avatar-img.jpg'" />
+                        <div class="red-details-list-right">
+                            <div class="red-details-list-text">
+                                <div class="red-details-title">
+                                    <i>
+                                    无
+                                   </i>
+                                    <span><i><img src="../../../image/redpacket/luck-optimum-icon.png"/></i>手气最佳</span>
+                                </div>
+                            </div>
+                            <div class="red-details-list-text">
+                                <span>yyyy-MM-dd hh:mm:ss</span>
+                            </div>
+                            <div class="red-details-mg"><span>1000</span>毫克</div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <img src="../../../image/redpacket/default-avatar-img.jpg" class="red-details-list-img" onerror="this.src='../../../image/redpacket/default-avatar-img.jpg'" />
+                        <div class="red-details-list-right">
+                            <div class="red-details-list-text">
+                                <div class="red-details-title">
+                                    <i>
+                                        无
+                                    </i>
+                                    <span><i><img src="../../../image/redpacket/luck-optimum-icon.png"/></i>手气最佳</span>
+                                </div>
+                            </div>
+                            <div class="red-details-list-text">
+                                <span>yyyy-MM-dd hh:mm:ss</span>
+                            </div>
+                            <div class="red-details-mg"><span>1000</span>毫克</div>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div id="no-records" class="no-address" style="padding-top: 30px;">
+                <i></i>
+                暂无记录
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div id="shareDiv" class="share-box hide">
+    <ul class="share-box-ul share-box-ul-50 mui-clearfix">
+        <li onclick="shareWx('session');" class="wechat-icon">
+            <i></i>微信好友
+        </li>
+        <li onclick="shareWx('timeline');"  class="friend-icon">
+            <i></i>朋友圈
+        </li>
+    </ul>
+    <div class="mui-popup-buttons">
+        <span onclick="closeShare();" class="mui-popup-button">取消</span>
+    </div>
+</div>
+<div id="backdrop"  class="mui-backdrop hide"></div>
+
+<div class="bomb-box bomb-red-box hide" id="redcodeDiv">
+    <div class="bomb-c">
+        <div class="rebqrcode-img" id="qrcodeDiv"></div>
+        <p class="bomb-c-wz">红包专属二维码</p>
+    </div>
+</div>
+<div class="mui-backdrop hide" id="redcodeBox" onclick="redcodeClose();"></div>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../../script/core/global.js"></script>
+<script type="text/javascript" src="../../../script/common/page.js"></script>
+<script type="text/javascript" src="../../../script/common/shareImage.js"></script>
+<script type="text/javascript" src="../../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../../script/library/jqueryQrcode.js"></script>
+<script type="text/javascript" src="../../../script/library/qrcode.js"></script>
+<script type="text/javascript" src="../../../script/redpacket/redList.js"></script>
+</html>

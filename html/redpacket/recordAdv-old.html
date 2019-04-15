@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>收到的红包/发出的红包</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+</head>
+<body>
+<div class="red-box">
+    <div class="adv">
+        <img src="../../image/redpacket/adv_banner.jpg" />
+    </div>
+    <ul class="red-tab">
+        <li tapmode onclick="switchStatusDiv(1);" id="notexpiredLi" class="active" >未过期</li>
+        <li tapmode onclick="switchStatusDiv(2);" id="expiredLi">已过期</li>
+    </ul>
+
+    <div class="red-record-con">
+
+        <div id="notexpiredDiv" class="reach-con">
+            <script id="notexpired-template" type="text/x-dot-template">
+                <div class="red-record-list red-record-list-arrow">
+                    <ul>
+                        {{ for(var i=0; i< it.length; i++) { }}
+                        <li tapmode onclick="openDetail('{{=it[i].securityCode}}',2,{{=it[i].amount}});" >
+                            {{ switch(it[i].geType) {
+                                    case 1:
+                                     }}
+                                      <h6 class="red-record-luck">拼</h6>  
+                                    {{ break;
+                                    case 2: }}
+                                      <h6 class="red-record-default">普</h6>
+                                    {{ break;
+                                    default: }}
+                            {{ } }}
+                        
+                            <div class="red-record-list-con">
+                                <div class="red-record-list-con-left record-adv-message">
+                                    <span>
+                                    {{if(it[i].remark){ }}
+                                     {{=it[i].remark }}
+                                    {{ }else { }}
+                                        财源滚滚，日进斗金
+                                    {{ } }}
+                                    </span>
+                                    <i>有效期至：{{=global.formatDate(it[i].expireTime, 'yyyy-MM-dd hh:mm:ss')}}</i>
+                                </div>
+                                <div class="red-record-list-con-right">
+                                    <span>{{=it[i].amount}}毫克</span>
+                                    <i>{{=it[i].quantity }}个</i>
+                                </div>
+                            </div>
+                        </li>
+                        {{ } }}
+
+                    </ul>
+                </div>
+            </script>
+
+            <div id="notexpired-content"></div>
+
+        </div>
+
+        <div id="expiredDiv" class="reach-con hide">
+
+            <script id="expired-template" type="text/x-dot-template">
+                <div class="red-record-list red-record-list-arrow">
+                    <ul>
+                        {{ for(var i=0; i< it.length; i++) { }}
+                        <li tapmode onclick="openDetail('{{=it[i].securityCode}}',2,{{=it[i].amount}});" class="red-record-gray">
+                        {{ switch(it[i].geType) {
+                            case 1: }}
+                            <h6 class="red-record-luck">拼</h6>
+                            {{ break;
+                            case 2: }}
+                            <h6 class="red-record-default">普</h6>
+                            {{ break;
+                            default: }}
+                            }
+                            {{ } }}
+                            <div class="red-record-list-con">
+                                <div class="red-record-list-con-left record-adv-message">
+                                    <span>
+                                   {{if(it[i].remark){ }}
+                                     {{=it[i].remark }}
+                                    {{ }else { }}
+                                        财源滚滚，日进斗金
+                                    {{ } }}
+                                    </span>
+                                    <i>有效期至：{{=global.formatDate(it[i].expireTime, 'yyyy-MM-dd hh:mm:ss') }}</i>
+                                </div>
+                                <div class="red-record-list-con-right">
+                                    <span>{{=it[i].amount}}毫克</span>
+                                    <i>{{=it[i].quantity }}个</i>
+                                </div>
+                            </div>
+                        </li>
+                        {{ } }}
+                    </ul>
+                </div>
+            </script>
+
+            <div id="expired-content"></div>
+        </div>
+
+    </div>
+
+    <div id="no-records" class="no-address hide">
+      <i></i>暂无记录
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/redpacket/recordAdv.js"></script>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>用户抽奖</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+
+</head>
+<body id="bodyRoll" class="bodyroll">
+	<div class="mui-content prize-box">
+
+		<img class="prize-top" src="../../image/activity/prize/prize-top.jpg" />
+		<div class="prize-main">
+			<div class="prize-banner">
+				<div class="turnplate" style="background-image:url(../../image/activity/prize/turnplate-bg.png);background-size:100% 100%;">
+					<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+					<img id="lottery" class="pointer" src="../../image/activity/prize/turnplate-pointer.png" onclick="showClick();" />
+				</div>
+			</div>
+
+			<p class="opportunity hide" id="opportunity">你还有<em id="times">0</em>次抽奖机会</p>
+
+			<div class="prize-main-bt">
+				<button onclick="myPrize()">我的奖品</button>
+				<button onclick="activityRemark()">活动说明</button>
+			</div>
+
+			<div class="record-box">
+			   <div class="prize-title">中奖记录</div>
+
+			        <script id="prize-template" type="text/x-dot-template">
+			            {{ for(var i=0; i< it.length; i++) { }}  
+
+			            	<li><span>{{=it[i].member.hideMobile}}</span>抽中<em>{{=it[i].prizeInstance.prize.name}}</em></li>
+
+			            {{ } }}    
+			        </script>
+
+					<ul class="winning-record-li">
+			        	<div id="prize-content"></div>
+			        </ul> 
+
+			</div>
+
+			<div class="record-box">
+				<div class="prize-title">活动奖品</div>
+				<div class="event-prizes mui-clearfix" id="prizeDiv">
+			
+				</div>
+			</div>
+
+			<div id="sysVersionDiv" class="foot-explain">
+				<p id="sysVersionDiv1" class="hide">本活动最终解释权归财易通智金所有</p>
+				<p id="sysVersionDiv2" class="hide">本活动与苹果公司无关</p>
+			</div>
+
+	 </div>
+
+	</div>
+
+	<!--活动说明-->
+	<div id="actContentDiv" class="explain-bomb-box hide">
+		<h4>活动说明</h4>
+		<i class="close" onclick="contentClose()"></i>
+		<div class="explain-bomb-c" id="contentDiv">
+		
+		</div>
+	</div>
+
+		<!--抽奖次数已经用完-->
+	<div id='loginDiv' class="explain-bomb-box explain-bomb-boxt30 hide">
+		<div class="prompt mui-clearfix">
+			<h3>请先登录参与抽奖活动</h3>
+			<div class="prompt-btn prompt-btn-ok" onclick="login()">确定</div>
+			<div class="prompt-btn prompt-btn-cancel" onclick="hiddenDialog('loginDiv')">取消</div>
+		</div>
+	</div>
+
+
+	<!--恭喜您获得一等奖！-->
+	<div id='giftDiv' class="explain-bomb-box hide">
+		<div class="prompt">
+			<img class="prize-package" src="../../image/activity/prize/prize-package.png" />
+			<h2 class="red" id="giftWard">恭喜您获得一等奖！</h2>
+			<h3 id="giftName">观音卡一张</h3>
+			<div class="prompt-btn" onclick="hiddenDialog('giftDiv')">确定</div>
+		</div>
+	</div>
+
+	<!--抽奖次数已经用完-->
+	<div id='timesUsedDiv' class="explain-bomb-box explain-bomb-boxt30 hide">
+		<div class="prompt">
+			<img class="prize-package" src="../../image/activity/prize/unhappy.png" />
+			<h3 id='timesUsedRemark'></h3>
+			<div class="prompt-btn" onclick="hiddenDialog('timesUsedDiv')">确定</div>
+		</div>
+	</div>
+
+		<!--抽奖次数已经用完-->
+	<div id='thanksDiv' class="explain-bomb-box explain-bomb-boxt30 hide">
+		<div class="prompt">
+			<img class="prize-package" src="../../image/activity/prize/unhappy.png" />
+			<h3 id="giftName">没中奖，谢谢参与！</h3>
+			<div class="prompt-btn" onclick="hiddenDialog('thanksDiv')">确定</div>
+		</div>
+	</div>
+
+
+	 <div id='backdropDiv' class="mui-backdrop hide"></div> 
+
+</body>
+
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/library/doT.js"></script>
+    <script type="text/javascript" src="../../script/common/page.js"></script>
+    <script type="text/javascript" src="../../script/core/global.js"></script>
+    <script type="text/javascript" src="../../script/common/cache.js"></script>
+    <script type="text/javascript" src="../../script/common/validate.js"></script>
+
+    <script type="text/javascript" src="../../script/library/jquery.js"></script>    
+    <script type="text/javascript" src="../../script/library/awardRotate.js"></script>
+    <script type="text/javascript" src="../../script/portal/prize.js"></script>
+
+</html>

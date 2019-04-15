@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+	<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<style type="text/css">
+	        .mui-btn-fb{ border-radius: 0 !important; position: fixed !important; margin-bottom: 0 !important; bottom: 0; background-color:transparent;
+	        height:66px;padding-top: 22px;}
+	        .shallowShow{ background-color: #fff;  
+					animation: animationShow 1s;
+					-moz-animation: animationShow 1s;	/* Firefox */
+					-webkit-animation: animationShow 1s;	/* Safari 和 Chrome */
+					-o-animation: animationShow 1s;	/* Opera */
+					border-bottom: 1px solid #e8e8e8;
+				}
+			.shallowHide{
+					animation: animationHide 1s;
+					-moz-animation: animationHide 1s;	/* Firefox */
+					-webkit-animation: animationHide 1s;	/* Safari 和 Chrome */
+					-o-animation: animationHide 1s;	/* Opera */
+			}
+	        @keyframes animationShow
+			{
+			0% {opacity: 0;}
+			20% {opacity: 0.2;}
+			40% {opacity: 0.4;}
+			60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+			100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-moz-keyframes animationShow /* Firefox */
+			{
+			0% {opacity: 0;}
+			20% {opacity: 0.2;}
+			40% {opacity: 0.4;}
+			60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+			100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-webkit-keyframes animationShow /* Safari 和 Chrome */
+			{
+			0% {opacity: 0;}
+			20% {opacity: 0.2;}
+			40% {opacity: 0.4;}
+			60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+			100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-o-keyframes animationShow /* Opera */
+			{
+			0% {opacity: 0;}
+			20% {opacity: 0.2;}
+			40% {opacity: 0.4;}
+			60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+			100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			
+			 @keyframes animationHide
+			{
+			0% {background:rgba(255,255,255,1)}
+			20% { background-color:rgba(255,255,255,0.6) }
+			40% {background-color:rgba(255,255,255,0.4)}
+			60% {background-color:rgba(255,255,255,0.2)} 
+			100% {background-color:rgba(255,255,255,0);}
+			}
+			@-moz-keyframes animationHide /* Firefox */
+			{
+			0% {background:rgba(255,255,255,1)}
+			20% { background-color:rgba(255,255,255,0.6) }
+			40% {background-color:rgba(255,255,255,0.4)}
+			60% {background-color:rgba(255,255,255,0.2)} 
+			100% {background-color:rgba(255,255,255,0)}
+			}
+			@-webkit-keyframes animationHide /* Safari 和 Chrome */
+			{
+			0% {background:rgba(255,255,255,1)}
+			20% { background-color:rgba(255,255,255,0.6) }
+			40% {background-color:rgba(255,255,255,0.4)}
+			60% {background-color:rgba(255,255,255,0.2)} 
+			100% {background-color:rgba(255,255,255,0)}
+			}
+			@-o-keyframes animationHide /* Opera */
+			{
+			0% {background:rgba(255,255,255,1)}
+			20% { background-color:rgba(255,255,255,0.6) }
+			40% {background-color:rgba(255,255,255,0.4)}
+			60% {background-color:rgba(255,255,255,0.2)} 
+			100% {background-color:rgba(255,255,255,0)}
+			}
+			.mui-bar-nav~.mui-content{ padding-top: 0; }
+			.bar-icon-scan-black{ background: url(../image/icon-scan-black.png) center center no-repeat; background-size: 34px 34px;}
+			.bar-icon-notice-black{ background: url(../image/icon-main-notice-black.png) center center no-repeat; background-size: 34px 34px; position:relative; text-align:center;}
+
+			.mui-bar.mui-bar-nav.mui-btn-fb{ webkit-box-shadow: none; box-shadow: none; }
+			.mui-bar.mui-bar-nav.mui-btn-fb .bar-nav-icon{ width: 34px; height: 44px; display: inline-block; position: absolute; z-index: 3; }
+			#scanA{ left: 10px; }
+			#noticeA{ right: 10px; }
+			.bar-icon-scan{ background: url(../image/icon-scan.png) center center no-repeat; background-size: 34px 34px;}
+			.bar-icon-notice{ background: url(../image/icon-main-notice.png) center center no-repeat; background-size: 34px 34px; position:relative; text-align:center;}
+			.bar-icon-notice span,.bar-icon-notice-black span{ width: 15px; height: 15px;}
+			.bar-icon-notice span,.bar-icon-notice-black span{position:absolute;right:-3px;top:8px;background:#ff3b30;color:#fff;width:14px;height:14px;border-radius:100%;line-height:16px;font-size:9px;}
+			html,body{ background:transparent !important;  }
+			.index-search-input{ width: 100%; padding: 0 47px; height: 32px; margin: 6px 0; position: relative;  }
+            .index-search-input .icon-search{ width: 16px; height: 16px; background: url(../image/icon-search-white.png) no-repeat; background-size: 16px 16px; position:absolute; left: 57px; top: 8px;  }
+			.index-search-input.index-search-input-black .icon-search{ background: url(../image/icon-search-black.png) no-repeat; background-size: 16px 16px;  }
+			.index-search-input div{
+				background-color: rgba(255,255,255,0.5); height: 32px; margin:0;  border-radius: 16px;
+				text-align: left; color: #fff; font-size: 14px;  padding: 10px 15px 10px 34px;
+			}
+			.index-search-input.index-search-input-black div{ background-color: rgba(246,246,246,1); color: #2d2d2d; }
+		</style>
+</head>
+<body>
+		<header id="mui-header" class="mui-bar mui-bar-nav mui-btn-fb">
+			<a tapmode id="scanA" onclick="scan();" class="bar-nav-icon bar-icon-scan"></a>
+			<a tapmode id="noticeA"onclick="openNoticeList();" class="bar-nav-icon bar-icon-notice"><span class="hide" id="unreadNum"></span></a>
+			<div class="index-search-input" id="searchA">
+				<i class="icon-search"></i>
+				<div tapmode onclick="search();"></div>
+			</div>
+		</header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/library/jquery.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript">
+	var serviceFlag,activityFlag;
+	apiready = function(){
+		changeNoticeStatus();
+		
+		api.addEventListener({
+			name : 'loginRefresh'
+		}, function(ret, err) {
+
+			changeNoticeStatus();
+		});
+
+		api.addEventListener({
+			name : 'logOutRefresh'
+		}, function(ret, err) {
+
+			changeNoticeStatus();
+		});
+
+		// api.addEventListener({
+		//     name:'showNoticeCss'
+	 //    },function(ret,err){
+	 //    	changeNoticeStatus();
+	 //    });
+
+		api.addEventListener({
+	        name:'scrollTopEvent'
+        },function(ret,err){
+        	if(!$api.hasCls($api.byId('mui-header'), 'shallowShow')){
+        		$api.removeCls($api.byId('mui-header'), 'shallowHide');
+            	$api.addCls($api.byId('mui-header'), 'shallowShow');
+            	
+            	$api.removeCls($api.byId('scanA'), 'bar-icon-scan');
+            	$api.removeCls($api.byId('noticeA'), 'bar-icon-notice');
+            	$api.addCls($api.byId('scanA'), 'bar-icon-scan-black');
+            	$api.addCls($api.byId('noticeA'), 'bar-icon-notice-black');
+
+				$api.addCls($api.byId('searchA'), 'index-search-input-black');
+
+			}
+        });
+        
+		api.addEventListener({
+	        name:'scrollBottomEvent'
+        },function(ret,err){
+        	if(!$api.hasCls($api.byId('mui-header'), 'shallowHide')){
+        		$api.removeCls($api.byId('mui-header'), 'shallowShow');
+        		$api.addCls($api.byId('mui-header'), 'shallowHide');
+        		
+        		$api.addCls($api.byId('scanA'), 'bar-icon-scan');
+            	$api.addCls($api.byId('noticeA'), 'bar-icon-notice');
+            	$api.removeCls($api.byId('scanA'), 'bar-icon-scan-black');
+            	$api.removeCls($api.byId('noticeA'), 'bar-icon-notice-black');
+
+				$api.removeCls($api.byId('searchA'), 'index-search-input-black');
+
+			}
+        });
+
+
+        api.addEventListener({
+		    name:'readNoticeTimeEvent'
+	    },function(ret,err){
+	    	$api.setStorage('noticeFlag','false');
+	    	global.setReadNoticeTime(ret.value.readNoticeTime);
+	    	global.setPublishTime(ret.value.publishTime);
+	    	var noticeFlag = $api.getStorage('noticeFlag');
+
+	    	if(noticeFlag == 'false' && serviceFlag == 'false' && activityFlag == 'false'){
+				$api.addCls($api.byId('unreadNum'), 'hide');
+			} else {
+				$api.removeCls($api.byId('unreadNum'), 'hide');
+			}
+	    });
+
+
+		api.addEventListener({
+		    name:'readTimeEvent'
+	    },function(ret,err){
+	    	changeNoticeStatus();
+	    });
+
+	};
+
+	
+	function changeNoticeStatus() {
+
+		api.ajax({
+	        method : 'get',
+	        cache : false,
+	        dataType : 'json',
+	        returnAll : false,
+	        headers : global.getRequestToken(),
+	        url : global.getRequestUri() + '/notices',
+	        data : {
+				'start' : 0,
+				'maxResults' : 1
+			}
+	    }, function(ret1, err) {
+	        if(ret1){
+	        	serviceTimeAjax(ret1);
+	        }
+	    });
+    
+	}
+	
+	
+	function serviceTimeAjax(ret1){
+		api.ajax({
+	        method : 'get',
+	        cache : false,
+	        dataType : 'json',
+	        returnAll : false,
+	        headers : global.getRequestToken(),
+	        url : global.getRequestUri() + '/service-message/last-time',
+	        data : {
+				'start' : 0,
+				'maxResults' : 1
+			}
+	    }, function(ret2, err) {
+	        if(ret2){
+	        	activityTimeAjax(ret1,ret2);
+	        } 
+	    });
+	}
+	
+	
+	function activityTimeAjax(data1,data2){
+		api.ajax({
+	        method : 'get',
+	        cache : false,
+	        dataType : 'json',
+	        returnAll : false,
+	        headers : global.getRequestToken(),
+	        url : global.getRequestUri() + '/member-notification/last-time',
+	        data : {
+				'start' : 0,
+				'maxResults' : 1
+			}
+	    }, function(data3, err) {
+	        if(data3){
+	        	
+	        	var noticeFlag = $api.getStorage('noticeFlag');
+
+				if(!noticeFlag || noticeFlag == 'false'){
+					noticeFlag = getNoticeTime(data1);
+					$api.setStorage('noticeFlag',noticeFlag);
+				}
+			
+				if(data2 && data2.obj){
+					serviceFlag = getServiceTime(data2);
+				} else{
+					serviceFlag = 'false';
+				}
+
+				if(data3 && data3.obj){
+					activityFlag = getActivityTime(data3);
+				} else{
+					activityFlag = 'false';
+				}
+
+				if(noticeFlag === 'false' && serviceFlag === 'false' && activityFlag === 'false'){
+					$api.addCls($api.byId('unreadNum'), 'hide');
+				} else {
+					$api.removeCls($api.byId('unreadNum'), 'hide');
+				}
+	        }
+	    });
+	}
+
+
+	//判断平台公告是否已读
+	function getNoticeTime(ret){
+
+		var readNoticeTime = global.getReadNoticeTime();
+		var publishTime = global.getPublishTime();
+
+		if (ret) {
+			if (readNoticeTime && publishTime){
+
+				if(ret.items && ret.items.length >0){
+					var lastPublishTime = ret.items[0].publishTime;
+					if (lastPublishTime > publishTime) {
+						publishTime = lastPublishTime;
+					}
+					if (readNoticeTime >= publishTime) {
+						return 'false';
+					} else {
+						return 'true';
+					}
+				}
+			} else {
+				return 'true';
+			}
+		}
+
+	}
+
+
+	/*判断服务通知是否已读*/
+	function getServiceTime(ret) {
+
+		if (!global.isValidUser()) {
+			return 'false';
+		}
+
+	    if (ret && ret.success) {
+	    	
+	    	var readServiceTime = ret.obj.lastReadTime;
+	    	var publishServiceTime = ret.obj.createTime;
+
+	    	if (readServiceTime != null && publishServiceTime != null){
+                if (readServiceTime >= publishServiceTime) {
+                    return 'false';
+                } else {
+                    return 'true';
+                }
+            } else {
+                return 'true';
+            }
+		}
+
+	}
+
+	/*判断活动精选是否已读*/
+	function getActivityTime(ret) {
+
+		if (!global.isValidUser()) {
+			return 'false';
+		}
+
+	    if (ret && ret.success) {
+
+	    	var readActivityTime = ret.obj.lastReadTime;
+	    	var publishActivityTime = ret.obj.createTime;
+
+			if (readActivityTime != null && publishActivityTime != null){
+				if (readActivityTime >= publishActivityTime) {
+                    return 'false';
+                } else {
+                    return 'true';
+                }
+			} else {
+				return 'true';
+			}
+		}
+
+	}
+	
+	/**
+	 *扫一扫
+	 */
+	function scan(){
+		var scanner = api.require('FNScanner');
+		scanner.openScanner({
+	    	autorotation: true
+		},function( ret, err ){     
+	    	if(ret && ret.content){
+	    	 	if(ret.content.indexOf('&sign=') > 0 && !global.isValidUser()){
+		    	 	var params = { "title" : "登录" };
+					global.openWinName("loginWin", './member/login', params);
+	    	 		return;
+	    	 	}
+
+		 		api.openWin({
+		            name: 'scanWin',
+		            url: './common/h5_header.html',
+		            pageParam: {
+		            	fullDomain: 1,
+		            	url: ret.content,
+		            	title: '扫描结果'
+		            }
+	            });
+	    	}
+		});
+	}
+	
+	
+	/**
+	 * 打开公告列表
+	 */
+	function openNoticeList(){
+
+		global.openHybridWin('noticeWin','./common/adv_header', global.getH5url() + '/html/notice/messageNotice.html', '消息', 0, '');
+	}
+
+	function search(){
+		global.openWinName('searchWin', './product/proSearch', '');
+	}
+</script>
+</html>

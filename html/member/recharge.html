@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>充值</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <style>
+     .recharge-tips{left:0;}
+    </style>
+</head>
+<body>
+<div class="rechange">
+    <div id="bankInfoDiv" class="rechange-bank">
+        <div class="mui-content">
+           <div id="stopIconDiv" class="rechange-Mainten-icon hide">
+                <img src="../../image/member/rechange-icon-error.png" />
+            </div>
+            <div class="rechange-card">
+                <div class="rechange-card-img">
+                    <img id="icon" onerror="this.src='../../image/member/bank-icon/bank-icon-default.png'" />
+                </div>
+                <div class="rechange-card-btn">
+                    <div id="unBundlingId" tapmode><i id="unBundlingName"></i></div>
+                </div>
+                <div class="rechange-card-info">
+                    <ul>
+                        <li id="bankName"></li>
+                        <li>
+                            <i id="name"></i>
+                            <span>尾号<em id="account"></em></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="quotaName" class="rechange-text"></div>
+        </div>
+    </div>
+    
+    <div id="normalDiv" class="hide">
+    <div class="rechange-money">
+        <div class="mui-content">
+            <h1>充值金额</h1>
+            <div class="rechange-money-con addValue">
+                <input id='amount' type="number" maxlength="10" oninput="checkAmount();" placeholder="请输入最少10元的金额" />
+            </div>
+            <div class="rechange-money-text">
+                账户余额:<i id="accountBalance">0.00</i>元
+            </div>
+            <div id="rechargeTip" class="rechange-error-con hide">
+                	线下充值可获得现金奖励，<a tapmode onclick="openlargeRecharge();">点击了解“线下充值”</a>
+            </div>
+        </div>
+    </div>
+    <div class="rechange-mobile">
+        <div class="rechange-mobile-con">
+            <ul>
+                <li>
+                    <span>手机号码</span>
+                    <input id='mobile' readonly="true" style="color:#999999; font-size:15px;" class="" type="text" maxlength="11" />
+                </li>
+                <li>
+                    <span>验证码</span>
+
+                    <div class="getCodeBox">
+		               <input id="smsCode" maxlength="6" type="number" oninput="checkLength();" placeholder="请输入验证码" />
+		               <input type="button" id="sendSms" onclick="gainCode();" class="getCode" value="获取验证码"/>
+		            </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="rechange-btn">
+        <button id="confirmBtn" tapmode onclick="rechargeSubmit();" type="button" class="mui-btn mui-btn-block mui-btn-primary">确定</button>
+    </div>
+    <div class="rechange-more">
+        <a tapmode onclick="bankList();">银行限额表</a>
+
+        <!-- <a tapmode onclick="openlargeRecharge();">更多充值方式</a> -->
+    </div>
+    </div>
+    
+    <div id="stopDiv" class="hide">
+    	<div class="rechange-Mainten">
+        <p id="maintenP">招商银行正在维护中...</p>
+        <p>如需充值，请查看<a>“更多充值方式”</a></p>
+	    </div>
+	    <!-- <div class="rechange-btn">
+	        <button tapmode onclick="openlargeRecharge();" type="button" class="mui-btn mui-btn-block mui-btn-primary">更多充值方式</button>
+	    </div> -->
+	    <div class="rechange-more">
+	        <a tapmode onclick="bankList();">银行限额表</a>
+	    </div>
+    </div>
+    
+    <div id="abroadDiv" class="hide">
+	    <div class="rechange-overseas">
+	        <h1><img src="../../image/icon-errors.png" /></h1>
+	        <p>暂仅支持中国境内（不含港澳台）用户线上充值</p>
+	        <p>境外用户如需充值，请查看“更多充值方式”</p>
+	    </div>
+	    <!-- <div class="rechange-btn">
+	        <button type="button" tapmode onclick="openlargeRecharge();" class="mui-btn mui-btn-block mui-btn-primary">更多充值方式</button>
+	    </div> -->
+	</div>
+</div>
+    
+    <div id="message" class="bomb-box recharge-tips hide">
+    	<div class="main">
+	        <h4 class="title">正在充值，请勿关闭页面...</h4>
+	        <div id="messageCont" class="cont">
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+                <div class="round"></div>
+            </div>
+        </div>
+    </div>
+    <div id="messageDropDiv" class="mui-backdrop hide"></div>
+    
+    <div class="toast-box hide">银行卡余额不不足</div>
+
+
+    <div class="mui-popup mui-popup-in hide" id="bindCardTip">
+        <div class="mui-popup-inner">
+            <div class="mui-popup-title"></div>
+            <div class="mui-popup-text">银行卡解绑中，请重新绑定银行卡后进行充值</div>
+        </div>
+        <div class="mui-popup-buttons"><span class="mui-popup-button" onclick="api.closeWin();" >知道了</span></div>
+    </div>
+    <div class="mui-popup-backdrop mui-active hide" id="bindCardTipDiv" onclick="api.closeWin();"></div>
+
+</div>
+</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/common/validate.js"></script>
+	<script type="text/javascript" src="../../script/member/recharge.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+</html>

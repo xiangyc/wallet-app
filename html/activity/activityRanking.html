@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html class="activity-r-body">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>富豪排行榜</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" href="../../css/mui.css" />
+	</head>
+	<body class="activity-r-body">
+		<div class="mui-content mui-mb10">
+			<div class="activity-r-banner">
+				<img src="../../image/activity/activity-r-banner.jpg">
+				<span id="activityTime"></span>
+			</div>
+
+			<div class="activity-r-number">
+				<div class="activity-r-number-box">
+					<div class="activity-r-number-money">
+						<span class="title"><em id="myGoldMoney">0.00</em>元</span>
+						<span>累计购金金额</span>
+					</div>
+				</div>
+				<div class="activity-r-number-box">
+					<div class="activity-r-number-money">
+						<span class="title" id="loginId" onclick="login();"><em id="myRankId">请登录</em></span>
+						<span>我的排名</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="activity-r-buyrule" id="demo">
+			
+				<div class="activity-r-box mui-mt10">
+					<div class="activity-r-rule">
+						<h4><i></i>活动规则<i></i></h4>
+						<p><i class="nth-child1">1</i>活动期间内，购买90天“安心金”产品可享双重豪礼，累计购金总额超过20万得现金奖励，多投多送最高可奖2000元，排名前十的用户，更有丰厚黄金礼品相送；</p>
+						<p><i>2</i>现金奖励将于活动结束后3个工作日发放至平台个人账户；</p>
+						<p><i class="nth-child3">3</i>实物奖品将于活动结束后7个工作日内进行发放，届时将由专门的客服人员与中奖用户确认奖品寄送事宜；</p>
+						<p><i>4</i>对于恶意刷奖，冒用他人手机号码、身份证、银行卡者，将取消获奖资格；</p>
+						<p><i>5</i>本活动最终解释权归金算子所有。</p>
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="activity-r-box">
+				<div class="activity-r-rule clearfix">
+					<h4><i></i>活动奖品<i></i></h4>
+					<div class="activity-r-t">豪礼一：黄金礼品</div>
+                    <div class="activity-r-prize">
+						<h5>第一名奖品</h5>
+						<img src="../../image/activity/activity-r-prize01.jpg">
+						<span>白衣观音吊坠1个</span>
+						<span>价值<em>13800</em>元</span>
+					</div>
+					<div class="activity-r-prize">
+						<h5>第二名奖品</h5>
+						<img src="../../image/activity/activity-r-prize02.jpg">
+						<span>益正家白衣观音金卡1张</span>
+						<span>价值<em>3800</em>元</span>
+					</div>
+					<div class="activity-r-prize pt-10">
+						<h5>第三名奖品</h5>
+						<img src="../../image/activity/activity-r-prize03.jpg">
+						<span>10克平安金1条</span>
+						<span>价值<em>2760</em>元</span>
+					</div>
+					<div class="activity-r-prize pt-10">
+						<h5>第4-10名奖品</h5>
+						<img src="../../image/activity/activity-r-prize04.jpg">
+						<span>元丰纪念金币1枚</span>
+						<span>价值<em>388</em>元</span>
+					</div>
+					<div class="activity-r-t">豪礼二：现金奖励</div>
+					<div class="activity-r-prize-m">
+						<span>累计购金金额≥100万</span><span>奖励<em>2000</em>元现金</span>
+						<span>累计购金金额≥50万</span><span>奖励<em>1000</em>元现金</span>
+						<span>累计购金金额≥20万</span><span>奖励<em>500</em>元现金</span>
+					</div>
+
+
+				</div>
+			</div>
+
+			<div class="activity-r-box mb0">
+				<div class="activity-r-rule clearfix">
+					<h4><i></i>富豪排行榜前10名<i></i></h4>
+
+						<script id="activity-ranking-template" type="text/x-dot-template">
+			               {{ for(var i=0; i< it.length; i++) { }}   
+			      				<li><em><i>{{=it[i].rowNum}}</i></em><span>{{=it[i].hideMobile}}</span><span class="mui-text-right">{{=global.formatCurrency(it[i].money)}} 元</span></li>
+			          	  {{ } }}
+				        </script> 
+
+					<ul id="activity-ranking-content" class="activity-ranking">
+
+					</ul>
+					<div class="activity-ranking-explain">按购买90天安心金累计购金金额排序</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="declare" class="invite-example hide">
+          <p>活动声明：</p>
+          <p>该活动与苹果公司(https://www.apple.com)无关</p>
+          <p>活动最终解释权归属深圳市财易通智金互联网股份有限公司所有</p>
+    	</div>
+
+	</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/portal/activityRank.js"></script>
+</html>

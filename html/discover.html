@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>发现</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+</head>
+<body class="mui-mb70">
+<div id="noneNetworkDiv" class="mui-content hide">
+	<div class="no-network pt0">
+		<img src="../image/no-network.png">
+	</div>
+</div>
+		
+<div id="mainDiv">
+	<div class="disc-icon">
+	    <div class="mui-content">
+	        <ul class="mui-table-view mui-grid-view mui-grid-9">
+	
+	
+	            <script id="lanmu-template" type="text/x-dot-template">
+	                {{ for(var i=0; i< it.length; i++) { }}
+	                    {{if(it[i].params) {}}
+	                    <li tapmode onclick="openPalaceWin('{{=it[i].src}}', '{{=it[i].text}}', {{=it[i].headType}},'{{=it[i].params}}');"  class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+	                    {{ }else {}}
+	                    <li tapmode onclick="openPalaceWin('{{=it[i].src}}', '{{=it[i].text}}', {{=it[i].headType}},'');"  class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+	                    {{ } }}
+	                        <a >
+	                            <span class="mui-icon disc-icon">
+	                                <img src="{{=global.getImgUri()+it[i].iconUrl}}">
+	                            </span>
+	                            <div class="mui-media-body">{{=it[i].text}}</div>
+	                        </a>
+	                    </li>
+	                {{ } }}
+	            </script>
+	
+	            <div id="lanmu-content"></div>
+	
+	        </ul>
+	    </div>
+	</div>
+	<div class="disc-hotAct" id="hotRecommendDiv">
+	    <div class="mui-content">
+	        <div class="disc-title">
+	            <a class="" onclick="openSubWin(2);">更多</a>
+	            热门活动
+	        </div>
+	        <div class="disc-hotAct-img" onclick="openSubWin(5);">
+	            <img id="imgSrc"/>
+	            <span id="titleName"></span>
+	        </div>
+	    </div>
+	</div>
+	
+	<div class="disc-newsList">
+	    <div class="mui-content">
+	        <div class="disc-title">
+	            <a class="" onclick="openSubWin(4);">更多</a>
+	            新闻资讯
+	        </div>
+	        <ul class="disc-newsList-con">
+	        	<script id="news-template" type="text/x-dot-template">
+				{{ for(var i=0; i< it.length; i++) { }}
+	            <li onclick="detail({{=it[i].id }})">
+	                <img src="{{=global.getImgUri()+it[i].imgurl}}">
+	                <div class="disc-newsList-text">
+	                    <div class='disc-newsList-title'>{{=it[i].title}}</div>
+	                    <div class="disc-newsList-time"><span>{{=global.formatTimeLong(it[i].publishTime)}}</span><i>{{=it[i].source}}</i></div>
+	                </div>
+	            </li>
+	            {{ } }}
+	            </script>
+	            <ul id="news-content" class="mui-table-view">
+				</ul>
+	        </ul>
+	    </div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/library/doT.js"></script>
+<script type="text/javascript" src="../script/core/global.js"></script>
+<script type="text/javascript" src="../script/common/page.js"></script>
+<script type="text/javascript" src="../script/portal/discover.js"></script>
+<script type="text/javascript" src="../script/common/h5url.js"></script>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年会红包/系统红包-抢到活动红包</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+</head>
+<body>
+<div class="red-box red-system-box hide" id="redPacket02">
+    <div class="red-packet red-packet-system">
+        <div class="red-packet-layout">
+            <div class="red-packet-top">
+                <div class="packet-text"><img id="logoImg1" onerror="src='../../image/redpacket/default-avatar-img.jpg'" src="../../image/redpacket/default-avatar-img.jpg" /></div>
+                <div class="packet-name"><em id="nameDiv1"></em>发的黄金红包</div>
+                <div class="packet-con">
+                    <h1 id="remark1"></h1>
+                </div>
+            </div>
+
+            <div tapmode onclick="gain();" class="red-packet-btn" id="redPacketBtn02"></div>
+
+        </div>
+
+        <div class="red-packet-bottom"></div>
+
+        <div class="red-packet-bank">
+            与平安银行、建设银行、工商银行达成合作<br>支持提取工商银行、平安银行、建设银行金条
+        </div>
+
+    </div>
+</div>
+
+<!--抢到-->
+<div id="successDiv" class="red-box red-system-box hide">
+    <div class="red-packet red-packet-system">
+        <div class="red-packet-layout">
+            <div class="red-packet-top red-packet-top2">
+                <div class="red-packet-mid">
+                    <div class="packet-con">
+                        <p class="red"><span id="amountSpan"></span>毫克</p>
+                        <p>价值约<em id="priceEm"></em>元</p>
+                        <p class="red-prompt" id="amountPlace">黄金已放入您的金算子账户，可卖出或提金</p>
+                        <p class="red-prompt hide" id="errorInfo">红包正在入账到您的金算子账户...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="red-packet-btn2"></div>
+
+            <div class="red-packet-bottom">
+                <!--<div class="red-details-btn">-->
+                    <!--<button id="immediateInvite" onclick="share();" type="button">炫耀一下</button>-->
+                <!--</div>-->
+                <div class="open-text">
+                    <a tapmode onclick="record();">查看我的黄金红包</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="red-packet-bank">
+            与平安银行、建设银行、工商银行达成合作<br>支持提取工商银行、平安银行、建设银行金条
+        </div>
+
+    </div>
+</div>
+<!--没抢到-->
+<div id="failDiv" class="red-box red-system-box hide">
+    <div class="red-packet red-packet-system packet-give">
+
+        <div class="error-con">
+            <h1>红包已抢完</h1>
+        </div>
+
+        <div class="red-packet-layout">
+            <div class="red-packet-top red-packet-top2">
+                <div class="packet-text"><img id="logoImg2" onerror="src='../../image/redpacket/default-avatar-img.jpg'" src="../../image/redpacket/default-avatar-img.jpg" /></div>
+                <div class="packet-name"><em id="nameDiv2"></em>发的黄金红包</div>
+                <div class="packet-con"><img src="../../image/redpacket/wechatRed_error01.jpg"></div>
+            </div>
+        </div>
+
+        <div class="red-packet-bottom"></div>
+
+        <div class="red-packet-bank">与平安银行、建设银行、工商银行达成合作<br>支持提取工商银行、平安银行、建设银行金条</div>
+
+   </div>
+
+</div>
+
+
+<!--没抢到-->
+<div id="endDiv" class="red-box red-system-box hide">
+   <!-- <div class=" red-packet-box"></div>-->
+    <div class="red-packet red-packet-system packet-give">
+
+        <div class="error-con">
+            <h1>红包已过期</h1>
+        </div>
+
+        <div class="red-packet-layout">
+            <div class="red-packet-top red-packet-top2">
+                <div class="packet-text"><img id="logoImg3" onerror="src='../../image/redpacket/default-avatar-img.jpg'" src="../../image/redpacket/default-avatar-img.jpg" /></div>
+                <div class="packet-name"><em id="nameDiv3"></em>发的黄金红包</div>
+                <div class="packet-con"><img src="../../image/redpacket/wechatRed_error02.jpg"></div>
+            </div>
+        </div>
+
+        <div class="red-packet-bottom"></div>
+
+        <div class="red-packet-bank">与平安银行、建设银行、工商银行达成合作<br>支持提取工商银行、平安银行、建设银行金条</div>
+
+     </div>
+</div>
+
+<!--没抢到-->
+<div id="errorDiv" class="red-box red-system-box hide">
+    <div class="red-packet red-packet-system packet-give">
+
+        <div class="error-con">
+            <h1>红包开小差了</h1>
+            <div class="red-details-btn">
+                <button onclick="api.closeWin();" type="button">重试一下</button>
+            </div>
+        </div>
+
+        <div class="red-packet-layout red-packet-layout2">
+            <div class="red-packet-top red-packet-top2">
+                <div class="packet-text"><img id="logoImg4" onerror="src='../../image/redpacket/default-avatar-img.jpg'" src="../../image/redpacket/default-avatar-img.jpg" /></div>
+                <div class="packet-name"><em id="nameDiv4"></em>发的黄金红包</div>
+                <div class="packet-con"><img src="../../image/redpacket/wechatRed_error03.jpg"></div>
+            </div>
+        </div>
+
+        <div class="red-packet-bottom"></div>
+
+        <div class="red-packet-bank">与平安银行、建设银行、工商银行达成合作<br>支持提取工商银行、平安银行、建设银行金条</div>
+
+    </div>
+</div>
+
+<div id="shareDiv" class="share-box hide">
+    <ul class="share-box-ul share-box-ul-50 mui-clearfix">
+        <li onclick="shareWx('session');" class="wechat-icon">
+            <i></i>微信好友
+        </li>
+        <li onclick="shareWx('timeline');"  class="friend-icon">
+            <i></i>朋友圈
+        </li>
+    </ul>
+    <div class="mui-popup-buttons">
+        <span onclick="closeShare();" class="mui-popup-button">取消</span>
+    </div>
+</div>
+<div id="backdrop"  class="mui-backdrop hide"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/redpacket/redpacketOpen.js"></script>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>会员中心</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <style type="text/css">
+	         .mui-btn-fb{ border-radius: 0 !important; position: fixed !important; margin-bottom: 0 !important; bottom: 0; background-color:transparent;
+	        height:66px;padding-top: 30px;}
+             .member-userIcon{float:left;background:url('../../image/member/icon-user.png');width:22px;height:22px;background-size:100%;}
+             .member-icon span{float:left;background:url('../../image/member/icon-set.png');width:22px;height:22px;background-size:100%;}
+             .member-icon i{float:left;background:url('../../image/icon-notice.png');width:22px;height:22px;background-size:100%;}
+             .shallowShow.member-header{color:#666;}
+             .shallowShow .member-userIcon{float:left;background:url('../../image/member/icon-user-gray.png');width:22px;height:22px;background-size:100%;}
+             .shallowShow .member-userCard{background:#666;border:0 solid #666;color:#fff;}
+             .shallowShow .member-userCard:before,.shallowShow .member-userCard:after{border: 8px solid rgba(102, 102, 102, 0);border-right-color: #666;}
+             .shallowShow .member-icon span{float:left;background:url('../../image/member/icon-set-gray.png');width:22px;height:22px;background-size:100%;}
+             .shallowShow .member-icon i{float:left;background:url('../../image/icon-notice-gray.png');width:22px;height:22px;background-size:100%;}
+	        .shallowShow{ background-color: #fff;
+					animation: animationShow 1s;
+					-moz-animation: animationShow 1s;	/* Firefox */
+					-webkit-animation: animationShow 1s;	/* Safari 和 Chrome */
+					-o-animation: animationShow 1s;	/* Opera */
+                    border-bottom: 1px solid #e8e8e8;
+				}
+			.shallowHide{
+					animation: animationHide 1s;
+					-moz-animation: animationHide 1s;	/* Firefox */
+					-webkit-animation: animationHide 1s;	/* Safari 和 Chrome */
+					-o-animation: animationHide 1s;	/* Opera */
+			}
+	        @keyframes animationShow
+			{
+			0% {opacity: 0;}
+			20% {opacity: 0.2;}
+			40% {opacity: 0.4;}
+            60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+            100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-moz-keyframes animationShow /* Firefox */
+			{
+            0% {opacity: 0;}
+            20% {opacity: 0.2;}
+            40% {opacity: 0.4;}
+            60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+            100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-webkit-keyframes animationShow /* Safari 和 Chrome */
+			{
+            0% {opacity: 0;}
+            20% {opacity: 0.2;}
+            40% {opacity: 0.4;}
+            60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+            100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			@-o-keyframes animationShow /* Opera */
+			{
+            0% {opacity: 0;}
+            20% {opacity: 0.2;}
+            40% {opacity: 0.4;}
+            60% {opacity: 0.6; border-bottom: 1px solid #e8e8e8;}
+            100% {opacity: 1; border-bottom: 1px solid #e8e8e8;}
+			}
+			
+			 @keyframes animationHide
+			{
+            0% {background:rgba(255,177,27,1)}
+            20% { background-color:rgba(255,177,27,0.6) }
+            40% {background-color:rgba(255,177,27,0.4)}
+            60% {background-color:rgba(255,177,27,0.2)} 
+            100% {background-color:rgba(255,177,17,0)}
+			}
+			@-moz-keyframes animationHide /* Firefox */
+			{
+            0% {background:rgba(255,177,27,1)}
+            20% { background-color:rgba(255,177,27,0.6) }
+            40% {background-color:rgba(255,177,27,0.4)}
+            60% {background-color:rgba(255,177,27,0.2)} 
+            100% {background-color:rgba(255,177,17,0)}
+			}
+			@-webkit-keyframes animationHide /* Safari 和 Chrome */
+			{
+            0% {background:rgba(255,177,27,1)}
+            20% { background-color:rgba(255,177,27,0.6) }
+            40% {background-color:rgba(255,177,27,0.4)}
+            60% {background-color:rgba(255,177,27,0.2)} 
+            100% {background-color:rgba(255,177,17,0)}
+			}
+			@-o-keyframes animationHide /* Opera */
+			{
+            0% {background:rgba(255,177,27,1)}
+            20% { background-color:rgba(255,177,27,0.6) }
+            40% {background-color:rgba(255,177,27,0.4)}
+            60% {background-color:rgba(255,177,27,0.2)} 
+            100% {background-color:rgba(255,177,17,0)}
+			}
+			.mui-bar-nav~.mui-content{ padding-top: 0; }
+			.mui-bar.mui-bar-nav.mui-btn-fb{ webkit-box-shadow: none; box-shadow: none; }
+			.mui-bar.mui-bar-nav.mui-btn-fb .bar-nav-icon{ width: 34px; height: 44px; }
+	        .bar-icon-scan{ background: url(../image/icon-scan.png) center center no-repeat; background-size: 22px 22px;}
+	        .bar-icon-notice{ background: url(../image/icon-notice.png) center center no-repeat; background-size: 22px 22px; position:relative; text-align:center;}
+	        .bar-icon-notice span{ width: 15px; height: 15px;}
+	        .bar-icon-notice span{position:absolute;right:-3px;top:8px;background:#ff3b30;color:#fff;width:16px;height:16px;border-radius:100%;line-height:18px;font-size:10px;}
+	         .swiper-container2 {
+		        width: 100%;
+		        height: 50px;
+		    }
+    	</style>
+</head>
+<body>
+<header id="mui-header" class="member-header mui-bar mui-bar-nav mui-btn-fb">
+    <div class="member-user">
+        <span class="member-userIcon"></span>
+        <em class="member-userMobile" id="userName"></em>
+        <i id="status" class="member-userCard"></i>
+    </div>
+    <div class="member-icon">
+        <span tapmode onclick="openSubWin(17);" ></span>
+        <i tapmode onclick="openSubWin(22);"><em class="hide" id="unreadNum"></em></i>
+    </div>
+</header>
+
+<div id="toast" class="toast-box headTitle hide" style="">网络连接失败，请检查网络!</div>
+
+<div class="member-main member-new">
+    <div class="mui-content">
+        <div class="member-money">
+            <div class="member-money-text">总资产(元)</div>
+            <div class="member-money-con"><i id="totalMoney">--</i><img id="eyeImg" tapmode onclick="showHide();" src="../../image/member/icon-open-eye.png"/></div>
+        </div>
+    </div>
+</div>
+<div class="member-asset member-new">
+    <div class="mui-content">
+        <ul class="mui-table-view member-asset-btn">
+            <li tapmode onclick="openSubWin(6);">
+                <button type="button" class="mui-btn mui-btn-outlined mui-btn-width100 mui-add-radius">
+                    提现
+                </button>
+            </li>
+            <li tapmode onclick="openSubWin(5);">
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-width100 mui-add-radius">
+                    充值
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="member-list">
+    <div class="mui-content">
+        <ul class="mui-table-view mui-table-view-chevron member-asset-list">
+            <li tapmode onclick="openSubWin(18);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-gold-mall.png" />
+                <a class="mui-navigate-right" >
+                    文化金订单
+                </a>
+            </li>
+            <li tapmode onclick="openSubWin(21);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-redpacket.png" />
+                <a class="mui-navigate-right" >
+                    黄金红包
+                </a>
+            </li>
+            <li tapmode onclick="openSubWin(23);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-card.png" />
+                <a class="mui-navigate-right" >
+                    <span id="vaildCouponCount" class="font-red"></span>我的卡券
+                </a>
+            </li>
+            <li tapmode onclick="openSubWin(19);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-gift.png" />
+                <a class="mui-navigate-right" >
+                    我的奖品
+                </a>
+            </li>
+            <li id="listLi" tapmode onclick="openH5SubWin(1);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-partner-s.png" />
+                <a class="mui-navigate-right" >
+                    合伙人计划
+                </a>
+            </li>
+            <li tapmode onclick="openSubWin(14);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-contact.png" />
+                <a class="mui-navigate-right" >
+                    <span>关于金算子</span>联系我们
+                </a>
+            </li>
+            <li tapmode onclick="openSubWin(15);" class="mui-table-view-cell">
+                <img src="../../image/member/icon-help.png" />
+                <a class="mui-navigate-right">帮助中心
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+    <script type="text/javascript" src="../../script/library/jquery.js"></script>
+	<script type="text/javascript" src="../../script/common/h5url.js"></script>
+	<script type="text/javascript" src="../../script/member/main.js"></script>
+	<script type="text/javascript" src="../../script/library/aui-scroll.js" ></script>
+	<script type="text/javascript">
+	    var scroll = new auiScroll({
+	        listen:true,
+	        distance:200 //判断到达底部的距离，isToBottom为true
+	    },function(ret){
+	    	//ret.isToBottom
+            if(ret.scrollTop > 44){
+            	if(!$api.hasCls($api.byId('mui-header'), 'shallowShow')){
+            		$api.removeCls($api.byId('mui-header'), 'shallowHide');
+	            	$api.addCls($api.byId('mui-header'), 'shallowShow');
+            	}
+            }else{
+            	if(!$api.hasCls($api.byId('mui-header'), 'shallowHide')){
+            		$api.removeCls($api.byId('mui-header'), 'shallowShow');
+            		$api.addCls($api.byId('mui-header'), 'shallowHide');
+            	}
+            }
+	    });
+	</script>
+</body>
+</html>

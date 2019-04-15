@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年会红包/系统红包-抢到活动红包</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+    <style>
+        html,body{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="red-box red-color-box" id="redPacket">
+    <div class="red-packet packet-system">
+        <div class="red-packet-layout">
+
+            <div class="red-packet-top" id="topcontent">
+                <div tapmode onclick="closeRedpacket();"  class="close-icon">+</div>
+                <div class="packet-text"><img id="logoImg" onerror="src='../../image/redpacket/logo-dyf.png'" src="../../image/redpacket/logo-dyf.png" /></div>
+                <div class="" id="nameDiv"></div>
+                <div class="packet-con">
+                    <h1 id="remark1"></h1>
+                </div>
+            </div>
+
+            <div class="red-packet-bottom" id="bottomcontent"></div>
+            <div tapmode onclick="getRedPacketToken();" class="red-packet-btn" id="redPacketBtn"></div>
+
+        </div>
+    </div>
+  <!-- <div class="red-packet-box"></div>-->
+</div>
+
+
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/redpacket/redpacketSystem.js"></script>
+
+</html>

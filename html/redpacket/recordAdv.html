@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>我的营销红包</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/redpacket.css" />
+</head>
+<body class="backg-white">
+<div class="red-recordadv-box">
+
+    <ul class="red-recordadv-top">
+        <li><i>抢红包：</i><span id="pickCount">0</span><em>人次</em></li>
+        <li><i>累计补助：</i><span id="totalSubsidy">0.00</span><em>元</em></li>
+        <li><i>新增注册：</i><span id="newUserCount">0</span><em>人</em></li>
+        <li><i>老用户：</i><span id="oldUserCount">0</span><em>人</em></li>
+    </ul>
+    <div class="red-recordadv-list clearfix">
+        <script id="yxredpacket-template" type="text/x-dot-template">
+            {{ for(var i=0; i< it.length; i++) { }}
+                 {{if(funDate(it[i].expireTime)){ }}
+                    <div class="recordadv-list-box clearfix" tapmode onclick="openRebExplainDetail('{{=it[i].securityCode}}',{{=it[i].geType}},{{=it[i].amount}},{{=it[i].goldPrice}});">
+                 {{ } else { }}
+                    <div class="recordadv-list-box recordadv-list-expired clearfix" tapmode onclick="openRebExplainDetail('{{=it[i].securityCode}}',{{=it[i].geType}},{{=it[i].amount}},{{=it[i].goldPrice}});">
+                 {{ } }}
+                    <div class="recordadv-list-c">
+                        <div class="recordadv-list-top">
+                            <span><em>{{=it[i].amount}}</em>毫克</span>
+                            <p>价值<em>{{=funCal(it[i].amount,it[i].goldPrice)}}</em>元</p>
+                        </div>
+                        <div class="recordadv-list-bottom">
+                            <p>有效期至
+                            <span>{{=global.formatDate(it[i].expireTime, 'yyyy-MM-dd hh:mm:ss')}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {{ } }}
+        </script>
+
+        <div id="yxredpacket-content"></div>
+</div>
+ <div id="sendDiv" class="send-adv-btn hide" tapmode onclick="sendRedExplain();">发营销红包</div>
+ 
+<div id="no-records" class="no-address hide">
+    <i></i>暂无发放记录
+</div>
+
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/calculate.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/redpacket/recordAdv.js"></script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+        <style type="text/css">
+           html,body { background-color: transparent !important; }
+        </style>
+    </head>
+    <body>
+   
+        <div id="buyGoldDiv" class="bomb-box bomb-box-s ">
+            <div class="mui-popup-inner">
+                <div class="mui-popup-title color6" id="descId"></div>
+            </div>
+            <div class="mui-popup-buttons">
+                <span tapmode onclick="buy();" class="mui-popup-button yellow">购买</span>
+            </div>
+        </div>
+        <div id="buyGoldDropDiv" class="mui-backdrop " tapmode onclick="closeMessage();"></div>
+
+    </body>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/core/global.js"></script>
+
+     <script type="text/javascript" >
+
+        var activation_org_product_id ;
+        var activation_org_product_money ;
+        var flag = false;
+        
+        apiready = function() {
+           query();
+        }
+
+        function query(){
+                api.ajax({
+                method : 'get',
+                cache : false,
+                dataType : 'json',
+                returnAll : false,
+                headers : global.getRequestToken(),
+                url : global.getRequestUri() + '/sys/config'
+            }, function(ret, err) {
+                if(ret && ret.activation_org_product_id){
+                    activation_org_product_id = ret.activation_org_product_id;
+                    activation_org_product_money = ret.activation_org_product_money;
+
+                    $api.html($api.byId('descId'), '激活机构合伙人资格需要购买'+ activation_org_product_money/10000+'万元安心金365天产品，确认激活请点击“购买”按钮。');
+
+                    flag = true;
+                }
+            });
+        }
+
+        function closeMessage(){
+           api.closeFrame();
+        }
+
+        function buy(){
+
+            if(!flag){
+                global.setToast('数据加载中,请稍后');
+                return;
+            }
+
+            setTimeout(function(){
+               closeMessage();
+            },300);
+
+            var header = "../common/product_header";
+            var  params = { "page" : "../productDetail", "title" : '安心金365天', "id" : activation_org_product_id,"optSrc" : 1, "activationMoney" :activation_org_product_money, "desc" :'激活机构合伙人，需购买'+activation_org_product_money/10000+'万元以上安心金365天' };
+            global.openWinName("productDetail", header, params);
+         
+        }
+     </script>
+</html>

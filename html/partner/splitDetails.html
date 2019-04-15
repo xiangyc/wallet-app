@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>分账详情</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/partner.css" />
+	<style>
+        html,body{background:#f1f3f8!important; }
+    </style>
+</head>
+<body style="padding-bottom: 69px; ">
+<div class="mui-content">
+	<div class="partner-split-details part-border-bottom">
+		<div class="pr-points-li">
+			<span class="title-t" id="orgSplitedAmout">0.00</span>
+			<span class="title-b">已分帐金额(元)</span>
+		</div>
+	</div>
+
+	<script id="splitDetails-template" type="text/x-dot-template">
+		{{ for(var i=0; i< it.length; i++) { }}
+
+		<div class="partner-split-details-list">
+			<div tapmode onclick="openList({{=it[i].memberId}}, {{=it[i].status}});" class="split-details-top part-border-bottom"><em>{{=it[i].name}}</em><span> {{=it[i].mobile}}</span></div>
+			<div  tapmode onclick="openList({{=it[i].memberId}}, {{=it[i].status}});" class="split-details-c">
+				<div class="title-t"><span>奖励业绩：{{=global.formatNumber(it[i].totalBrokerage, 2)}}元</span> <span class="part-orange">已分账：{{=global.formatNumber(it[i].totalTradeAmount, 2)}} 元</span></div>
+				<!-- <div class="title-b">已分账：{{=global.formatNumber(it[i].totalTradeAmount, 2)}} 元</div> -->
+			</div>
+			{{if(it[i].status == 1){}}
+				<div class="split-details-b"><span tapmode onclick="openSplit({{=it[i].orgId}},{{=it[i].memberId}},'{{=it[i].name}}','{{=it[i].mobile}}');">分账</span></div>
+			{{ }else{ }}
+				<div class="split-details-b"><span>{{=it[i].statusName}}</span></div>
+			{{ } }}
+		</div>
+
+		{{ } }}
+	</script>
+
+	<div id="splitDetails-content"></div>
+
+</div>
+<!--机构成员-->
+<div class="bomb-box mui-hidden">
+	<div class="bomb-c">
+		<p>机构成员在机构期间邀请注册的用户，在机构成员退出机构后购金带来的邀请奖励归属到机构本身。</p>
+	</div>
+</div>
+<!--未分帐金额-->
+<div id="unOrgSplitedAmoutDivId" class="bomb-box mui-hidden">
+	<h4>未分帐金额</h4>
+	<div class="bomb-c" onclick="contentClose();">
+		<p>机构成员在机构期间邀请注册的用户，在机构成员退出机构后购金带来的邀请奖励归属到机构本身。</p>
+	</div>
+</div>
+<!-- <div id="backdropDiv" class="mui-backdrop mui-hidden"></div> -->
+<div id="messageDropDiv" tapmode onclick="showTips();" class="mui-backdrop hide"></div>
+
+<div id="no-records" class="no-address hide">
+	<i></i>
+	暂无记录
+</div>
+
+
+<div tapmode onclick="openSplitSelect();" class="part-inv-btn"><button class="btn mui-btn">分账</button></div>
+
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/partner/splitDetails.js"></script>
+<script type="text/javascript" src="../../script/common/h5url.js"></script>
+</html>

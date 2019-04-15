@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>验证身份</title>
+	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body class="backgwhite">
+<div class="mui-content pwfind mui-mt20">
+	<div class="logInput">
+		<div>
+			<input id='userName' type="text" maxlength="20" placeholder="请输入真实姓名" tapmode onkeyup="validateName();"/>
+		</div>
+		<div class="getCodeBox">
+			<input type="text"  id='idCardNo' tapmode maxlength="18" oninput="if(value.length>18)value=value.slice(0,18);"  onkeyup="validateIDCard();" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+				   oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" placeholder="请输入的身份证号" />
+			<i id='cleanInputId' class="mui-icon mui-icon-closeempty hide"  tapmode onclick="cleanInput();"></i>
+		</div>
+		<div class="input-pwfindtips">
+			请输入您实名绑卡时填写的姓名和身份证号，信息仅用于验证用户身份
+		</div>
+		<div class="logBtn pwfindBtn">
+			<button id='loginBt' tapmode onclick="auth();" type="button" class="mui-bt mui-btn-default mui-add-radius" disabled>下一步</button>
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/common/sms.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript">
+	apiready = function(){	
+		
+		 $("#idCardNo").bind("input propertychange",function(){
+	        validateIDCard();
+	    });
+	    
+	}
+
+	function validateIDCard(){
+		var value = $api.val($api.byId('idCardNo'));
+		value=value.replace(/[^\a-\z\A-\Z0-9]/g,'');
+	
+		$api.val($api.byId('idCardNo'),value);
+	
+		$api.removeCls($api.byId('cleanInputId'), 'hide'); 
+		
+		var userName = $api.val($api.byId('userName'));
+		
+		if(!validate.isEmpty(value) && !validate.isEmpty(userName)){
+			$api.removeAttr($api.byId('loginBt'), 'disabled');
+		}else{
+			$api.attr($api.byId('loginBt'), 'disabled', 'disabled');
+		}
+	}
+	
+	function validateName(){
+
+		var userName = $api.val($api.byId('userName'));
+		var value = $api.val($api.byId('idCardNo'));
+		value=value.replace(/[^\a-\z\A-\Z0-9]/g,'');
+		
+		 if(!validate.isEmpty(value) && !validate.isEmpty(userName)){
+			$api.removeAttr($api.byId('loginBt'), 'disabled');
+		}else{
+			$api.attr($api.byId('loginBt'), 'disabled', 'disabled');
+		}
+	
+	}
+
+	function cleanInput(){
+		$api.addCls($api.byId('cleanInputId'), 'hide');
+		$api.val($api.byId('idCardNo'),'');
+		$api.attr($api.byId('loginBt'), 'disabled', 'disabled');
+	
+	}
+
+		
+	function auth() {
+		var userName = $api.val($api.byId('userName'));
+		var idCardNo = $api.val($api.byId('idCardNo'));
+	
+		if (validate.isEmpty(userName)) {
+			global.setToast('姓名不能为空');
+			return false;
+		}
+	
+		if (validate.isEmpty(idCardNo)) {
+			global.setToast('身份证号码不能为空');
+			return false;
+		}
+		
+		if (!validate.idCard(idCardNo) && idCardNo.indexOf('*') < 0) {
+			global.setToast('请填写正确的身份证号码');
+			return false;
+		}
+	
+		api.showProgress({
+			title : '努力验证中...',
+			modal : false
+		});
+		
+		api.ajax({
+				method : 'post',
+				cache : false,
+				timeout : 30,
+				dataType : 'json',
+				returnAll : false,
+				url : global.getRequestUri() + '/members/changeMobileRealNameAuth',
+				data : {
+					values : {
+						'name' : userName,
+						'idCard' : idCardNo
+					}
+				}
+			}, function(ret, err) {
+	
+				if (ret) {
+					api.hideProgress();
+					if (ret) {
+						if(ret.code && (ret.code =='2119' || ret.code =='2122' || ret.code =='2120')){		
+							global.setToast(ret.message);
+							api.sendEvent({
+						   	   name:'invalidTokenEvent'
+					    	});
+						}else{							
+							if(ret.success){
+								global.openWinName("changePhoneThirdWin", "../member/replacephonethird", '{}');
+							}else{
+								global.setToast(ret.message);
+							}
+		
+						}
+					
+					} else {
+						global.setToast(ret.message);
+						
+					}
+				} else {
+					api.hideProgress();
+					global.setErrorToast();
+				}
+		});
+	}
+
+</script>
+</html>

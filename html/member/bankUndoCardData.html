@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>提交资料</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	</head>
+	<body>
+		<div class="mui-content mui-mb70">
+			<div class="prompt-text-ordinary" >
+				为了确保是您本人操作，解绑银行卡需提供以下资料。
+			</div>
+			
+			<div class="bankcarddata-title">身份证信息</div>
+			<div class="bankcarddata-img" onclick="selectImage(0)">
+				<img id="img0" src="../../image/member/id-positive.jpg"/>
+			</div>
+			<div class="bankcarddata-title">原银行卡信息</div>
+			<div class="bankcarddata-img"  onclick="selectImage(1)">
+				<img id="img1" src="../../image/member/bankcard-positive.jpg"/>
+			</div>
+
+			<div class="bankcarddata-title">查看范例<span>(点击图片可放大查看)</span></div>
+			<div class="bankcarddata-img-box">
+				<div class="bankcarddata-img" onclick="showIcon(1);">
+					<img src="../../image/member/example-img1.jpg"/>
+					<p>手持身份证范例</p>
+				</div>
+				<div class="bankcarddata-img" onclick="showIcon(2);">
+					<img src="../../image/member/example-img2.jpg"/>
+					<p>手持原银行卡范例</p>
+				</div>
+			</div>
+			<div class="bankcarddata-prompt">
+				<p>1、上传的图片仅用于解绑银行卡，信息已加密处理，请确保身份证和银行卡清晰可见；</p>
+				<p>2、若原银行卡出现丢失、无法使用等情况，需在“原银行卡信息”栏上传挂失、换卡的相关证明；</p>
+				<p>3、解绑期间不支持提现。</p>
+			</div>
+
+			<button tapmode id="confirmId" onclick="confirm();" type="button" class="mui-btn mui-btn-fb-buy mui-btn-block">提交</button>
+
+		</div>
+
+		<div id="iconDiv1" class="example-box hide" >
+			<i onclick="closeIcon(1);"><img src="../../image/member/close-icon.png"/></i>
+			<img src="../../image/member/example-img-s1.jpg" class="example-img-s"/>
+		</div>
+
+		<div id="iconDiv2" class="example-box hide" >
+			<i onclick="closeIcon(2);"><img src="../../image/member/close-icon.png"/></i>
+			<img src="../../image/member/example-img-s2.jpg" class="example-img-s"/>
+		</div>
+
+		<div id="backdrop" class="mui-backdrop hide"></div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/core/global.js"></script>
+	<script type="text/javascript" src="../../script/member/bankUndoCardData.js"></script>
+</html>

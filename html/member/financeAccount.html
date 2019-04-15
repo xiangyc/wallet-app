@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>账户金额</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+</head>
+<body>
+	<div class="gold-account-top finance-account-top">
+		<div class="gold-total">
+			<div class="member-money-con finance-money"><i id="accountBalance">0.00</i><img id="eyeImg" tapmode onclick="showHide();" src="../../image/refresh-icon-white.png"/></div>
+
+		</div>
+		<ul class="gold-account-ul mui-clearfix">
+			<li class="mui-table-view-cell gold-account-li">
+				<span>可用余额(元)</span>
+				<div id="useBalance">0.00</div>
+			</li>
+			<li class="gold-account-li">
+				<span>冻结金额(元)</span>
+				<div id="frozenAmount">0.00</div>
+			</li>
+		</ul>
+	</div>
+
+<div class="mui-content mui-mb70">
+	<h5 class="finance-account-h5"><span>热销产品</span></h5>
+	<!--热销产品-->
+	<ul class="hotpro-list-box clearfix">
+
+		<script id="recommend-template" type="text/x-dot-template">
+			{{ for(var i=0; i< it.length; i++) { }}
+
+			<li tapmode onclick="openShopDetail({{=it[i].id }}, '{{=it[i].name }}');">
+				<img src="{{=global.getImgUri() + it[i].imgurl}}" onerror="this.src='../../image/error-icon-nopic.png'" />
+				<div class="home-pro-text">
+					<span>
+						{{ if(it[i].name.length > 18){ }}
+								{{=it[i].name.substring(0,18) + '…' }}
+							{{ }else{ }}
+								{{=it[i].name }}
+						{{ } }}
+					</span>
+					<i>￥<em>{{=global.formatCurrency(it[i].salePrice) }}</em></i>
+				</div>
+			</li>
+
+			{{ } }}	
+		</script>
+
+		<ul id="recommend-content">
+		</ul>
+	</ul>
+
+</div>
+
+    <div class="account-b-btn">
+		<div tapmode onclick="openSubWin(2);" class="btn mui-btn-warning"><i class="withdraw-icon"></i>提现</div>
+		<div tapmode onclick="openSubWin(1);" class="btn mui-btn-primary"><i class="recharge-icon"></i>充值</div>
+    </div>
+
+    <!--提现银行卡解绑中-->
+	<div id="showDiv" class="mui-popup mui-popup-in hide">
+		<div class="mui-popup-inner">
+			<div  id="showDivContent" class="mui-popup-text">
+				银行卡解绑中，请解绑后重新绑定银行卡
+			</div>
+		</div>
+		<div class="mui-popup-buttons"><span class="mui-popup-button" tapmode onclick="cancelShow();" >确定</span></div>
+	</div>
+	<div id="dropDiv" class="mui-popup-backdrop mui-active hide" tapmode onclick="cancelShow();"></div>
+
+
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/library/doT.js"></script>
+<script type="text/javascript" src="../../script/common/page.js"></script>
+<script type="text/javascript" src="../../script/common/cache.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/member/financeAccount.js"></script>
+
+</html>

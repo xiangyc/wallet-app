@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>邀请奖励详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/frame.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css" />
+    <link rel="stylesheet" href="../../css/partner.css" />
+    <style type="text/css">
+        html, body {background: #f1f3f8!important;}
+    </style>
+</head>
+<body>
+<div class="hide">
+    <div id="header">
+        <a tapmode onclick="api.closeWin()" class="back-icon"></a>
+        <h1>邀请奖励详情</h1>
+    </div>
+</div>
+<!-- 自动分账 -->
+<div class="mui-content hide" id="autoDiv">
+   <div class="commission-detail-box">
+        <h4><em id="totalMoney"></em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <label>收款成员</label><span id="gather"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>发放方式</label><span id="way">自动分账</span>
+        </div>
+         <div class="commission-detail-li">
+            <label>类型</label><span id="type">邀请奖励</span>
+        </div>
+         <div class="commission-detail-li">
+            <label>创建时间</label><span id="createTime"></span>
+        </div>
+         <div class="commission-detail-li hide">
+            <label>订单号</label><span id="no"></span>
+        </div>
+         <div class="commission-detail-li line-t">
+            <label>佣金</label><span id="commission"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>年化奖励</label><span id="reward"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>分成比例</label><span id="rate"></span>
+        </div>
+   </div>
+
+     <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <label>购金者</label><span id="buyer"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>产品</label><span id="productName"></span>
+        </div>
+         <div class="commission-detail-li hide">
+            <label>购金应付(元)</label><span id="payMoney"></span>
+        </div>
+   </div>
+</div>
+
+<!-- 手动转账 -->
+<div class="mui-content hide" id="handDiv">
+   <div class="commission-detail-box">
+        <h4><em id="totalMoney1"></em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+        <div class="commission-detail-li">
+            <label>收款成员</label><span id="gather1"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>发放方式</label><span id="way1">手动分账</span>
+        </div>
+         <div class="commission-detail-li">
+            <label>类型</label><span id="type1">奖励分账</span>
+        </div>
+         <div class="commission-detail-li">
+            <label>创建时间</label><span id="createTime1"></span>
+        </div>
+         <div class="commission-detail-li hide">
+            <label>订单号</label><span id="no1"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>备注</label><span id="note">机构主发放的奖励</span>
+        </div>
+   </div>
+</div>
+
+<!-- 活动 -->
+<div class="mui-content hide" id="activityDiv">
+   <div class="commission-detail-box">
+        <h4><em id="totalMoney2"></em>元</h4>
+    </div>
+    
+   <div class="commission-detail-box mui-mt10">
+         <div class="commission-detail-li">
+            <label>类型</label><span id="type2"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>创建时间</label><span id="createTime2"></span>
+        </div>
+         <div class="commission-detail-li hide">
+            <label>订单号</label><span id="no2"></span>
+        </div>
+         <div class="commission-detail-li">
+            <label>备注</label><span id="note2"></span>
+        </div>
+   </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/partner/invitationRewardDetails.js"></script>
+</html>

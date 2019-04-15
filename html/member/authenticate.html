@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>验证身份</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <style>
+        html,body{height:100%;}
+        body{background:#fff;}
+    </style>
+</head>
+<body>
+<header>
+    <div class="loginHeader authenHeader" tapmode onclick="api.closeWin();">
+        <img src="../../image/icon-close.png"/>
+        <span>验证身份</span>
+    </div>
+</header>
+
+<div class="authenticate" id="authenticate">
+    <h1><img src="../../image/icon-errors.png" /></h1>
+    <h6>您正在一台新设备上登录金算子，为了您的账户安全，请进行安全验证</h6>
+    <div class="authenBtn">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" tapmode onclick='startAuth();'>开始验证</button>
+    </div>
+</div>
+
+<div class="authenInput hide" id="authenInput">
+    <ul>
+        <li>
+            <input id='userName' type="text" maxlength="20" placeholder="请输入真实姓名" tapmode onkeyup="validateName();"/>
+        </li>
+        <li>
+            <input type="text"  id='idCardNo' tapmode maxlength="18" oninput="if(value.length>18)value=value.slice(0,18);"  onkeyup="validateIDCard();" onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+             oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')" placeholder="请输入实名认证时的证件号码" />
+            <i id='cleanInputId' class="mui-icon mui-icon-closeempty hide"  tapmode onclick="cleanInput();"></i>
+        </li>
+    </ul>
+    <div class="authenTips">信息仅用于验证用户身份，验证成功后即可登录</div>
+    <div class="authenBtn">
+        <button type="button" id='loginBt' class="mui-btn mui-btn-block mui-btn-primary" disabled tapmode onclick='auth();'>开始验证</button>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/library/jquery.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/core/global.js"></script>
+<script type="text/javascript" src="../../script/common/validate.js"></script>
+<script type="text/javascript" src="../../script/library/base64.js"></script>
+<script type="text/javascript" src="../../script/member/authenticate.js"></script>
+<script type="text/javascript" src="../../script/member/loginDataWrapper.js"></script>
+</html>
